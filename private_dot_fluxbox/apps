@@ -1,0 +1,13 @@
+[app] (name=fbrun)
+  [Position]	(CENTER)	{0 0}
+  [Layer]	{2}
+[end]
+[app] (name=chromium) (class=Chromium) (role=browser)
+  [Maximized]	{yes}
+[end]
+[app] (name=Alacritty) (class=Alacritty)
+  [Maximized]	{yes}
+[end]
+[transient] (role=GtkFileChooserDialog)
+  [Dimensions]	{70% 80%}
+[end]

@@ -1,0 +1,4 @@
+if [[ -z $DISPLAY ]] && (( $EUID != 0 )) && [[ $(tty) = /dev/tty1 ]] {
+        dbus-run-session wayfire 2>&1 &
+#        startx 2>&1 &
+}

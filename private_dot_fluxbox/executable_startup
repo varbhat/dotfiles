@@ -1,0 +1,13 @@
+#!/bin/sh
+
+fluxbox &
+fbpid=$!
+
+sleep 1
+{
+    fbsetbg ~/.fluxbox/wallpaper.bg
+    xrdb ~/.Xresources
+    tint2 &
+} &
+ 
+wait $fbpid

@@ -1,0 +1,25 @@
+syntax enable
+filetype indent on
+colorscheme zellner
+set tabstop=4
+set softtabstop=4
+set mouse=a
+set expandtab
+set number
+set showcmd
+set wildmenu
+set lazyredraw
+set showmatch
+set incsearch
+set hlsearch
+set foldenable
+set nowrap
+set foldlevelstart=10
+set foldnestmax=10
+set foldmethod=indent
+set modelines=2
+set clipboard=unnamedplus
+set laststatus=2
+set statusline=%F%m%r%h%w%=\ [%Y]\ [%{&ff}]\ [%04l,%04v]\ [%p%%]\ [%L]
+hi statusline ctermfg=15 ctermbg=17
+highlight Comment cterm=italic

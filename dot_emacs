@@ -1,0 +1,298 @@
+;;; .emacs --- Initialization file for Emacs
+;;; Commentary: Emacs Startup File --- initialization for Emacs
+
+;; User Details
+;; Var Bhat <vbt@anche.no>
+
+;;; Commentary:
+;; Prepared by me for my use
+;;; Code:
+
+;; Sane UI defaults
+(when window-system
+  (tool-bar-mode -1)                              ; Disable Toolbars
+  (scroll-bar-mode -1)                            ; Disable the scroll bar
+  (toggle-frame-maximized))                       ; Maximize the frame
+
+;; Create Necessary Directories if it didn't exist
+(if (not (file-exists-p "~/.saves"))
+    (make-directory "~/.saves" t))                ; ~/.saves directory will be used for backups
+(if (not (file-exists-p "~/space"))
+    (make-directory "~/space" t))                 ; ~/space directory will be workspace directory
+
+;; Sane Defaults
+(setq-default
+ ad-redefinition-action 'accept                   ; Silence warnings for redefinition
+ auto-save-list-file-prefix nil                   ; Prevent tracking for auto-saves
+ cursor-in-non-selected-windows nil               ; Hide the cursor in inactive windows
+ cursor-type 'bar                                 ; Prefer a bar-shaped cursor by default
+ indent-tabs-mode nil                             ; Stop using tabs to indent
+ inhibit-startup-screen t                         ; Disable start-up screen
+ initial-scratch-message nil                      ; Empty the initial *scratch* buffer
+ scroll-conservatively most-positive-fixnum       ; Always scroll by one line
+ select-enable-clipboard t                        ; Merge system's and Emacs' clipboard
+ tab-width 4                                      ; Set width for tabs
+ c-basic-offset 4                                 ; Set offset for c to 4
+ uniquify-buffer-name-style 'forward              ; Uniquify buffer names
+ backward-delete-char-untabify-method 'hungry     ; Hungry Mode
+ window-combination-resize t                      ; Resize windows proportionally
+ x-stretch-cursor t)                              ; Stretch cursor to the glyph width
+(fset 'yes-or-no-p 'y-or-n-p)                     ; Replace yes/no prompts with y/n
+(set-default-coding-systems 'utf-8)               ; Default to utf-8 encoding
+
+;; Start Emacs in dired mode
+(cd "~/space")                                    ; Change to the Space directory by default
+(dired "~/space")                                 ; Start Emacs with dired opened in ~/space
+(add-hook 'dired-mode-hook 'auto-revert-mode)     ; Auto refresh dired when file changes
+
+;; Default Modes
+(electric-pair-mode 1)                            ; Auto close bracket insertion
+(show-paren-mode 1)                               ; Show Paranthesis
+(global-display-line-numbers-mode 1)              ; Display Line Numbers by Default
+(global-auto-revert-mode 1)                       ; Revert File Changes Automatically
+(xterm-mouse-mode 1)                              ; Enable Mouse in xterm (terminal)
+(cua-mode 1)                                      ; Enable CUA Mode
+
+;; Additional Keybindings
+(global-set-key (kbd "<home>") 'beginning-of-line)    ; <home> button binds to beginning of line
+(global-set-key (kbd "<end>") 'end-of-line)           ; <end> button binds to ending of line
+(global-set-key (kbd "C-;") 'save-buffer)             ; C-; binds to save
+(global-set-key (kbd "C-q") 'save-buffers-kill-emacs) ; C-q binds to save+quit
+
+;; Backups
+(setq
+ make-backup-files   t                            ; Enable Backup
+ backup-directory-alist `(("." . "~/.saves"))     ; Use ~/.saves folder to backup
+ auto-save-file-name-transforms `((".*" "~/.saves/" t))  ; Use ~/.saves to save autosave files
+ backup-by-copying   t                            ; Always backup by copying
+ backup-by-copying-when-mismatch t                ; Backup by copy when mismatched
+ backup-by-copying-when-linked   t                ; Backup by copy when linked
+ create-lockfiles    nil                          ; Don't create lockfiles
+ delete-old-versions t                            ; Delete Old versions of Backup files
+ kept-old-versions   1                            ; Keep 1 Old version
+ kept-new-versions   3                            ; Keep 3 New versions
+ version-control     t                            ; Use versioning
+ )
+
+;; Set Font
+(cond ((find-font (font-spec :name "IBM Plex Mono"))
+       (set-frame-font "IBM Plex Mono 12" nil t)))
+
+;; Disable byte-compile warnings, which I don't care about.
+(setq byte-compile-warnings '(not nresolved
+                                  free-vars
+                                  callargs
+                                  redefine
+                                  obsolete
+                                  noruntime
+                                  cl-functions
+                                  interactive-only
+                                  ))
+
+
+
+;; Define Repositories for Emacs
+(require 'package)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "http://melpa.org/packages/")
+                         ("org" . "http://orgmode.org/elpa/")))
+(package-initialize)
+(setq package-enable-at-startup nil)
+
+
+;; Install Use-Package if not installed
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package)
+  (eval-when-compile (require 'use-package)))
+(setq use-package-always-ensure t)
+
+;; Packages
+
+
+
+;; highlights delimiters according to their depth
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+;; rainbow-mode colors the color names
+(use-package rainbow-mode
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-mode))
+
+;; Go Mode for Golang
+(use-package go-mode
+  :mode "\\.go\\'"
+  :hook (before-save . gofmt-before-save))
+(setenv "GOPATH" "/home/vbt/.gopath")
+
+;; Rust Mode for Rust Lang
+(use-package rust-mode
+  :hook (rust-mode . lsp))
+
+;; Add keybindings for interacting with Cargo
+(use-package cargo
+  :hook (rust-mode . cargo-minor-mode))
+
+;; Formats the Source Code
+(use-package format-all
+  :bind ("C-c C-f" . format-all-buffer))
+
+
+;; Markdown Mode
+(use-package markdown-mode
+  :mode ("INSTALL\\'" "CONTRIBUTORS\\'" "LICENSE\\'" "README\\'")
+  :custom
+  (markdown-asymmetric-header t)
+  (markdown-split-window-direction 'right)
+  :config
+  (unbind-key "<M-down>" markdown-mode-map)
+  (unbind-key "<M-up>" markdown-mode-map))
+
+;; JSON mode
+(use-package json-mode
+  :mode "\\.json\\'"
+  :hook
+  (json-mode . (lambda () (setq-local js-indent-level 2))))
+
+;; Sync Variables With System Shell
+(use-package exec-path-from-shell
+  :config
+  (setq exec-path-from-shell-arguments '("-l"))
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-envs
+   '("PATH" "GOPATH" "LC_ALL" "LANG" "LC_TYPE")))
+
+;; YAML Mode
+(use-package yaml-mode)
+
+;; TOML Mode
+(use-package toml-mode)
+
+
+;; Flycheck syntax checker
+(use-package flycheck
+  :init (global-flycheck-mode)
+  :custom
+  (flycheck-display-errors-delay 3)
+  :config
+  ;; flycheck buffer popup
+  (add-hook 'flycheck-after-syntax-check-hook
+            (lambda  ()
+              (if flycheck-current-errors
+                  (flycheck-list-errors)
+                (when (get-buffer "*Flycheck errors*")
+                  (switch-to-buffer "*Flycheck errors*")
+                  (kill-buffer (current-buffer))
+                  (delete-window))))))
+(add-to-list 'display-buffer-alist
+             `(,(rx bos "*Flycheck errors*" eos)
+               (display-buffer-reuse-window
+                display-buffer-in-side-window)
+               (side            . bottom)
+               (reusable-frames . visible)
+               (window-height   . 0.3)))
+
+;; Flycheck for Rust
+(use-package flycheck-rust
+  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+;; Company Mode for AutoCompletion
+(use-package company
+  :bind (:map
+         global-map
+         ("TAB" . company-complete-common-or-cycle))
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2)
+  (global-company-mode t)
+  (add-hook 'after-init-hook 'company-tng-mode))
+
+;; C-<tab> to insert tabs
+(global-set-key (kbd "C-<tab>") #'tab-to-tab-stop)
+
+
+
+
+
+;; company-mode for go
+(use-package company-go)
+(add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
+
+;; lsp-mode
+(use-package lsp-mode
+  :defer t
+  :commands lsp
+  :custom
+  (lsp-prefer-flymake nil) ; Use flycheck instead of flymake
+  ;; (lsp-file-watch-threshold 2000)
+  ;; (read-process-output-max (* 1024 1024))
+  :bind (:map lsp-mode-map ("C-c C-f" . lsp-format-buffer))
+  :hook ((go-mode python-mode
+                  c-mode c++-mode) . lsp))
+(setq
+ lsp-signature-auto-activate t
+ lsp-signature-doc-lines 5)
+
+;; Company Mode Integration with lsp-mode
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp
+  :config (push 'company-lsp company-backends)) ;; add company-lsp as a backend
+
+;; UI for lsp-mode
+(use-package lsp-ui
+  :after lsp-mode
+  :commands lsp-ui-mode)
+
+
+;; Use ccls for c/c++
+(use-package ccls
+  :ensure t
+  :config
+  (setq ccls-executable "ccls")
+  (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
+  :hook ((c-mode c++-mode) .
+         (lambda () (require 'ccls) (lsp))))
+
+;; Yasnippet
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :init
+  (use-package yasnippet-snippets :after yasnippet)
+  :hook ((prog-mode org-mode) . yas-minor-mode)
+  :bind
+  (:map yas-minor-mode-map ("<f8>" . yas-expand-from-trigger-key)))
+
+;; quickrun
+(use-package quickrun
+  :bind
+  (("<f5>" . quickrun)
+   ("M-<f5>" . quickrun-shell)))
+
+;; Highlight indent guides
+(use-package highlight-indent-guides
+  :config
+  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
+
+;; which-key
+(use-package which-key
+  :init (which-key-mode))
+
+;; set theme
+(use-package reverse-theme)
+(load-theme 'reverse t)
+
+;; set italics for comments and keywords
+(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+
+;; Keep custom-file seperate and don't load it
+(setq custom-file "/dev/null")
+
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars noruntime)
+;; End:
+;;; .emacs ends here

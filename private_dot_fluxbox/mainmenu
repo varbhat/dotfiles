@@ -1,0 +1,16 @@
+[begin] (Menu)
+[encoding] {UTF-8}
+      [exec] (Terminal) {alacritty}
+      [exec] (Browser) {chromium}
+[submenu] (Configure Fluxbox)
+      [config] (Configure)
+      [workspaces] (Workspace List)
+[end]
+[commanddialog] (Fluxbox Command)
+[exit] (Exit)
+[reconfig] (Reload)
+[restart] (Restart)
+[exec] (Reboot) {doas reboot}
+[exec] (Power Off) {doas poweroff}
+[endencoding]
+[end]
