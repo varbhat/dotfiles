@@ -1,0 +1,107 @@
+theme = "plain"
+icons = "awesome5"
+
+[[block]]
+block = "focused_window"
+max_width = 20
+show_marks = "visible"
+
+[[block]]
+block = "backlight"
+
+[[block]]
+block = "battery"
+interval = 10
+
+[[block]]
+block = "net"
+format = "{ssid}"
+interval = 10
+on_click = "iwgtk"
+
+[[block]]
+block = "sound"
+on_click = "pavucontrol"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%I:%M %p %a %d-%m-%Y"
+
+[[block]]
+block = "custom"
+command = "echo T"
+on_click = "foot"
+interval = "once"
+
+[[block]]
+block = "custom"
+command = "echo H"
+on_click = "swaymsg splith"
+interval = "once"
+
+[[block]]
+block = "custom"
+command = "echo V"
+on_click = "swaymsg splitv"
+interval = "once"
+
+[[block]]
+block = "custom"
+command = "echo "
+on_click = "swaymsg workspace next_on_output"
+interval = "once"
+
+[[block]]
+block = "custom"
+command = "echo "
+on_click = "swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)"
+interval = "once"
+
+[[block]]
+block = "custom"
+command = "echo "
+on_click = "swaymsg  move container to workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)"
+interval = "once"
+
+[[block]]
+block = "custom"
+command = "echo "
+on_click = "swaymsg move scratchpad"
+interval = "once"
+
+[[block]]
+block = "custom"
+command = "echo "
+on_click = "swaymsg scratchpad show"
+interval = "once"
+
+[[block]]
+block = "custom"
+command = "echo "
+on_click = "swaymsg fullscreen"
+interval = "once"
+
+[[block]]
+block = "custom"
+command = "echo "
+on_click = "swaymsg floating toggle"
+interval = "once"
+
+[[block]]
+block = "custom"
+command = "echo "
+on_click = "swaymsg kill"
+interval = "once"
+
+[[block]]
+block = "custom"
+command = "echo "
+on_click = "nwggrid"
+interval = "once"
+
+[[block]]
+block = "custom"
+command = "echo "
+on_click = "nwgbar"
+interval = "once"

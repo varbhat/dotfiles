@@ -1,0 +1,159 @@
+set $mod Mod4
+set $term foot
+set $menu nwgdmenu | xargs swaymsg exec --
+output * bg  $(find ~/.images -type f | shuf -n 1) fill
+exec swayidle -w \
+          timeout 300 'swaylock -f -c 000000' \
+          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+          before-sleep 'swaylock -f -c 000000'
+
+# Input
+focus_follows_mouse yes
+input "type:touchpad" {
+       dwt enabled
+       tap enabled
+       natural_scroll enabled
+}
+
+input "type:keyboard" {
+        xkb_layout us
+        xkb_variant dvorak
+}
+
+# Borders
+default_border none
+hide_edge_borders vertical
+# colors of      border    background  text     indicator
+client.focused   #222222   #111111     #ffffff  #00ff00
+
+# XF86 Keybindings
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86MonBrightnessDown exec light -U 5
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym $mod+XF86MonBrightnessUp output * dpms on
+bindsym $mod+XF86MonBrightnessDown output * dpms off
+bindsym XF86WLAN exec iwgtk
+bindsym Print exec grim -t png - | tee /tmp/screenshot.png | wl-copy
+bindsym $mod+Print exec grim -t png -g "$(slurp)" - | tee /tmp/screenshot.png | wl-copy
+bindsym $mod+Shift+Print exec grim  -t png -g "$(slurp)" $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png
+
+# other keybindings
+bindsym $mod+Return exec $term
+bindsym $mod+BackSpace kill
+bindsym $mod+d exec $menu
+floating_modifier $mod normal
+bindsym $mod+Shift+r reload
+bindsym $mod+Escape exec nwgbar
+
+# Alt+Tab
+bindsym Mod1+tab workspace next_on_output 
+bindsym Mod1+Shift+tab workspace prev_on_output
+
+# layout keybindings
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# layout
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+# scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# resize mode
+mode "resize" {
+    bindsym Left resize grow width 10px
+    bindsym Down resize shrink height 10px
+    bindsym Up resize grow height 10px
+    bindsym Right resize shrink width 10px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# bar
+bar {
+    position top
+    status_command i3status-rs
+
+    colors {
+        statusline #ffffff
+        background #000000
+        separator  #ff0000
+
+        # colors of          border  background text
+        focused_workspace    #dddddd #000000   #ffffff
+        inactive_workspace   #000000 #111111   #dddddd
+        active_workspace     #C4C2BD #C4C2BD   #606060
+        urgent_workspace     #903030 #903030   #ffffff
+    }
+}
+
+# Sway Window Rules
+
+# Auto float some apps
+for_window [app_id="mpv"] floating enable
+for_window [app_id="pavucontrol"] floating enable
+for_window [title="iwgtk"] floating enable
+
+# File Picker Fixes
+for_window [title="^Open File$"] floating enable
+for_window [window_role="GtkFileChooserDialog"] resize set 800 600
+for_window [window_role="GtkFiileChooserDialog"] move position center
+
+# Jetbrains IDE fixes
+for_window [class="jetbrains-(.*)" title="Go to Line/Column"] floating enable
+for_window [class="jetbrains-(.*)" title="Rename"] floating enable
+for_window [class="jetbrains-(.*)" title="Open Project"] floating enable
+for_window [class="jetbrains-(.*)" title="win0"] floating enable
+
+# default floating
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [instance="update_installer"] floating enable	
+
+# Tag xwayland windows as such
+for_window [shell="xwayland"] title_format "[Xorg] %title"
+
+# Execute Notification Daemon Mako
+exec mako --max-visible 10 --width 350 --border-color='#ff2255' --background-color='#222222' --default-timeout 6000

@@ -1,0 +1,3 @@
+if [[ -z $DISPLAY ]] && (( $EUID != 0 )) && [[ $(tty) = /dev/tty1 ]] {
+        dbus-run-session sway 2>&1 &
+}
