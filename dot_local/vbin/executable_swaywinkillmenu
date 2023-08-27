@@ -1,0 +1,35 @@
+#!/bin/sh
+# Based on https://gist.github.com/lbonn/89d064cde963cfbacabd77e0d3801398
+#
+# In order to have meaningful window names for terminals, use
+
+# inside .vimrc:
+# set title
+
+# inside .bashrc:
+# export PROMPT_COMMAND='echo -en "\033]0; $("pwd")  \a"'
+
+set -e
+
+while true
+do
+
+row=$(swaymsg -t get_tree | jq  -r '
+    ..
+    | objects
+    | select(.type == "workspace") as $ws
+    | ..
+    | objects
+    | select(has("app_id"))
+    | (if .focused == true then "*" else " " end) as $asterisk
+    | "\($asterisk)[\($ws.name)]\(.app_id): \(.name) (\(.id))\u0000icon\u001f\(.app_id)"' \
+| wofi --normal-window -p "kill window" --dmenu)
+
+if [ ! -z "$row" ]
+then
+    # shellcheck disable=SC2001
+    winid=$(echo "$row" | sed 's/.*(\([0-9]*\))$/\1/')
+    swaymsg "[con_id=$winid] kill"
+fi
+
+done

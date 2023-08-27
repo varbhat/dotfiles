@@ -1,0 +1,178 @@
+# create necessary directories if they don't exist
+[[ -d ~/.cache ]] || mkdir -p ~/.cache
+[[ -d ~/.config ]] || mkdir -p ~/.config
+[[ -d ~/.xdgpath ]] || mkdir -p ~/.xdgpath
+[[ -d ~/.xdgpath/pictures ]] || mkdir -p ~/.xdgpath/pictures
+[[ -d ~/.xdgpath/pictures/wallpapers ]] || mkdir -p ~/.xdgpath/pictures/wallpapers
+[[ -d ~/space ]] || mkdir -p ~/space
+
+# Check if zinit is installed, else autoinstall
+if [[ ! -d ~/.local/share/zinit ]]; then
+  mkdir -p ~/.local/share/zinit
+  git clone https://github.com/zdharma-continuum/zinit ~/.local/share/zinit
+fi
+
+# Load zinit
+if [[ -f ~/.local/share/zinit/zinit.zsh ]]; then
+  source ~/.local/share/zinit/zinit.zsh
+  autoload -Uz _zinit
+  (( ${+_comps} )) && _comps[zinit]=_zinit
+fi
+
+# compinit
+autoload -Uz compinit && compinit -d ~/.cache/.zcompdump-$ZSH_VERSION
+if [[ -f $ZDOTDIR/.zshcompletion ]]; then
+        source $ZDOTDIR/.zshcompletion
+fi
+
+# zinit plugins
+zinit light Aloxaf/fzf-tab
+zinit light zsh-users/zsh-autosuggestions
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
+zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit load zdharma-continuum/history-search-multi-word
+zinit load woefe/git-prompt.zsh
+zinit load hlissner/zsh-autopair
+zinit load Tarrasch/zsh-bd
+zinit load trapd00r/zsh-syntax-highlighting-filetypes
+#zinit light joshskidmore/zsh-fzf-history-search
+
+zinit light ianthehenry/zsh-autoquoter
+ZAQ_PREFIXES+=('git commit( [^ ]##)# -[^ -]#m' 'ssh( [^ ]##)# [^ -][^ ]#')
+ZSH_HIGHLIGHT_HIGHLIGHTERS+=(zaq)
+ZSH_HIGHLIGHT_STYLES[zaq:string]="fg=green,underline"
+
+zinit light zsh-users/zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+autoload -Uz url-quote-magic
+
+
+# set options
+setopt correctall
+setopt autocd
+setopt extendedglob
+setopt longlistjobs
+setopt hash_list_all
+setopt noshwordsplit
+setopt complete_in_word    # Complete from both ends of a word.
+setopt always_to_end       # Move cursor to the end of a completed word.
+setopt path_dirs           # Perform path search even on command names with slashes.
+setopt auto_menu           # Show completion menu on a succesive tab press.
+setopt auto_list           # Automatically list choices on ambiguous completion.
+setopt auto_param_slash    # If completed parameter is a directory, add a trailing slash.
+unsetopt menu_complete     # Do not autoselect the first completion entry.
+unsetopt flow_control      # Disable start/stop characters in shell editor.
+
+
+# Git Prompt
+ZSH_GIT_PROMPT_FORCE_BLANK=1
+ZSH_GIT_PROMPT_SHOW_UPSTREAM="full"
+ZSH_THEME_GIT_PROMPT_PREFIX="%B %b"
+ZSH_THEME_GIT_PROMPT_SUFFIX=" "
+ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
+ZSH_THEME_GIT_PROMPT_BRANCH="⎇ %{$fg_bold[cyan]%}"
+ZSH_THEME_GIT_PROMPT_UPSTREAM_SYMBOL="%{$fg_bold[yellow]%}⟳ "
+ZSH_THEME_GIT_PROMPT_UPSTREAM_PREFIX="%{$fg[yellow]%} ⤳ "
+ZSH_THEME_GIT_PROMPT_UPSTREAM_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_no_bold[cyan]%}:"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg_no_bold[cyan]%}↓"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_no_bold[cyan]%}↑"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}✖"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}●"
+ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}✚"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
+ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[blue]%}⚑"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}🮱"
+
+
+# colors here: https://unix.stackexchange.com/a/124409
+
+PROMPT=$'%(?..%F{214}%K{%(?.000.052)} err %? %k%f )%F{245}%~%f %F{078}%n%f%F{245}@%f%F{132}%m%f$(gitprompt)\n%F{%(#.red.105)%}%#%f '
+RPROMPT='%F{245}%D{%L:%M:%S}%f'
+
+setopt promptsubst
+PS1=$'%F{%(?.236.red)}${(r:$COLUMNS::\u2500:)}%f'$PS1
+
+if (( $EUID != 0 )) && (type paru &> /dev/null); then
+  alias pacman="paru"
+fi
+
+# colored output in terminal
+alias diff='diff --color=auto'
+alias grep='grep --color=auto'
+alias ip='ip -color=auto'
+alias ls='ls --color=auto --group-directories-first --hyperlink=auto'
+alias pastebin="curl -F'file=@-' https://0x0.st"
+alias hx="helix"
+alias icat="kitty +kitten icat"
+
+#export LS_COLORS="$(vivid generate one-dark)"
+export LS_COLORS="*~=0;38;2;102;102;102:bd=0;38;2;86;182;194;48;2;51;51;51:ca=0:cd=0;38;2;255;106;193;48;2;51;51;51:di=0;38;2;97;175;239:do=0;38;2;0;0;0;48;2;255;106;193:ex=1;38;2;224;108;117:fi=0:ln=0;38;2;255;106;193:mh=0:mi=0;38;2;0;0;0;48;2;224;108;117:no=0:or=0;38;2;0;0;0;48;2;224;108;117:ow=0:pi=0;38;2;0;0;0;48;2;97;175;239:rs=0:sg=0:so=0;38;2;0;0;0;48;2;255;106;193:st=0:su=0:tw=0:*.a=1;38;2;224;108;117:*.c=0;38;2;152;195;121:*.d=0;38;2;152;195;121:*.h=0;38;2;152;195;121:*.m=0;38;2;152;195;121:*.o=0;38;2;102;102;102:*.p=0;38;2;152;195;121:*.r=0;38;2;152;195;121:*.t=0;38;2;152;195;121:*.z=4;38;2;86;182;194:*.7z=4;38;2;86;182;194:*.as=0;38;2;152;195;121:*.bc=0;38;2;102;102;102:*.bz=4;38;2;86;182;194:*.cc=0;38;2;152;195;121:*.cp=0;38;2;152;195;121:*.cr=0;38;2;152;195;121:*.cs=0;38;2;152;195;121:*.di=0;38;2;152;195;121:*.el=0;38;2;152;195;121:*.ex=0;38;2;152;195;121:*.fs=0;38;2;152;195;121:*.go=0;38;2;152;195;121:*.gv=0;38;2;152;195;121:*.gz=4;38;2;86;182;194:*.hh=0;38;2;152;195;121:*.hi=0;38;2;102;102;102:*.hs=0;38;2;152;195;121:*.jl=0;38;2;152;195;121:*.js=0;38;2;152;195;121:*.ko=1;38;2;224;108;117:*.kt=0;38;2;152;195;121:*.la=0;38;2;102;102;102:*.ll=0;38;2;152;195;121:*.lo=0;38;2;102;102;102:*.md=0;38;2;229;192;123:*.ml=0;38;2;152;195;121:*.mn=0;38;2;152;195;121:*.nb=0;38;2;152;195;121:*.pl=0;38;2;152;195;121:*.pm=0;38;2;152;195;121:*.pp=0;38;2;152;195;121:*.ps=0;38;2;224;108;117:*.py=0;38;2;152;195;121:*.rb=0;38;2;152;195;121:*.rm=0;38;2;255;106;193:*.rs=0;38;2;152;195;121:*.sh=0;38;2;152;195;121:*.so=1;38;2;224;108;117:*.td=0;38;2;152;195;121:*.ts=0;38;2;152;195;121:*.ui=0;38;2;229;192;123:*.vb=0;38;2;152;195;121:*.wv=0;38;2;255;106;193:*.xz=4;38;2;86;182;194:*.aif=0;38;2;255;106;193:*.ape=0;38;2;255;106;193:*.apk=4;38;2;86;182;194:*.arj=4;38;2;86;182;194:*.asa=0;38;2;152;195;121:*.aux=0;38;2;102;102;102:*.avi=0;38;2;255;106;193:*.awk=0;38;2;152;195;121:*.bag=4;38;2;86;182;194:*.bak=0;38;2;102;102;102:*.bat=1;38;2;224;108;117:*.bbl=0;38;2;102;102;102:*.bcf=0;38;2;102;102;102:*.bib=0;38;2;229;192;123:*.bin=4;38;2;86;182;194:*.blg=0;38;2;102;102;102:*.bmp=0;38;2;255;106;193:*.bsh=0;38;2;152;195;121:*.bst=0;38;2;229;192;123:*.bz2=4;38;2;86;182;194:*.c++=0;38;2;152;195;121:*.cfg=0;38;2;229;192;123:*.cgi=0;38;2;152;195;121:*.clj=0;38;2;152;195;121:*.com=1;38;2;224;108;117:*.cpp=0;38;2;152;195;121:*.css=0;38;2;152;195;121:*.csv=0;38;2;229;192;123:*.csx=0;38;2;152;195;121:*.cxx=0;38;2;152;195;121:*.deb=4;38;2;86;182;194:*.def=0;38;2;152;195;121:*.dll=1;38;2;224;108;117:*.dmg=4;38;2;86;182;194:*.doc=0;38;2;224;108;117:*.dot=0;38;2;152;195;121:*.dox=0;38;2;152;195;121:*.dpr=0;38;2;152;195;121:*.elc=0;38;2;152;195;121:*.elm=0;38;2;152;195;121:*.epp=0;38;2;152;195;121:*.eps=0;38;2;255;106;193:*.erl=0;38;2;152;195;121:*.exe=1;38;2;224;108;117:*.exs=0;38;2;152;195;121:*.fls=0;38;2;102;102;102:*.flv=0;38;2;255;106;193:*.fnt=0;38;2;255;106;193:*.fon=0;38;2;255;106;193:*.fsi=0;38;2;152;195;121:*.fsx=0;38;2;152;195;121:*.gif=0;38;2;255;106;193:*.git=0;38;2;102;102;102:*.gvy=0;38;2;152;195;121:*.h++=0;38;2;152;195;121:*.hpp=0;38;2;152;195;121:*.htc=0;38;2;152;195;121:*.htm=0;38;2;229;192;123:*.hxx=0;38;2;152;195;121:*.ico=0;38;2;255;106;193:*.ics=0;38;2;224;108;117:*.idx=0;38;2;102;102;102:*.ilg=0;38;2;102;102;102:*.img=4;38;2;86;182;194:*.inc=0;38;2;152;195;121:*.ind=0;38;2;102;102;102:*.ini=0;38;2;229;192;123:*.inl=0;38;2;152;195;121:*.ipp=0;38;2;152;195;121:*.iso=4;38;2;86;182;194:*.jar=4;38;2;86;182;194:*.jpg=0;38;2;255;106;193:*.kex=0;38;2;224;108;117:*.kts=0;38;2;152;195;121:*.log=0;38;2;102;102;102:*.ltx=0;38;2;152;195;121:*.lua=0;38;2;152;195;121:*.m3u=0;38;2;255;106;193:*.m4a=0;38;2;255;106;193:*.m4v=0;38;2;255;106;193:*.mid=0;38;2;255;106;193:*.mir=0;38;2;152;195;121:*.mkv=0;38;2;255;106;193:*.mli=0;38;2;152;195;121:*.mov=0;38;2;255;106;193:*.mp3=0;38;2;255;106;193:*.mp4=0;38;2;255;106;193:*.mpg=0;38;2;255;106;193:*.nix=0;38;2;229;192;123:*.odp=0;38;2;224;108;117:*.ods=0;38;2;224;108;117:*.odt=0;38;2;224;108;117:*.ogg=0;38;2;255;106;193:*.org=0;38;2;229;192;123:*.otf=0;38;2;255;106;193:*.out=0;38;2;102;102;102:*.pas=0;38;2;152;195;121:*.pbm=0;38;2;255;106;193:*.pdf=0;38;2;224;108;117:*.pgm=0;38;2;255;106;193:*.php=0;38;2;152;195;121:*.pid=0;38;2;102;102;102:*.pkg=4;38;2;86;182;194:*.png=0;38;2;255;106;193:*.pod=0;38;2;152;195;121:*.ppm=0;38;2;255;106;193:*.pps=0;38;2;224;108;117:*.ppt=0;38;2;224;108;117:*.pro=0;38;2;152;195;121:*.ps1=0;38;2;152;195;121:*.psd=0;38;2;255;106;193:*.pyc=0;38;2;102;102;102:*.pyd=0;38;2;102;102;102:*.pyo=0;38;2;102;102;102:*.rar=4;38;2;86;182;194:*.rpm=4;38;2;86;182;194:*.rst=0;38;2;229;192;123:*.rtf=0;38;2;224;108;117:*.sbt=0;38;2;152;195;121:*.sql=0;38;2;152;195;121:*.sty=0;38;2;102;102;102:*.svg=0;38;2;255;106;193:*.swf=0;38;2;255;106;193:*.swp=0;38;2;102;102;102:*.sxi=0;38;2;224;108;117:*.sxw=0;38;2;224;108;117:*.tar=4;38;2;86;182;194:*.tbz=4;38;2;86;182;194:*.tcl=0;38;2;152;195;121:*.tex=0;38;2;152;195;121:*.tgz=4;38;2;86;182;194:*.tif=0;38;2;255;106;193:*.tml=0;38;2;229;192;123:*.tmp=0;38;2;102;102;102:*.toc=0;38;2;102;102;102:*.tsx=0;38;2;152;195;121:*.ttf=0;38;2;255;106;193:*.txt=0;38;2;229;192;123:*.vcd=4;38;2;86;182;194:*.vim=0;38;2;152;195;121:*.vob=0;38;2;255;106;193:*.wav=0;38;2;255;106;193:*.wma=0;38;2;255;106;193:*.wmv=0;38;2;255;106;193:*.xcf=0;38;2;255;106;193:*.xlr=0;38;2;224;108;117:*.xls=0;38;2;224;108;117:*.xml=0;38;2;229;192;123:*.xmp=0;38;2;229;192;123:*.yml=0;38;2;229;192;123:*.zip=4;38;2;86;182;194:*.zsh=0;38;2;152;195;121:*.zst=4;38;2;86;182;194:*TODO=1:*hgrc=0;38;2;152;195;121:*.bash=0;38;2;152;195;121:*.conf=0;38;2;229;192;123:*.dart=0;38;2;152;195;121:*.diff=0;38;2;152;195;121:*.docx=0;38;2;224;108;117:*.epub=0;38;2;224;108;117:*.fish=0;38;2;152;195;121:*.flac=0;38;2;255;106;193:*.h264=0;38;2;255;106;193:*.hgrc=0;38;2;152;195;121:*.html=0;38;2;229;192;123:*.java=0;38;2;152;195;121:*.jpeg=0;38;2;255;106;193:*.json=0;38;2;229;192;123:*.less=0;38;2;152;195;121:*.lisp=0;38;2;152;195;121:*.lock=0;38;2;102;102;102:*.make=0;38;2;152;195;121:*.mpeg=0;38;2;255;106;193:*.opus=0;38;2;255;106;193:*.orig=0;38;2;102;102;102:*.pptx=0;38;2;224;108;117:*.psd1=0;38;2;152;195;121:*.psm1=0;38;2;152;195;121:*.purs=0;38;2;152;195;121:*.rlib=0;38;2;102;102;102:*.sass=0;38;2;152;195;121:*.scss=0;38;2;152;195;121:*.tbz2=4;38;2;86;182;194:*.tiff=0;38;2;255;106;193:*.toml=0;38;2;229;192;123:*.webm=0;38;2;255;106;193:*.webp=0;38;2;255;106;193:*.woff=0;38;2;255;106;193:*.xbps=4;38;2;86;182;194:*.xlsx=0;38;2;224;108;117:*.yaml=0;38;2;229;192;123:*.cabal=0;38;2;152;195;121:*.cache=0;38;2;102;102;102:*.class=0;38;2;102;102;102:*.cmake=0;38;2;152;195;121:*.dyn_o=0;38;2;102;102;102:*.ipynb=0;38;2;152;195;121:*.mdown=0;38;2;229;192;123:*.patch=0;38;2;152;195;121:*.scala=0;38;2;152;195;121:*.shtml=0;38;2;229;192;123:*.swift=0;38;2;152;195;121:*.toast=4;38;2;86;182;194:*.xhtml=0;38;2;229;192;123:*README=0;38;2;40;44;52;48;2;229;192;123:*passwd=0;38;2;229;192;123:*shadow=0;38;2;229;192;123:*.config=0;38;2;229;192;123:*.dyn_hi=0;38;2;102;102;102:*.flake8=0;38;2;152;195;121:*.gradle=0;38;2;152;195;121:*.groovy=0;38;2;152;195;121:*.ignore=0;38;2;152;195;121:*.matlab=0;38;2;152;195;121:*COPYING=0;38;2;153;153;153:*INSTALL=0;38;2;40;44;52;48;2;229;192;123:*LICENSE=0;38;2;153;153;153:*TODO.md=1:*.desktop=0;38;2;229;192;123:*.gemspec=0;38;2;152;195;121:*Doxyfile=0;38;2;152;195;121:*Makefile=0;38;2;152;195;121:*TODO.txt=1:*setup.py=0;38;2;152;195;121:*.DS_Store=0;38;2;102;102;102:*.cmake.in=0;38;2;152;195;121:*.fdignore=0;38;2;152;195;121:*.kdevelop=0;38;2;152;195;121:*.markdown=0;38;2;229;192;123:*.rgignore=0;38;2;152;195;121:*COPYRIGHT=0;38;2;153;153;153:*README.md=0;38;2;40;44;52;48;2;229;192;123:*configure=0;38;2;152;195;121:*.gitconfig=0;38;2;152;195;121:*.gitignore=0;38;2;152;195;121:*.localized=0;38;2;102;102;102:*.scons_opt=0;38;2;102;102;102:*CODEOWNERS=0;38;2;152;195;121:*Dockerfile=0;38;2;229;192;123:*INSTALL.md=0;38;2;40;44;52;48;2;229;192;123:*README.txt=0;38;2;40;44;52;48;2;229;192;123:*SConscript=0;38;2;152;195;121:*SConstruct=0;38;2;152;195;121:*.gitmodules=0;38;2;152;195;121:*.synctex.gz=0;38;2;102;102;102:*.travis.yml=0;38;2;152;195;121:*INSTALL.txt=0;38;2;40;44;52;48;2;229;192;123:*LICENSE-MIT=0;38;2;153;153;153:*MANIFEST.in=0;38;2;152;195;121:*Makefile.am=0;38;2;152;195;121:*Makefile.in=0;38;2;102;102;102:*.applescript=0;38;2;152;195;121:*.fdb_latexmk=0;38;2;102;102;102:*CONTRIBUTORS=0;38;2;40;44;52;48;2;229;192;123:*appveyor.yml=0;38;2;152;195;121:*configure.ac=0;38;2;152;195;121:*.clang-format=0;38;2;152;195;121:*.gitattributes=0;38;2;152;195;121:*.gitlab-ci.yml=0;38;2;152;195;121:*CMakeCache.txt=0;38;2;102;102;102:*CMakeLists.txt=0;38;2;152;195;121:*LICENSE-APACHE=0;38;2;153;153;153:*CONTRIBUTORS.md=0;38;2;40;44;52;48;2;229;192;123:*.sconsign.dblite=0;38;2;102;102;102:*CONTRIBUTORS.txt=0;38;2;40;44;52;48;2;229;192;123:*requirements.txt=0;38;2;152;195;121:*package-lock.json=0;38;2;102;102;102:*.CFUserTextEncoding=0;38;2;102;102;102"
+
+cl() {
+	cd "$@" && ls -a  
+}
+
+mkcd() {
+	mkdir -p "$@" && cd "$@"
+}
+
+# run function
+run() {
+    setsid "$@" &> /dev/null
+}
+
+
+# colored manpages
+man() {
+  env \
+    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+    LESS_TERMCAP_md=$(printf "\e[1;31m") \
+    LESS_TERMCAP_me=$(printf "\e[0m") \
+    LESS_TERMCAP_se=$(printf "\e[0m") \
+    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+    LESS_TERMCAP_ue=$(printf "\e[0m") \
+    LESS_TERMCAP_us=$(printf "\e[1;32m") \
+    man "$@"
+}
+
+# history
+HISTFILE=$HOME/.cache/.zshhistory
+HISTSIZE=10000
+SAVEHIST=$HISTSIZE
+setopt hist_ignore_all_dups hist_ignore_space inc_append_history share_history
+
+# make ctrl-d exit zsh on partial command line
+exit_zsh() { exit }
+zle -N exit_zsh
+bindkey '^D' exit_zsh
+export zle_highlight=(default:fg=105)
+
+
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
+
+# I-bar cursor
+_fix_cursor() {
+   echo -ne '\e[5 q'
+}
+precmd_functions+=(_fix_cursor)
+
+n() {
+	    tmp="$(mktemp)"
+    # `command` is needed in case `lfcd` is aliased to `lf`
+    command lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
+
+eval "$(zoxide init zsh)"

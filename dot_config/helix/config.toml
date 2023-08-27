@@ -1,0 +1,19 @@
+theme = "base16_transparent"
+
+[editor]
+cursorline = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+
+[keys.insert]
+"C-c" = "normal_mode"
+"C-b" = ":wq!"
+"C-f" = ":w"
+"C-/" = ":q!"
+
+[keys.normal]
+"C-b" = ":wq!"
+"C-f" = ":w"
+"C-/" = ":q!"
