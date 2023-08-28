@@ -1,0 +1,186 @@
+[theme]
+theme = "srcery"
+[icons]
+icons = "awesome6"
+
+[[block]]
+block = "focused_window"
+[block.format]
+full = " $title.str(max_w:15) |"
+short = " $title.str(max_w:10) |"
+[[block.click]]
+button = "right"
+cmd = "swaymsg kill"
+[[block.click]]
+button = "middle"
+cmd = "swaymsg move to scratchpad"
+
+
+
+[[block]]
+block = "music"
+format = "{ $prev|} {$combo.str(max_w:20,rot_interval:0.5) { $play|} { $next|} |}"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+cmd = "killall wlsunset || wlsunset -T 4001"
+button = "left"
+
+
+[[block]]
+block = "time"
+interval = 60
+format = "$timestamp.datetime(f:'%I:%M %p %a %d-%m-%Y')"
+
+[[block]]
+block = "net"
+format = " $icon{$signal_strength $ssid $frequency|} $device"
+[[block.click]]
+button = "left"
+cmd = "iwgtk"
+[[block.click]]
+button = "right"
+cmd = "blueman-manager"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "dolphin"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+cmd = "mpv --player-operation-mode=pseudo-gui"
+button = "left"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "firefox"
+
+[[block]]
+block = "custom"
+command = "echo %"
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "swayddt"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "(killall sah && swaymsg bar mode dock) || swaymsg bar mode toggle"
+[[block.click]]
+button = "right"
+cmd = "sah"
+
+[[block]]
+block = "keyboard_layout"
+driver = "sway"
+[block.mappings]
+"English (Dvorak)" = "dv"
+"English (US)" = "qw"
+[[block.click]]
+button="left"
+cmd =  "swaymsg input \"type:keyboard\" xkb_variant dvorak"
+[[block.click]]
+button = "right"
+cmd = "swaymsg input \"type:keyboard\" xkb_variant '\"\"'"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "swaymsg move container to workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "swaymsg move scratchpad"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "swaymsg scratchpad show"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "swaymsg fullscreen"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "swaymsg floating toggle"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "swaymsg kill"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "nwg-drawer -nofs -nocats -c 9"
+
+[[block]]
+block = "sound"
+driver = "pulseaudio"
+format = " $icon{ $volume|} "
+[[block.click]]
+button = "left"
+cmd = "pavucontrol-qt"
+
+[[block]]
+block = "menu"
+text = "\uf011"
+[[block.items]]
+display = " -&gt; Power Off &lt;-"
+cmd = "poweroff"
+confirm_msg = "Are you sure you want to power off?"
+[[block.items]]
+display = " -&gt;  Reboot   &lt;-"
+cmd = "reboot"
+confirm_msg = "Are you sure you want to reboot?"
