@@ -81,10 +81,10 @@ command = "echo "
 interval = "once"
 [[block.click]]
 button = "left"
-cmd = "(killall sah && swaymsg bar mode dock) || swaymsg bar mode toggle"
+cmd = "swaymsg bar mode toggle"
 [[block.click]]
 button = "right"
-cmd = "sah"
+cmd = "swaymsg bar mode hide"
 
 [[block]]
 block = "keyboard_layout"
