@@ -30,8 +30,7 @@ exec {
     hash dbus-update-activation-environment 2>/dev/null && \
         dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
 
-    # look and feel
-    lookandfeeltool -a org.kde.breezedark.desktop
+    # themes
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
     # start xdg-desktop-portals here itself
@@ -258,7 +257,7 @@ for_window {
     [title="Open Files(.*)"] floating enable; border normal;
     [app_id="wofi"] floating enable; border normal; move position cursor
     [app_id="kitty" title="floatterm(.*)"] floating enable; border normal; move position cursor; resize set 1000 600
-    [app_id="kitty" title="dropdownterminal"] floating enable; sticky toggle; border normal; move position cursor; resize set 1000 600
+    [app_id="kitty" title="dropdownterminal"] floating enable; sticky toggle; border normal; move position cursor; resize set 1000 600;
     [app_id="amdgpu_top"] floating enable; border normal; move position cursor;
 
     # Fix Wine
@@ -334,6 +333,8 @@ bindsym --border {
     button3 kill
     Shift+button3 $forcekill
     button2 sticky toggle
+    Shift+button4 floating toggle
+    Shift+button5 move scratchpad
 }
 
 # Modes

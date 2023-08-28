@@ -15,8 +15,6 @@ cmd = "swaymsg kill"
 button = "middle"
 cmd = "swaymsg move to scratchpad"
 
-
-
 [[block]]
 block = "music"
 format = "{ $prev|} {$combo.str(max_w:20,rot_interval:0.5) { $play|} { $next|} |}"
@@ -159,7 +157,7 @@ cmd = "swaymsg kill"
 
 [[block]]
 block = "custom"
-command = "echo "
+command = "echo "
 interval = "once"
 [[block.click]]
 button = "left"
