@@ -39,7 +39,7 @@ exec {
     /usr/lib/xdg-desktop-portal-wlr
     /usr/lib/xdg-desktop-portal-shana
     /usr/lib/xdg-desktop-portal-gtk
-    bash -c "env QT_QPA_PLATFORMTHEME=\"\" XDG_CURRENT_DESKTOP=kde /usr/lib/xdg-desktop-portal-kde"
+    /usr/lib/xdg-desktop-portal-kde
 
     # polkit
     /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
