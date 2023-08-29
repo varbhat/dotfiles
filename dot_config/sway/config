@@ -34,11 +34,11 @@ exec {
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
     # start xdg-desktop-portals here itself
-    /usr/lib/xdg-desktop-portal
-    /usr/lib/xdg-desktop-portal-wlr
-    /usr/lib/xdg-desktop-portal-shana
-    /usr/lib/xdg-desktop-portal-gtk
-    /usr/lib/xdg-desktop-portal-kde
+    #/usr/lib/xdg-desktop-portal
+    #/usr/lib/xdg-desktop-portal-wlr
+    #/usr/lib/xdg-desktop-portal-shana
+    #/usr/lib/xdg-desktop-portal-gtk
+    #/usr/lib/xdg-desktop-portal-kde
 
     # polkit
     /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -258,6 +258,7 @@ for_window {
     [app_id="wofi"] floating enable; border normal; move position cursor
     [app_id="kitty" title="floatterm(.*)"] floating enable; border normal; move position cursor; resize set 1000 600
     [app_id="kitty" title="dropdownterminal"] floating enable; sticky toggle; border normal; move position cursor; resize set 1000 600;
+    [app_id="org.qbittorrent.qBittorrent"] floating enable; border normal; resize set 1000 600;
     [app_id="amdgpu_top"] floating enable; border normal; move position cursor;
 
     # Fix Wine
