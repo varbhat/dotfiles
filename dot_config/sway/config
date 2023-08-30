@@ -338,6 +338,21 @@ bindsym --border {
     Shift+button5 move scratchpad
 }
 
+# Gestures
+bindgesture {
+    swipe:3:up exec $launcher
+    swipe:3:down exec $newworkspace
+
+    swipe:3:right workspace prev
+    swipe:3:left workspace next
+
+    swipe:4:up kill
+    swipe:4:down $forcekill
+
+    swipe:4:right move right
+    swipe:4:left move left
+}
+
 # Modes
 mode "wsmanage" {
     bindsym  Home workspace prev
