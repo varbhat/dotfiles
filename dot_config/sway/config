@@ -100,8 +100,8 @@ bindsym {
     # XF86MonBrightnessUp exec ddcutil getvcp 10 | awk -F 'current value = ' '{print $2}' | awk -F ', max value' '{print $1}' | sed 's/$/+10/' | bc | sed 's/^-.*/1/' | awk '{ if ($1 > 100) $1 = 100; print $1 }'  | tee $wobsock | xargs ddcutil setvcp 10
     
     # Brightness using brightnessctl
-    # XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
-    # XF86MonBrightnessUp exec brightnessctl set +5% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
+    XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
+    XF86MonBrightnessUp exec brightnessctl set +5% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
 
     # Screen Turn On/Off
     $meta+XF86MonBrightnessUp output * dpms on
