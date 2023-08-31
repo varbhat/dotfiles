@@ -33,13 +33,6 @@ exec {
     # themes
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
-    # start xdg-desktop-portals here itself
-    #/usr/lib/xdg-desktop-portal
-    #/usr/lib/xdg-desktop-portal-wlr
-    #/usr/lib/xdg-desktop-portal-shana
-    #/usr/lib/xdg-desktop-portal-gtk
-    #/usr/lib/xdg-desktop-portal-kde
-
     # polkit
     /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
@@ -94,11 +87,7 @@ bindsym {
     XF86AudioPlay exec playerctl play-pause
     XF86AudioNext exec playerctl next
     XF86AudioPrev exec playerctl previous
-
-    # Brightness of ddcutil Screens
-    # XF86MonBrightnessDown exec ddcutil getvcp 10 | awk -F 'current value = ' '{print $2}' | awk -F ', max value' '{print $1}' | sed 's/$/-10/' | bc | sed 's/^-.*/1/' | awk '{ if ($1 > 100) $1 = 100; print $1 }'  | tee $wobsock | xargs ddcutil setvcp 10
-    # XF86MonBrightnessUp exec ddcutil getvcp 10 | awk -F 'current value = ' '{print $2}' | awk -F ', max value' '{print $1}' | sed 's/$/+10/' | bc | sed 's/^-.*/1/' | awk '{ if ($1 > 100) $1 = 100; print $1 }'  | tee $wobsock | xargs ddcutil setvcp 10
-    
+  
     # Brightness using brightnessctl
     # XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
     # XF86MonBrightnessUp exec brightnessctl set +5% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
@@ -112,10 +101,6 @@ bindsym {
     Print exec grimshot copy active
     $meta+Print exec grimshot --notify copy output
     $alt+Print exec grimshot --notify copy area
-
-
-
-    
 
     #TODO:s
     # $meta+m exec mpv --player-operation-mode=pseudo-gui
@@ -327,6 +312,21 @@ bindsym --whole-window {
 
     $meta+$alt+button3 kill
     $meta+$alt+button1 exec $newworkspace
+}
+
+# Touchpad Gestures
+bindgesture {
+    swipe:3:up exec $launcher
+    swipe:3:down exec $newworkspace
+
+    swipe:3:right workspace prev
+    swipe:3:left workspace next
+
+    swipe:4:up kill
+    swipe:4:down $forcekill
+
+    swipe:4:right move right
+    swipe:4:left move left
 }
 
 # Mouse Bindings on Window Borders

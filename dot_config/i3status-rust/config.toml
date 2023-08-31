@@ -171,6 +171,10 @@ format = " $icon{ $volume|} "
 button = "left"
 cmd = "pavucontrol-qt"
 
+#[[block]]
+#block = "battery"
+#format = " $icon $percentage "
+
 [[block]]
 block = "menu"
 text = "\uf011"

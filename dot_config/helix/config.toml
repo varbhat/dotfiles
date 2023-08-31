@@ -1,4 +1,4 @@
-theme = "base16_transparent"
+theme = "vbt"
 
 [editor]
 cursorline = true
