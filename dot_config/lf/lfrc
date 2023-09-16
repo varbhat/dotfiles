@@ -1,4 +1,8 @@
-set previewer ~/.config/lf/preview
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit $id
+
 set ratios 1:2:3
 set mouse
 

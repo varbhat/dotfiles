@@ -87,7 +87,7 @@ bindsym {
     XF86AudioPlay exec playerctl play-pause
     XF86AudioNext exec playerctl next
     XF86AudioPrev exec playerctl previous
-  
+    
     # Brightness using brightnessctl
     # XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
     # XF86MonBrightnessUp exec brightnessctl set +5% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
@@ -102,11 +102,7 @@ bindsym {
     $meta+Print exec grimshot --notify copy output
     $alt+Print exec grimshot --notify copy area
 
-    #TODO:s
-    # $meta+m exec mpv --player-operation-mode=pseudo-gui
-    $meta+b exec firefox
     $meta+w border toggle
-    # $meta+c exec gio launch /home/vbt/.local/share/applications/codium.desktop
 
     # Terminal
     $meta+Return exec $term
@@ -255,10 +251,10 @@ for_window {
     [class="control.exe"] floating enable; border normal; resize set 40ppt 40ppt; move position cursor;
     [class="setup(.*)"] floating enable; border normal; move position cursor;
     [app_id="easyterm.py"] floating enable; move position cursor;
+    [app_id="zenity"] floating enable; border normal;
 
-
-    # Fix Variety
-    [app_id="variety"] floating enable; border normal; resize set 40ppt 40ppt; move position cursor;
+    # Fix Steam
+    [class="steam" title="Steam Settings"] floating enable; move position cursor;
 
     # Fix Audacious
     [app_id="audacious"] floating enable; border normal;
@@ -339,6 +335,7 @@ bindsym --border {
 }
 
 # Modes
+# Workspace management mode
 mode "wsmanage" {
     bindsym  Home workspace prev
     bindsym  Down exec swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | min')
@@ -350,3 +347,28 @@ mode "wsmanage" {
     bindsym  Escape mode "default"
 }
 bindsym  $meta+F1 mode "wsmanage"
+
+
+# Passthrough mode
+mode passthrough {
+	bindsym $meta+F2 mode default
+}
+bindsym $meta+F2 mode passthrough
+
+# Launcher mode
+set $launcher_mode [f]irefox | [d]olphin | [m]pv | [c]ode | [t]elegram | [e]ditor | [s]team | [b]ottles | [l]auncher | [Bs]poweroff | [Sh+Bs]reboot
+mode "$launcher_mode" {
+    bindsym f exec firefox; mode "default"
+    bindsym d exec dolphin; mode "default"
+    bindsym m exec mpv --player-operation-mode=pseudo-gui; mode "default"
+    bindsym c exec code; mode "default"
+    bindsym t exec org.telegram.desktop; mode "default"
+    bindsym e exec helix; mode "default"
+    bindsym s exec com.valvesoftware.Steam; mode "default"
+    bindsym b exec com.usebottles.bottles; mode "default"
+    bindsym l exec $launcher; mode "default"
+    bindsym Backspace exec systemctl poweroff; mode "default"
+    bindsym Shift+Backspace exec systemctl reboot; mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $meta+m mode "$launcher_mode"
