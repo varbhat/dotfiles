@@ -104,6 +104,10 @@ bindsym {
 
     $meta+w border toggle
 
+
+    # Browser
+    $meta+b exec firefox
+
     # Terminal
     $meta+Return exec $term
     $meta+grave exec swayddt
