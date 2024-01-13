@@ -1,3 +1,6 @@
 [user]
 email = mailvarbhat@gmail.com
 name = Var Bhat
+
+[core]
+sshCommand = ssh -i /home/vbt/.ssh/id_ed25519

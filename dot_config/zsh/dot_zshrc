@@ -49,7 +49,7 @@ zinit load hlissner/zsh-autopair
 zinit load Tarrasch/zsh-bd
 zinit load trapd00r/zsh-syntax-highlighting-filetypes
 
-zinit light ianthehenry/zsh-autoquoter
+#zinit light ianthehenry/zsh-autoquoter
 ZAQ_PREFIXES+=('git commit( [^ ]##)# -[^ -]#m' 'ssh( [^ ]##)# [^ -][^ ]#')
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(zaq)
 ZSH_HIGHLIGHT_STYLES[zaq:string]="fg=green,underline"

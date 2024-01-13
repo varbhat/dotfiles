@@ -240,6 +240,7 @@ for_window {
     [window_role="GtkFileChooserDialog"] floating enable; border normal; move position cursor
     [title="Open Folder(.*)"] floating enable; border normal;
     [title="Open Files(.*)"] floating enable; border normal;
+    [title="(.*)iced-debug-app(.*)"] floating enable; border normal;
     [app_id="wofi"] floating enable; border normal; move position cursor
     [app_id="kitty" title="floatterm(.*)"] floating enable; border normal; move position cursor; resize set 1000 600
     [app_id="kitty" title="dropdownterminal"] floating enable; sticky toggle; border normal; move position cursor; resize set 1000 600;
@@ -254,6 +255,7 @@ for_window {
     [class="regedit.exe"] floating enable; border normal; move position cursor;
     [class="control.exe"] floating enable; border normal; resize set 40ppt 40ppt; move position cursor;
     [class="setup(.*)"] floating enable; border normal; move position cursor;
+    [title="LariLauncher"] floating enable; border normal; move position cursor;
     [app_id="easyterm.py"] floating enable; move position cursor;
     [app_id="zenity"] floating enable; border normal;
 
