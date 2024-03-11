@@ -122,6 +122,7 @@ zle -N exit_zsh
 bindkey '^D' exit_zsh
 export zle_highlight=(default:fg=105)
 
+preexec() { print -Pn "\e]0;$1%~\a" }
 
 bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line

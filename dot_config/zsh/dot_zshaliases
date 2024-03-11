@@ -4,9 +4,7 @@ alias grep='grep --color=auto'
 alias ip='ip -color=auto'
 alias ls='ls --color=auto --group-directories-first --hyperlink=auto'
 alias pastebin="curl -F'file=@-' https://0x0.st"
-alias hx="helix"
-alias icat="kitty +kitten icat"
-
+alias v="nvim"
 
 # flatpak aliases
 alias fin='flatpak install flathub --user'
