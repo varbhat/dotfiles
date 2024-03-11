@@ -1,13 +1,13 @@
 #!/bin/sh
-window=$(swaymsg -t get_tree | jq -r '..|try select(.app_id == "'kitty'")|try select(.name == "'dropdownterminal'")')
+window=$(swaymsg -t get_tree | jq -r '..|try select(.app_id == "'Alacritty'")|try select(.name == "'dropdownterminal'")')
 windowpid=$(echo $window | jq -r '.pid')
 
 if [ ! -z "$windowpid" ]; then
-    if [ "$(echo $window | jq -r .visible)" = "true" ]; then
-       swaymsg [ app_id="kitty" pid="$windowpid" ] move scratchpad
-    else
-       swaymsg [title="dropdownterm" app_id="kitty"] move container to workspace current, move position cursor, focus
-    fi
+	if [ "$(echo $window | jq -r .visible)" = "true" ]; then
+		swaymsg [ app_id="Alacritty" pid="$windowpid" ] move scratchpad
+	else
+		swaymsg [title="dropdownterminal" app_id="Alacritty"] move container to workspace current, move position cursor, focus
+	fi
 else
-    swaymsg exec 'kitty -o background_opacity=0.8 -T "dropdownterminal"'
+	swaymsg exec 'alacritty -o window.opacity=0.8 -T "dropdownterminal"'
 fi

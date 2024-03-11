@@ -2,7 +2,7 @@
 set {
     $meta Mod4
     $alt Mod1
-    $term kitty
+    $term alacritty
     $forcekill exec kill -9 $(swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true) | .pid')
     $menu bash -c "rofi -show combi -combi-modi drun,run"
     $dmenu $(rofi -dmenu)
@@ -242,8 +242,8 @@ for_window {
     [title="Open Files(.*)"] floating enable; border normal;
     [title="(.*)iced-debug-app(.*)"] floating enable; border normal;
     [app_id="wofi"] floating enable; border normal; move position cursor
-    [app_id="kitty" title="floatterm(.*)"] floating enable; border normal; move position cursor; resize set 1000 600
-    [app_id="kitty" title="dropdownterminal"] floating enable; sticky toggle; border normal; move position cursor; resize set 1000 600;
+    [app_id="Alacritty" title="floatterm(.*)"] floating enable; border normal; move position cursor; resize set 1000 600
+    [app_id="Alacritty" title="dropdownterminal"] floating enable; sticky toggle; border normal; move position cursor; resize set 1000 600;
     [app_id="org.qbittorrent.qBittorrent"] floating enable; border normal; resize set 1000 600;
     [app_id="amdgpu_top"] floating enable; border normal; move position cursor;
 
@@ -308,7 +308,7 @@ bindsym --whole-window {
     $meta+$alt+button5 exec $wofilauncher
 
 
-    $meta+Shift+button4 exec kitty
+    $meta+Shift+button4 exec alacritty
     $meta+Shift+button5 exec swayddt
 
 
