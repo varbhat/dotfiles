@@ -1,5 +1,5 @@
 export EDITOR="nvim"
-export TERMINAL="alacritty"
+export TERMINAL="foot"
 export GOPATH=~/.local/share/gopath
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$GOPATH/bin:$HOME/.cargo/bin:$VOLTA_HOME/bin:$HOME/.local/bin:$HOME/.local/vbin:$PATH" 
