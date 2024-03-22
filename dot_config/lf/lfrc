@@ -1,7 +1,7 @@
 set previewer ~/.config/lf/lf_preview
 
 
-set ratios 1:2:3
+set ratios 1:2
 set mouse
 set sixel true
 map . :set hidden!
