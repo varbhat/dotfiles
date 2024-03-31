@@ -1,0 +1,94 @@
+[theme]
+theme = "srcery"
+[icons]
+icons = "awesome6"
+
+[[block]]
+block = "focused_window"
+[block.format]
+full = " $title.str(max_w:25) |"
+short = " $title.str(max_w:20) |"
+[[block.click]]
+button = "right"
+cmd = "swaymsg kill"
+[[block.click]]
+button = "middle"
+cmd = "swaymsg move to scratchpad"
+
+[[block]]
+block = "music"
+format = "{ $prev|} {$combo.str(max_w:25,rot_interval:0.5) { $play|} { $next|} |}"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+cmd = "killall wlsunset || wlsunset -T 4001"
+button = "left"
+
+[[block]]
+block = "net"
+format = " $icon{$signal_strength $ssid $frequency|} $device"
+[[block.click]]
+button = "left"
+cmd = "iwgtk"
+[[block.click]]
+button = "right"
+cmd = "blueman-manager"
+
+[[block]]
+block = "keyboard_layout"
+driver = "sway"
+[block.mappings]
+"English (Dvorak)" = "dv"
+"English (US)" = "qw"
+[[block.click]]
+button = "left"
+cmd = "swaymsg mode keyboard"
+[[block.click]]
+button = "right"
+cmd = "swaymsg mode keyboard"
+
+[[block]]
+block = "tea_timer"
+format = " $icon {$minutes:$seconds |}"
+done_cmd = "notify-send 'Timer Finished'"
+
+
+#[[block]]
+#block = "battery"
+#format = " $icon $percentage "
+
+
+[[block]]
+block = "time"
+interval = 60
+format = "$timestamp.datetime(f:'%I:%M %p %a %d-%m-%Y')"
+
+[[block]]
+block = "sound"
+driver = "pulseaudio"
+format = " $icon{ $volume|} "
+[[block.click]]
+button = "left"
+cmd = "pavucontrol-qt"
+
+[[block]]
+block = "menu"
+text = "\uf011"
+[[block.items]]
+display = " -&gt; Power Off &lt;-"
+cmd = "sudo poweroff"
+confirm_msg = "Are you sure you want to power off?"
+[[block.items]]
+display = " -&gt;  Reboot   &lt;-"
+cmd = "sudo reboot"
+confirm_msg = "Are you sure you want to reboot?"
+
+[[block]]
+block = "privacy"
+[[block.driver]]
+name = "v4l"
+[[block.driver]]
+name = "pipewire"

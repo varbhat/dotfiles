@@ -1,0 +1,76 @@
+/* rofi config for launcher, need my main config.rasi file */
+
+configuration {
+    modi:                 "drun";
+    drun-display-format:  "{name}";
+    /* Here disable the Left and Right keys for line editing,
+     * so you can use them to move the selection */
+    kb-move-char-back:    "Control+b";
+    kb-move-char-forward: "Control+f";
+    kb-row-left:          "Left";
+    kb-row-right:         "Right";
+    kb-row-up:            "Up";
+    kb-row-down:          "Down";
+}
+
+* {
+    background-color    : #21212100;
+    color               : #EEFFFFFF;
+    /* color for highlighted things */
+    selected-background : #EEFFFF40;
+}
+
+window {
+    background-color    : #21212180;
+    width: 100%;
+    height: 100%;
+}
+
+listview {
+    columns: 7;
+    lines:   5;
+    margin:  2%;
+    flow: horizontal;
+}
+
+inputbar {
+    children: [button-dummy, entry, button-dummy];
+    padding: 4% 2% 0% 2%;
+}
+
+/* button- prefix is essential, making it clickable */
+button-dummy {
+    action: "kb-cancel";
+}
+
+entry {
+    background-color : @selected-background;
+    border-radius    : 16px;
+    padding          : 1%;
+    expand           : false;
+    width            : 20%;
+    margin           : 4% 0;
+}
+
+element {
+    border-radius    : 16px;
+    orientation      : vertical;
+    padding          : 3% 1%;
+}
+
+element selected {
+    background-color: @selected-background;
+}
+
+element-icon {
+    size: 8%;
+}
+
+element-text, element-icon {
+    horizontal-align: 0.5;
+    background-color: none;
+    color:            inherit;
+}
+
+/* vim magic line below, but don't add closing comment, since vim can't parse them */
+/* vim: ft=css

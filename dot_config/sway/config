@@ -1,0 +1,409 @@
+# Variables
+set {
+    $meta Mod4
+    $alt Mod1
+    $term foot
+    $forcekill exec kill -9 $(swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true) | .pid')
+    $menu bash -c "rofi -show combi -combi-modi drun,run"
+    $dmenu $(rofi -dmenu)
+    $launcher nwg-drawer -nofs -nocats -c 9 | xargs swaymsg exec --
+    $wofilauncher bash -c "wofi --show drun,run --normal-window --allow-images"
+    #$lockcmd swaymsg "output * dpms off" && swaylock && swaymsg "output * dpms on"
+    $lockcmd swaylock.sh
+    $wobsock $XDG_RUNTIME_DIR/wob.sock
+    $newworkspace swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)
+    $movetonewworkspace swaymsg move container to workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)
+}
+
+# Wallpaper
+output * {
+    #bg '#000000' solid_color
+    bg  $(find ~/.xdgpath/pictures/wallpapers -type f | shuf -n 1) fill
+}
+
+# Executions
+exec {
+    dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+    # https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
+    #systemctl --user import-environment
+    #hash dbus-update-activation-environment 2>/dev/null && \
+    #    dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
+    /usr/bin/pipewire &
+    /usr/bin/pipewire-pulse &
+    /usr/bin/wireplumber &
+
+    # themes
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
+    # polkit
+    /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+    # Start mako
+    mako
+
+    # Wayland Overlay Bar
+    rm -f $wobsock && mkfifo $wobsock && tail -f $wobsock | wob
+
+    # make bluetooth media controls work
+    mpris-proxy
+
+    $lockcmd
+}
+
+
+
+# IO configs
+input "type:touchpad" {
+       dwt enabled
+       tap enabled
+       natural_scroll enabled
+}
+input "type:keyboard" {
+        xkb_layout us
+        xkb_variant dvorak
+        xkb_options caps:swapescape
+}
+
+focus_follows_mouse yes
+default_border pixel 1
+default_floating_border normal
+hide_edge_borders both
+smart_borders on
+popup_during_fullscreen leave_fullscreen
+
+
+# colors of      border    background  text     indicator
+client.focused   #222222   #111111     #ffffff  #00ff00
+
+
+floating_modifier $meta normal # super key
+
+bindsym {
+    # XF86 Keybindings
+
+    # Sound
+    XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ && wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/[^0-9]//g' > $wobsock
+    XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/[^0-9]//g' > $wobsock
+    XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && (wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo 0 > $wobsock) || wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/[^0-9]//g' > $wobsock
+    XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && (wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo 0 > $wobsock) || wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | sed 's/[^0-9]//g' > $wobsock
+    XF86AudioPlay exec playerctl play-pause
+    XF86AudioNext exec playerctl next
+    XF86AudioPrev exec playerctl previous
+    
+    # Brightness using brightnessctl
+    # XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
+    # XF86MonBrightnessUp exec brightnessctl set +5% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
+
+    # Screen Turn On/Off
+    $meta+XF86MonBrightnessUp output * dpms on
+    $meta+XF86MonBrightnessDown output * dpms off
+
+    # Print Bindings
+    $meta+Shift+Print exec wl-paste > "$(xdg-user-dir PICTURES)/screenshot-$(date -Ins).png" #TODO: make this to save all clipboard
+    Print exec grimshot copy active
+    $meta+Print exec grimshot --notify copy output
+    $alt+Print exec grimshot --notify copy area
+
+    $meta+w border toggle
+
+
+    # Browser
+    $meta+b exec firefox
+
+    # Terminal
+    $meta+Return exec $term
+    $meta+slash exec swayddt
+
+    # kill windows
+    $meta+BackSpace kill
+    $meta+Shift+BackSpace $forcekill
+
+    # Menus and Launchers
+    $meta+d exec $menu
+    $meta+Shift+d exec $newworkspace && $menu
+    $meta+alt+d exec $launcher
+
+    $meta+l bar mode toggle
+
+    $meta+Shift+r reload
+
+
+    # Alt+Tab
+    $alt+tab exec rofi -show window
+
+    # Navigate Workspaces
+    $meta+Home workspace prev_on_output
+    $meta+End workspace next_on_output
+
+
+    # Meta+n opens empty new workspace
+    $meta+n exec $newworkspace
+    # Meta+Shift+n moves current window to new workspace
+    $meta+Shift+n exec $movetonewworkspace
+    # Meta+Alt+n moves current window to new workspace and switches to the created new workspace
+    $meta+$alt+n exec $movetonewworkspace && swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max')
+
+
+    # layout keybindings
+    $meta+Left focus left
+    $meta+Down focus down
+    $meta+Up focus up
+    $meta+Right focus right
+    $meta+Shift+Left move left
+    $meta+Shift+Down move down
+    $meta+Shift+Up move up
+    $meta+Shift+Right move right
+
+    # Lock
+    $meta+Shift+l exec $lockcmd
+
+    # workspace
+    $meta+1 workspace number 1
+    $meta+2 workspace number 2
+    $meta+3 workspace number 3
+    $meta+4 workspace number 4
+    $meta+5 workspace number 5
+    $meta+6 workspace number 6
+    $meta+7 workspace number 7
+    $meta+8 workspace number 8
+    $meta+9 workspace number 9
+    $meta+0 exec swaymsg workspace number $dmenu
+    $meta+Shift+1 move container to workspace number 1
+    $meta+Shift+2 move container to workspace number 2
+    $meta+Shift+3 move container to workspace number 3
+    $meta+Shift+4 move container to workspace number 4
+    $meta+Shift+5 move container to workspace number 5
+    $meta+Shift+6 move container to workspace number 6
+    $meta+Shift+7 move container to workspace number  7
+    $meta+Shift+8 move container to workspace number 8
+    $meta+Shift+9 move container to workspace number 9
+    $meta+Shift+0 exec swaymsg move container to workspace number $dmenu
+
+    # layout
+    $meta+h splith
+    $meta+v splitv
+    $meta+f fullscreen
+    $meta+z layout toggle split
+    $meta+t layout toggle tabbed split
+    $meta+s layout toggle stacking split
+    $meta+space floating toggle
+    $meta+Shift+space focus mode_toggle
+
+    # resize mode
+    $meta+$alt+Left resize grow width 10px
+    $meta+$alt+Down resize shrink height 10px
+    $meta+$alt+Up resize grow height 10px
+    $meta+$alt+Right resize shrink width 10px
+
+    #75:25 layout
+    $meta+g resize set width 75ppt
+    $meta+r resize set width 25ppt
+
+
+    #prior->pgup next->pgdown
+    $meta+Prior floating disable
+    $meta+Next floating enable
+    $meta+Shift+Prior scratchpad show
+    $meta+Shift+Next move scratchpad
+}
+
+
+bar {
+    font pango:Inter, FontAwesome 10
+    position bottom
+    status_command i3status-rs
+    colors {
+        separator #666666
+        background #222222
+        statusline #dddddd
+        focused_workspace #0088CC #0088CC #ffffff
+        active_workspace #333333 #333333 #ffffff
+        inactive_workspace #333333 #333333 #888888
+        urgent_workspace #2f343a #900000 #ffffff
+    }
+}
+
+# Sway Window Rules
+for_window {
+    # Auto float some apps
+    [app_id="org.twosheds.iwgtk"] floating enable; border normal; move position cursor
+    [app_id="flameshot"] floating enable; border normal; move position cursor
+    [app_id="pavucontrol-qt"] floating enable; border normal; move position cursor
+    [app_id="blueman-manager"] floating enable; border normal; move position cursor
+    [app_id="org.freedesktop.impl.portal.desktop(.*)"] floating enable; border normal; move position cursor
+    [app_id="thunar" title="File Operation Progress" ] floating enable; border normal; resize set 1000 600; move position cursor
+
+    [window_role="GtkFileChooserDialog"] floating enable; border normal; move position cursor
+    [title="Open Folder(.*)"] floating enable; border normal;
+    [title="Open Files(.*)"] floating enable; border normal;
+    [title="(.*)debug-app(.*)"] floating enable; border normal;
+    [app_id="wofi"] floating enable; border normal; move position cursor
+    [app_id="foot" title="floatterm(.*)"] floating enable; border normal; move position cursor; resize set 1000 600
+    [app_id="footdropterm"] floating enable; sticky toggle; border normal; move position cursor; resize set 1000 600;
+    [app_id="org.qbittorrent.qBittorrent"] floating enable; border normal; resize set 1000 600;
+    [app_id="amdgpu_top"] floating enable; border normal; move position cursor;
+
+    # Fix Wine
+    [class="explorer.exe"] floating enable; border normal; move position cursor;
+    [class="taskmgr.exe"] floating enable; border normal; move position cursor;
+    [class="winecfg.exe"] floating enable; border normal; move position cursor;
+    [class="uninstaller.exe"] floating enable; border normal; move position cursor;
+    [class="regedit.exe"] floating enable; border normal; move position cursor;
+    [class="control.exe"] floating enable; border normal; resize set 40ppt 40ppt; move position cursor;
+    [class="setup(.*)"] floating enable; border normal; move position cursor;
+    [title="LariLauncher"] floating enable; border normal; move position cursor;
+    [app_id="easyterm.py"] floating enable; move position cursor;
+    [app_id="zenity"] floating enable; border normal;
+
+    # Fix Steam
+    [class="steam" title="Steam Settings"] floating enable; move position cursor;
+    [class="^Steam$" title="^Friends$"] floating enable
+    [class="^Steam$" title="Steam - News"] floating enable
+    [class="^Steam$" title=".* - Chat"] floating enable
+    [class="^Steam$" title="^Settings$"] floating enable
+    [class="^Steam$" title=".* - event started"] floating enable
+    [class="^Steam$" title=".* CD key"] floating enable
+    [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+    [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+    [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+    [title="^Steam Keyboard$"] floating enable 
+
+    # Fix Audacious
+    [app_id="audacious"] floating enable; border normal;
+
+    # Jetbrains fixes
+    [class="jetbrains-(.*)" title="Go to Line/Column"] floating enable
+    [class="jetbrains-(.*)" title="Rename"] floating enable
+    [class="jetbrains-(.*)" title="Open Project"] floating enable
+    [class="(jetbrains|java-util)-(.*)" title="win0"] floating enable
+    [class="jetbrains-(.*)" title="Welcome to *"] floating enable
+
+    # Firefox Fixes
+    [app_id="firefox" title="Pushbullet"] floating enable
+    [app_id="firefox" title="Firefox — Sharing Indicator"] floating enable; move scratchpad
+    [app_id="firefox" title="Picture-in-Picture"] floating enable; resize set 50ppt 50ppt; move position 50ppt 50ppt; sticky toggle
+    [app_id="firefox" title="Pushbullet – Mozilla Firefox"] floating enable
+    [app_id="firefox" title="About Mozilla Firefox"] floating enable; border normal
+    [app_id="firefox" title="moz-extension:.*"] floating enable
+    [app_id="firefox" title="Password Required"] floating enable
+    [app_id="firefox" title="Firefox - Choose User Profile"] floating enable; border normal
+    [app_id="firefox" title="Library"] floating enable; border normal
+    [app_id="firefox" title="Page Info — (.*)"] floating enable; border normal
+
+    # default floating
+    [window_role="pop-up"] floating enable
+    [window_role="bubble"] floating enable
+    [window_role="task_dialog"] floating enable
+    [window_role="Preferences"] floating enable
+    [window_type="dialog"] floating enable
+    [window_type="menu"] floating enable
+    [instance="update_installer"] floating enable
+
+    # Tag xwayland windows as such
+    [shell="xwayland"] title_format "[X11] %title"
+}
+
+# Mouse Bindings
+bindsym --whole-window {
+    $meta+button4 workspace prev
+    $meta+button5 workspace next
+    $alt+button4 exec swaywinmenu
+    $alt+button5 exec swaywinkillmenu
+
+    $meta+$alt+button4 exec $launcher
+    $meta+$alt+button5 exec $wofilauncher
+
+
+    $meta+Shift+button4 exec foot
+    $meta+Shift+button5 exec swayddt
+
+
+    $meta+$alt+button3 kill
+    $meta+$alt+button1 exec $newworkspace
+}
+
+# Touchpad Gestures
+bindgesture {
+    swipe:3:up exec $launcher
+    swipe:3:down exec $newworkspace
+
+    swipe:3:right workspace prev
+    swipe:3:left workspace next
+
+    swipe:4:up kill
+    swipe:4:down $forcekill
+
+    swipe:4:right move right
+    swipe:4:left move left
+}
+
+# Mouse Bindings on Window Borders
+bindsym --border {
+    button3 kill
+    Shift+button3 $forcekill
+    button2 sticky toggle
+    Shift+button4 floating toggle
+    Shift+button5 move scratchpad
+}
+
+
+# Passthrough mode
+mode passthrough {
+	bindsym $meta+F1 mode default
+}
+bindsym $meta+F1 mode passthrough
+
+# Workspace Mode
+set $workspacemode workspace 
+mode "$workspacemode" {
+   bindsym {
+      1 workspace number 1
+      2 workspace number 2
+      3 workspace number 3
+      4 workspace number 4
+      5 workspace number 5
+      6 workspace number 6
+      7 workspace number 7
+      8 workspace number 8
+      9 workspace number 9
+      0 mode default;exec swaymsg workspace number $dmenu
+      Shift+1 move container to workspace number 1
+      Shift+2 move container to workspace number 2
+      Shift+3 move container to workspace number 3
+      Shift+4 move container to workspace number 4
+      Shift+5 move container to workspace number 5
+      Shift+6 move container to workspace number 6
+      Shift+7 move container to workspace number  7
+      Shift+8 move container to workspace number 8
+      Shift+9 move container to workspace number 9
+      Shift+0 mode default;exec swaymsg move container to workspace number $dmenu
+      Home workspace prev
+      Down exec swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | min')
+      Up exec swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max')
+      End workspace next
+    }
+    bindsym Escape mode "default"
+}
+bindsym $meta+F2 mode "$workspacemode"
+
+# Keyboard layout Mode
+set $kblayoutmode keyboard 
+mode "$kblayoutmode" {
+    set {
+        $setkbdvorak exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "us" && swaymsg input type:keyboard xkb_variant 'dvorak';
+        $setkbqwerty exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "us" && swaymsg input type:keyboard xkb_variant 'qwerty';
+        $setkbkankagapa exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "in" && swaymsg input type:keyboard xkb_variant 'kan-kagapa';
+        $setkbsankagapa exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "in" && swaymsg input type:keyboard xkb_variant 'san-kagapa';
+    }
+    # 43 -> dvorak d
+    bindcode 43 $setkbdvorak; mode "default" 
+    # 53 -> dvorak q
+    bindcode 53 $setkbqwerty; mode "default"
+    # 55 -> dvorak k
+    bindcode 55 $setkbkankagapa; mode "default"
+    # 47 -> dvorak s
+    bindcode 47 $setkbsankagapa; mode "default"
+    bindsym Escape mode "default"
+}

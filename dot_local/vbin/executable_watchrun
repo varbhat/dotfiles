@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+while inotifywait -r "$1" -e create,delete,modify; do { "${@:2}"; }; done  

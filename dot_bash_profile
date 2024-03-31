@@ -1,0 +1,42 @@
+export EDITOR="nvim"
+export TERMINAL="foot"
+export GOPATH=~/.local/share/gopath
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$GOPATH/bin:$HOME/.cargo/bin:$VOLTA_HOME/bin:$HOME/.local/bin:$HOME/.local/vbin:$PATH"
+
+if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && [[ -f /usr/bin/sway ]]; then
+	if test -z "${XDG_RUNTIME_DIR}"; then
+		export XDG_RUNTIME_DIR=/tmp/xdgruntimedir/"$(id -u)"
+		if ! test -d "${XDG_RUNTIME_DIR}"; then
+			mkdir -p "${XDG_RUNTIME_DIR}"
+			chmod 0700 "${XDG_RUNTIME_DIR}"
+		fi
+	fi
+
+	# export XDG_CURRENT_DESKTOP
+	export XDG_CURRENT_DESKTOP=sway
+
+	# wayland
+	export QT_QPA_PLATFORM=wayland
+	export _JAVA_AWT_WM_NONREPARENTING=1
+	export MOZ_ENABLE_WAYLAND=1
+	export XCURSOR_THEME=Adwaita
+	#export SDL_DYNAMIC_API=/usr/lib/libSDL2-2.0.so.0
+	#export SDL_AUDIODRIVER=pipewire
+	#export SDL_VIDEODRIVER=wayland
+	#export ELM_DISPLAY=wl
+	#export ALSOFT_DRIVERS=pipewire
+
+	# enable file portal for gtk apps
+	export GTK_USE_PORTAL=1
+
+	# use qt6ct to theme QT
+	export QT_QPA_PLATFORMTHEME=qt6ct
+
+	# Permanently disable bash history
+	# Because we aren't using bash
+	set +o history
+
+	# start sway
+	dbus-run-session sway 2>&1 &
+fi
