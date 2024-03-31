@@ -29,6 +29,11 @@ for i in $__fish_config_dir/udir/functions/*.fish
     source $i
 end
 
+# Create missing directories
+set -l directories ~/space ~/space/downloads ~/.cache ~/.config ~/.xdgpath ~/.xdgpath/desktop ~/.xdgpath/documents ~/.xdgpath/music ~/.xdgpath/pictures ~/.xdgpath/publicshare ~/.xdgpath/templates ~/.xdgpath/videos ~/.xdgpath/pictures ~/.xdgpath/pictures/wallpapers
+for dir in $directories
+    test -d $dir || mkdir -p $dir
+end
 
 
 # Integrate with fish 
