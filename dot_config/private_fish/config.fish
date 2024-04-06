@@ -29,6 +29,11 @@ for i in $__fish_config_dir/udir/functions/*.fish
     source $i
 end
 
+# Source Misc Fish scripts
+for i in $__fish_config_dir/udir/misc/*.fish
+    source $i
+end
+
 # Create missing directories
 set -l directories ~/space ~/space/downloads ~/.cache ~/.config ~/.xdgpath ~/.xdgpath/desktop ~/.xdgpath/documents ~/.xdgpath/music ~/.xdgpath/pictures ~/.xdgpath/publicshare ~/.xdgpath/templates ~/.xdgpath/videos ~/.xdgpath/pictures ~/.xdgpath/pictures/wallpapers
 for dir in $directories

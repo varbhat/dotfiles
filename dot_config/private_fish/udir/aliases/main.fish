@@ -1,6 +1,10 @@
 # editor
 alias v="nvim"
+
+
 alias ls="eza --icons=auto --hyperlink"
+alias g="git"
+alias lg="lazygit"
 
 # Colored utilities
 alias diff="diff --color=auto"
