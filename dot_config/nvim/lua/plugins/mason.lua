@@ -8,6 +8,7 @@ return {
         "goimports",
         "golangci-lint",
         "go-debug-adapter",
+        "gofumpt",
         "delve",
         "gomodifytags",
 
@@ -21,10 +22,10 @@ return {
         "tailwindcss-language-server",
 
         -- Python
-        -- "ruff",
+        --"ruff",
         --"ruff-lsp",
         --"pylyzer",
-        "pyright",
+        "basedpyright",
 
         -- Clang Tools
         "clangd",
