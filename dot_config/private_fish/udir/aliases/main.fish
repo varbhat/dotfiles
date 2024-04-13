@@ -5,6 +5,7 @@ alias v="nvim"
 alias ls="eza --icons=auto --hyperlink"
 alias g="git"
 alias lg="lazygit"
+alias ldo="lazydocker"
 
 # Colored utilities
 alias diff="diff --color=auto"
