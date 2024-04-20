@@ -7,7 +7,6 @@ zdharma-continuum/fast-syntax-highlighting kind:defer
 zdharma-continuum/history-search-multi-word
 woefe/git-prompt.zsh
 hlissner/zsh-autopair
-ianthehenry/zsh-autoquoter
 Tarrasch/zsh-bd
 romkatv/zsh-bench kind:path
 olets/zsh-abbr    kind:defer
