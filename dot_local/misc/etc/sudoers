@@ -1,0 +1,2 @@
+# Allow vbt to execute following command without password
+vbt ALL=NOPASSWD: /usr/bin/poweroff , /usr/bin/reboot , /usr/bin/halt , /usr/bin/pacman , /usr/bin/mount
