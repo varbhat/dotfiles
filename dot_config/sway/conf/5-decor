@@ -1,0 +1,3 @@
+# vim: set ft=swayconfig:
+# colors of      border    background  text     indicator
+client.focused   #222222   #111111     #ffffff  #00ff00

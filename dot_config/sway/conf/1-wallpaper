@@ -1,0 +1,5 @@
+# vim: set ft=swayconfig:
+output * {
+    #bg '#000000' solid_color
+    bg  $(find ~/.xdgpath/pictures/wallpapers -type f | shuf -n 1) fill
+}

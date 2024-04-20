@@ -1,0 +1,8 @@
+# vim: set ft=swayconfig:
+focus_follows_mouse yes
+default_border pixel 1
+default_floating_border normal
+hide_edge_borders both
+smart_borders on
+popup_during_fullscreen leave_fullscreen
+floating_modifier $meta normal # super key

@@ -1,0 +1,80 @@
+# vim: set ft=swayconfig:
+# Sway Window Rules
+for_window {
+    # Auto float some apps
+    [app_id="org.twosheds.iwgtk"] floating enable; border normal; move position cursor
+    [app_id="flameshot"] floating enable; border normal; move position cursor
+    [app_id="pavucontrol-qt"] floating enable; border normal; move position cursor
+    [app_id="blueman-manager"] floating enable; border normal; move position cursor
+    [app_id="org.freedesktop.impl.portal.desktop(.*)"] floating enable; border normal; move position cursor
+    [app_id="thunar" title="File Operation Progress" ] floating enable; border normal; resize set 1000 600; move position cursor
+
+    [window_role="GtkFileChooserDialog"] floating enable; border normal; move position cursor
+    [title="Open Folder(.*)"] floating enable; border normal;
+    [title="Open Files(.*)"] floating enable; border normal;
+    [title="(.*)debug-app(.*)"] floating enable; border normal;
+    [app_id="wofi"] floating enable; border normal; move position cursor
+    [app_id="foot" title="floatterm(.*)"] floating enable; border normal; move position cursor; resize set 1000 600
+    [app_id="footdropterm"] floating enable; sticky toggle; border normal; move position cursor; resize set 1000 600;
+    [app_id="org.qbittorrent.qBittorrent"] floating enable; border normal; resize set 1000 600;
+    [app_id="amdgpu_top"] floating enable; border normal; move position cursor;
+
+    # Fix Wine
+    [class="explorer.exe"] floating enable; border normal; move position cursor;
+    [class="taskmgr.exe"] floating enable; border normal; move position cursor;
+    [class="winecfg.exe"] floating enable; border normal; move position cursor;
+    [class="uninstaller.exe"] floating enable; border normal; move position cursor;
+    [class="regedit.exe"] floating enable; border normal; move position cursor;
+    [class="control.exe"] floating enable; border normal; resize set 40ppt 40ppt; move position cursor;
+    [class="setup(.*)"] floating enable; border normal; move position cursor;
+    [title="LariLauncher"] floating enable; border normal; move position cursor;
+    [app_id="easyterm.py"] floating enable; move position cursor;
+    [app_id="zenity"] floating enable; border normal;
+
+    # Fix Steam
+    [class="steam" title="Steam Settings"] floating enable; move position cursor;
+    [class="^Steam$" title="^Friends$"] floating enable
+    [class="^Steam$" title="Steam - News"] floating enable
+    [class="^Steam$" title=".* - Chat"] floating enable
+    [class="^Steam$" title="^Settings$"] floating enable
+    [class="^Steam$" title=".* - event started"] floating enable
+    [class="^Steam$" title=".* CD key"] floating enable
+    [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+    [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+    [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+    [title="^Steam Keyboard$"] floating enable 
+
+    # Fix Audacious
+    [app_id="audacious"] floating enable; border normal;
+
+    # Jetbrains fixes
+    [class="jetbrains-(.*)" title="Go to Line/Column"] floating enable
+    [class="jetbrains-(.*)" title="Rename"] floating enable
+    [class="jetbrains-(.*)" title="Open Project"] floating enable
+    [class="(jetbrains|java-util)-(.*)" title="win0"] floating enable
+    [class="jetbrains-(.*)" title="Welcome to *"] floating enable
+
+    # Firefox Fixes
+    [app_id="firefox" title="Pushbullet"] floating enable
+    [app_id="firefox" title="Firefox — Sharing Indicator"] floating enable; move scratchpad
+    [app_id="firefox" title="Picture-in-Picture"] floating enable; resize set 50ppt 50ppt; move position 50ppt 50ppt; sticky toggle
+    [app_id="firefox" title="Pushbullet – Mozilla Firefox"] floating enable
+    [app_id="firefox" title="About Mozilla Firefox"] floating enable; border normal
+    [app_id="firefox" title="moz-extension:.*"] floating enable
+    [app_id="firefox" title="Password Required"] floating enable
+    [app_id="firefox" title="Firefox - Choose User Profile"] floating enable; border normal
+    [app_id="firefox" title="Library"] floating enable; border normal
+    [app_id="firefox" title="Page Info — (.*)"] floating enable; border normal
+
+    # default floating
+    [window_role="pop-up"] floating enable
+    [window_role="bubble"] floating enable
+    [window_role="task_dialog"] floating enable
+    [window_role="Preferences"] floating enable
+    [window_type="dialog"] floating enable
+    [window_type="menu"] floating enable
+    [instance="update_installer"] floating enable
+
+    # Tag xwayland windows as such
+    [shell="xwayland"] title_format "[X11] %title"
+}

@@ -27,3 +27,17 @@ function precmd {
 function preexec {
     print -n "\e]133;C\e\\"
 }
+
+
+# Foot dynamic Title Updation
+# uses OSC-7
+# Called before prompt(?)
+function precmd {
+    # Set window title
+    print -Pn "\e]0; %(1j,%j job%(2j|s|); ,)%~\e\\"
+}
+
+# Called when executing a command
+function preexec {
+    print -Pn "\e]0;${(q)1}\e\\"
+}

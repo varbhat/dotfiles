@@ -1,0 +1,12 @@
+# vim: set ft=swayconfig:
+# IO configs
+input "type:touchpad" {
+       dwt enabled
+       tap enabled
+       natural_scroll enabled
+}
+input "type:keyboard" {
+        xkb_layout us
+        xkb_variant dvorak
+        xkb_options caps:swapescape
+}

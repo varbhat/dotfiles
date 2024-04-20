@@ -1,0 +1,33 @@
+# vim: set ft=swayconfig:
+# Executions
+exec {
+    dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+    # https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
+    #systemctl --user import-environment
+    #hash dbus-update-activation-environment 2>/dev/null && \
+    #    dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
+    /usr/bin/pipewire &
+    /usr/bin/pipewire-pulse &
+    /usr/bin/wireplumber &
+
+    # themes
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
+    # polkit
+    /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+    # Start mako
+    mako
+
+    # Wayland Overlay Bar
+    rm -f $wobsock && mkfifo $wobsock && tail -f $wobsock | wob
+
+    # make bluetooth media controls work
+    mpris-proxy
+
+    $lockcmd
+}
+
+
