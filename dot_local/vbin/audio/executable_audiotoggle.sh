@@ -5,6 +5,9 @@ familyspeaker_id="$(pw-dump | jq -r ".[] | select(.info.props.\"device.descripti
 venturedas32_active_profile="$(pw-dump -N | jq -r ".[] | select(.id == ${venturedas32_id}) | .info.params.Profile | .[].name")"
 familyspeaker_active_profile="$(pw-dump -N | jq -r ".[] | select(.id == ${familyspeaker_id}) | .info.params.Profile | .[].name")"
 
+echo "${venturedas32_active_profile}"
+echo "${familyspeaker_active_profile}"
+
 if [[ "${venturedas32_active_profile}" == "off" ]]; then
 	wpctl set-profile "${venturedas32_id}" 1
 	wpctl set-profile "${familyspeaker_id}" 0

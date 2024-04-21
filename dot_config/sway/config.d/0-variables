@@ -9,8 +9,6 @@ set {
   $dmenu $(fuzzel -d) 
   $launcher nwggrid | xargs swaymsg exec --
 
-  $wofilauncher echo dummy 
-  #$lockcmd swaymsg "output * dpms off" && swaylock && swaymsg "output * dpms on"
   $lockcmd swaylock.sh
   $wobsock $XDG_RUNTIME_DIR/wob.sock
   $newworkspace swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)

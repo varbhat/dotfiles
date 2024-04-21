@@ -1,1 +1,1 @@
-include $HOME/.config/sway/conf/*
+include $HOME/.config/sway/config.d/*
