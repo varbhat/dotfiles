@@ -1,8 +1,14 @@
 export EDITOR="nvim"
 export TERMINAL="foot"
 export GOPATH=~/.local/share/gopath
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$GOPATH/bin:$HOME/.cargo/bin:$VOLTA_HOME/bin:$HOME/.local/bin:$HOME/.local/vbin:$PATH" 
+export VOLTA_HOME=~/.local/share/volta
+
+path+=($GOPATH/bin)
+path+=($HOME/.cargo/bin)
+path+=($VOLTA_HOME/bin)
+path+=($HOME/.local/bin)
+# https://unix.stackexchange.com/a/480799
+path+=($HOME/.local/vbin{,/**/*(N/)})
 
 if [[ -z $DISPLAY ]] && (( $EUID != 0 )) && [[ $(tty) = /dev/tty1 ]] && [[ -f /usr/bin/sway ]]; then
 	# export XDG_CURRENT_DESKTOP

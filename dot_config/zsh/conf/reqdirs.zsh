@@ -1,4 +1,4 @@
-# Creates XDG dirs and Other Necessary Directories
+# Creates XDG dirs and Other Required Directories
 # if not present
 mkdir -p ~/.cache \
          ~/.config \

@@ -1,3 +1,4 @@
+# vim: set ft=gitconfig :
 [user]
 email = mailvarbhat@gmail.com
 name = Var Bhat

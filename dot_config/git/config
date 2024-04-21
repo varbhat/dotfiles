@@ -1,4 +1,5 @@
+# vim: set ft=gitconfig :
 [include]
-  path = ~/.gitconfig-main
+  path = ~/.config/git/config-main
 [includeIf "gitdir:~/space/work/"]
   path = ~/space/work/.gitconfig
