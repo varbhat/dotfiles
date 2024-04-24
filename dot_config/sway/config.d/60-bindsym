@@ -1,0 +1,142 @@
+# vim: set ft=swayconfig:
+bindsym {
+    # XF86 Keybindings
+    XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ && wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/[^0-9]//g' > $wobsock
+    XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/[^0-9]//g' > $wobsock
+    XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && (wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo 0 > $wobsock) || wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/[^0-9]//g' > $wobsock
+    $meta+XF86AudioMute exec audiotoggle.sh 
+    XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && (wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo 0 > $wobsock) || wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | sed 's/[^0-9]//g' > $wobsock
+    XF86AudioPlay exec playerctl play-pause
+    XF86AudioNext exec playerctl next
+    XF86AudioPrev exec playerctl previous
+    XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
+    XF86MonBrightnessUp exec brightnessctl set +5% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
+    # Meta+Fn+F2
+    $meta+XF86MonBrightnessUp output * dpms on  
+    # Meta+Fn+F1
+    $meta+XF86MonBrightnessDown output * dpms off
+
+    # Print Bindings
+    Print exec fzl-grimshot.sh
+    $meta+Print exec grimshot copy output
+    $alt+Print exec grimshot copy area
+
+    # Terminal
+    $meta+Return exec $term
+    $meta+$alt+Return exec swayddt
+    $meta+F12 exec swayddt
+
+    # kill windows
+    $meta+BackSpace kill
+    $meta+Shift+BackSpace $forcekill
+
+    # Menus and Launchers
+    $meta+d exec $menu
+    $meta+alt+d exec $launcher
+    $meta+b exec $webbrowser
+
+    # reload sway
+    $meta+Shift+r reload
+
+    # Fullscreen
+    $meta+f fullscreen
+
+    # Navigate Workspaces
+    $meta+s exec sway-tree-switcher.sh
+    $meta+slash exec sway-workspace-switcher.sh; mode "default"
+    $meta+$alt+h workspace prev_on_output
+    $meta+$alt+l workspace next_on_output
+
+    # Meta+n opens empty new workspace
+    $meta+n exec $newworkspace
+    # Meta+Shift+n moves current window to new workspace
+    $meta+Shift+n exec $movetonewworkspace
+    # Meta+Alt+n moves current window to new workspace and switches to the created new workspace
+    $meta+$alt+n exec $movetonewworkspace && swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max')
+
+    # layout keybindings
+    $meta+Left focus left
+    $meta+Down focus down
+    $meta+Up focus up
+    $meta+Right focus right
+    $meta+Shift+Left move left
+    $meta+Shift+Down move down
+    $meta+Shift+Up move up
+    $meta+Shift+Right move right
+    $meta+$left focus left
+    $meta+$down focus down
+    $meta+$up focus up
+    $meta+$right focus right
+    $meta+Shift+$left move left
+    $meta+Shift+$down move down
+    $meta+Shift+$up move up
+    $meta+Shift+$right move right
+
+    $meta+space floating toggle
+    $meta+Shift+space focus mode_toggle
+    #prior->pgup next->pgdown
+    $meta+Prior floating disable
+    $meta+Next floating enable
+
+    # Scratchpad
+    $meta+backslash scratchpad show
+    $meta+Shift+backslash move scratchpad
+
+    # Mark Windows and switch
+    $meta+g exec sway-mark-switcher.sh
+    $meta+m exec sway-mark.sh
+
+    # workspace
+    $meta+1 workspace prev_on_output
+    $meta+2 workspace next_on_output
+
+
+    # Move Workspaces to output in Direction
+    $meta+Ctrl+Right move workspace to output right
+    $meta+Ctrl+Left move workspace to output left
+    $meta+Ctrl+Up move workspace to output up
+    $meta+Ctrl+Down move workspace to output down
+    $meta+Ctrl+$right move workspace to output right
+    $meta+Ctrl+$left move workspace to output left
+    $meta+Ctrl+$up move workspace to output up
+    $meta+Ctrl+$down move workspace to output down
+}
+
+
+
+
+
+
+# Mouse Bindings
+bindsym --whole-window {
+    $meta+button4 workspace prev_on_output
+    $meta+button5 workspace next_on_output
+
+    $alt+button4 exec swaywinmenu
+    $alt+button5 exec swaywinkillmenu
+
+    $meta+$alt+button3 kill
+    $meta+$alt+button1 exec $newworkspace
+}
+
+# Touchpad Gestures
+bindgesture {
+    swipe:3:up exec $launcher
+    swipe:3:down exec $newworkspace
+
+    swipe:3:right workspace prev_on_output
+    swipe:3:left workspace next_on_output
+
+    swipe:4:up kill
+    swipe:4:down $forcekill
+
+    swipe:4:right move right
+    swipe:4:left move left
+}
+
+# Mouse Bindings on Window Borders
+bindsym --border {
+    button3 kill
+    $alt+button3 sticky toggle
+    Shift+button3 $forcekill
+}

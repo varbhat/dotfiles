@@ -1,6 +1,12 @@
 # vim: set ft=swayconfig:
 # Sway Window Rules
 for_window {
+    # App icons in Title for Some apps
+    [app_id="(?i)firefox"] title_format " %title"
+    [app_id="foot"] title_format "  %title"
+    [app_id="pavucontrol-qt"] title_format " %title"
+    #[app_id="foot" title="(.*) nvim (.*)"] title_format " %title"
+    
     # Auto float some apps
     [app_id="org.twosheds.iwgtk"] floating enable; border normal; move position cursor
     [app_id="flameshot"] floating enable; border normal; move position cursor
@@ -77,4 +83,5 @@ for_window {
 
     # Tag xwayland windows as such
     [shell="xwayland"] title_format "[X11] %title"
+
 }

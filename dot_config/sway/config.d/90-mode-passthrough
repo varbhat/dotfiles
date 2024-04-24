@@ -1,0 +1,6 @@
+# vim: set ft=swayconfig:
+# Passthrough mode
+mode passthrough {
+	bindsym $meta+F1 mode default
+}
+bindsym $meta+F1 mode passthrough

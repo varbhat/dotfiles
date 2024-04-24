@@ -1,8 +1,9 @@
 # vim: set ft=swayconfig:
 bar {
-    font pango:Inter, FontAwesome 10
+    font pango:Inter, "Symbols Nerd Font" ,FontAwesome 9
     position bottom
     status_command i3status-rs
+    #strip_workspace_numbers yes
     colors {
         separator #666666
         background #222222

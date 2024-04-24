@@ -1,0 +1,56 @@
+# vim: set ft=swayconfig:
+# Mouse Mode
+# Move cursor with keyboard
+set $mousemode "mousemode"
+mode "$mousemode" {
+  # Move cursor
+	bindsym $left seat - cursor move -10 0
+	bindsym $down seat - cursor move 0 10
+	bindsym $up seat - cursor move 0 -10
+	bindsym $right seat - cursor move 10 0
+	bindsym Left seat - cursor move -10 0
+	bindsym Down seat - cursor move 0 10
+	bindsym Up seat - cursor move 0 -10
+	bindsym Right seat - cursor move 10 0
+
+  # Move cursor faster
+	bindsym Shift+$left seat - cursor move -50 0
+	bindsym Shift+$down seat - cursor move 0 50
+	bindsym Shift+$up seat - cursor move 0 -50
+	bindsym Shift+$right seat - cursor move 50 0
+	bindsym Shift+Left seat - cursor move -50 0
+	bindsym Shift+Down seat - cursor move 0 50
+	bindsym Shift+Up seat - cursor move 0 -50
+	bindsym Shift+Right seat - cursor move 50 0
+
+  # Move cursor even more faster
+	bindsym $meta+$left seat - cursor move -250 0
+	bindsym $meta+$down seat - cursor move 0 250
+	bindsym $meta+$up seat - cursor move 0 -250
+	bindsym $meta+$right seat - cursor move 250 0
+	bindsym $meta+Left seat - cursor move -250 0
+	bindsym $meta+Down seat - cursor move 0 250
+	bindsym $meta+Up seat - cursor move 0 -250
+	bindsym $meta+Right seat - cursor move 250 0
+
+  # Move cursor to the other edge
+	bindsym $alt+$left seat - cursor move -100000000000 0
+	bindsym $alt+$down seat - cursor move 0 100000000000
+	bindsym $alt+$up seat - cursor move 0 -100000000000
+	bindsym $alt+$right seat - cursor move 100000000000 0
+	bindsym $alt+Left seat - cursor move -100000000000 0
+	bindsym $alt+Down seat - cursor move 0 100000000000
+	bindsym $alt+Up seat - cursor move 0 -100000000000
+	bindsym $alt+Right seat - cursor move 100000000000 0
+
+  # Mouse Buttons
+	bindsym --no-repeat 1 seat - cursor press button1, seat - cursor release button1
+  bindsym --no-repeat Return seat - cursor press button1, seat - cursor release button1
+	bindsym --no-repeat 3 seat - cursor press button3, seat - cursor release button3
+  bindsym --no-repeat Shift+Return seat - cursor press button3, seat - cursor release button3
+	bindsym --no-repeat 2 seat - cursor press button2, seat - cursor release button2
+
+  bindsym Escape mode "default"
+  bindsym grave mode "default"
+}
+bindsym $meta+grave mode "$mousemode"

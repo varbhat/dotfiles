@@ -6,11 +6,16 @@ set {
   $term foot
   $forcekill exec kill -9 $(swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true) | .pid')
   $menu fuzzel --list-executables-in-path
-  $dmenu $(fuzzel -d) 
   $launcher nwggrid | xargs swaymsg exec --
 
   $lockcmd swaylock.sh
+  $webbrowser exec firefox
   $wobsock $XDG_RUNTIME_DIR/wob.sock
   $newworkspace swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)
   $movetonewworkspace swaymsg move container to workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)
+
+  $left  h
+  $down  j
+  $up    k
+  $right l
 }

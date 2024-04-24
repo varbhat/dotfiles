@@ -1,0 +1,21 @@
+# vim: set ft=swayconfig:
+# resize
+set $resizemode "resizemode"
+mode "$resizemode" {
+    bindsym {
+      # resize mode
+      Left resize grow width 10px
+      Down resize shrink height 10px
+      Up resize grow height 10px
+      Right resize shrink width 10px
+      $left resize grow width 10px
+      $down resize shrink height 10px
+      $up resize grow height 10px
+      $right resize shrink width 10px
+      #75:25 layout
+      g resize set width 75ppt
+      r resize set width 25ppt
+    }
+    bindsym Escape mode "default"
+}
+bindsym $meta+$alt+r mode "$resizemode"

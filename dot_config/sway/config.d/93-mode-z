@@ -1,0 +1,43 @@
+# vim: set ft=swayconfig:
+
+# Keyboard layout mode
+set $kblayoutmode keyboard
+mode "$kblayoutmode" {
+    set {
+        $setkbdvorak exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "us" && swaymsg input type:keyboard xkb_variant 'dvorak';
+        $setkbqwerty exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "us" && swaymsg input type:keyboard xkb_variant 'qwerty';
+        $setkbkankagapa exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "in" && swaymsg input type:keyboard xkb_variant 'kan-kagapa';
+        $setkbsankagapa exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "in" && swaymsg input type:keyboard xkb_variant 'san-kagapa';
+    }
+    # 43 -> dvorak d
+    bindcode 43 $setkbdvorak; mode "default" 
+    # 53 -> dvorak q
+    bindcode 53 $setkbqwerty; mode "default"
+    # 55 -> dvorak k
+    bindcode 55 $setkbkankagapa; mode "default"
+    # 47 -> dvorak s
+    bindcode 47 $setkbsankagapa; mode "default"
+    bindsym Escape mode "default"
+}
+
+# powermode
+set $powermode "powermode"
+mode "$powermode" {
+    bindsym o exec sudo poweroff; mode "default"
+    bindsym r exec sudo reboot; mode "default"
+    bindsym Escape mode "default"
+}
+
+# z mode
+set $zmode "zmode" 
+mode "$zmode" {
+    bindsym p mode "$powermode"
+    bindsym k mode "$kblayoutmode"
+    bindsym r reload; mode "default"
+    bindsym l exec $lockcmd; mode "default"
+    bindsym z border toggle; mode "default"
+    bindsym $meta+z border toggle; mode "default"
+    bindsym b bar mode toggle; mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $meta+z mode "$zmode"

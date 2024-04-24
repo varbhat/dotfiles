@@ -1,13 +1,11 @@
 # vim: set ft=swayconfig:
-# Executions
+# Execute Startup Commands
 exec {
-    dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-
+    # Fix GTK+Portals
     # https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
-    #systemctl --user import-environment
-    #hash dbus-update-activation-environment 2>/dev/null && \
-    #    dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+    dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
+    # Pipewire and Wireplumber: the audio stack
     /usr/bin/pipewire &
     /usr/bin/pipewire-pulse &
     /usr/bin/wireplumber &
@@ -15,18 +13,25 @@ exec {
     # themes
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
-    # polkit
+    # polkit: auth agent
     /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-    # Start mako
+    # mako: notification daemon
     mako
 
-    # Wayland Overlay Bar
+    # Wayland Overlay Bar: Bars for Audio and Brightness
     rm -f $wobsock && mkfifo $wobsock && tail -f $wobsock | wob
 
     # make bluetooth media controls work
     mpris-proxy
 
+    # Rename 1st workspace as main
+    swaymsg rename workspace to "$(swaymsg -t get_workspaces | jq '.[] | select(.focused==true) | .num'):main"
+
+    # swaycons
+    exec swaycons
+
+    # Lock the desktop by default
     $lockcmd
 }
 

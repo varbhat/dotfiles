@@ -1,0 +1,40 @@
+# vim: set ft=swayconfig:
+# Workspace Mode
+set $workspacemode workspace
+mode "$workspacemode" {
+   bindsym {
+      # Workspace Nav
+      Prior workspace prev_on_output
+      Next workspace next_on_output
+      1 workspace prev_on_output
+      2 workspace next_on_output
+      less exec swaymsg workspace prev_on_output
+      greater exec swaymsg workspace next_on_output
+      0 exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | min')"
+      dollar exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | max')"
+      Home exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | min')"
+      End exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | max')"
+
+      # Actions
+      asterisk sticky toggle; mode "default"
+      r exec sway-rename.sh; mode "default"
+      slash exec sway-workspace-switcher.sh; mode "default"
+      s exec sway-tree-switcher.sh; mode "default"
+      o exec sway-workspace-move.sh; mode "default"
+      g exec sway-window-move.sh; mode "default"
+      a exec sway-new-workspace.sh; mode "default"
+
+      # layout
+      h splith; mode "default"
+      v splitv; mode "default"
+      minus layout toggle stacking split; mode "default"
+      t layout toggle tabbed split; mode "default"
+      z layout toggle split; mode "default"
+      $meta+w layout toggle tabbed split; mode "default"
+
+      f fullscreen; mode "default"
+      comma floating toggle
+    }
+    bindsym Escape mode "default"
+}
+bindsym $meta+w mode "$workspacemode"
