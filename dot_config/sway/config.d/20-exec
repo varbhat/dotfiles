@@ -28,9 +28,6 @@ exec {
     # Rename 1st workspace as main
     swaymsg rename workspace to "$(swaymsg -t get_workspaces | jq '.[] | select(.focused==true) | .num'):main"
 
-    # swaycons
-    exec swaycons
-
     # Lock the desktop by default
     $lockcmd
 }

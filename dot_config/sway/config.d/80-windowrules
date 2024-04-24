@@ -5,15 +5,13 @@ for_window {
     [app_id="(?i)firefox"] title_format " %title"
     [app_id="foot"] title_format "  %title"
     [app_id="pavucontrol-qt"] title_format " %title"
-    #[app_id="foot" title="(.*) nvim (.*)"] title_format " %title"
-    
+
     # Auto float some apps
     [app_id="org.twosheds.iwgtk"] floating enable; border normal; move position cursor
     [app_id="flameshot"] floating enable; border normal; move position cursor
     [app_id="pavucontrol-qt"] floating enable; border normal; move position cursor
     [app_id="blueman-manager"] floating enable; border normal; move position cursor
     [app_id="org.freedesktop.impl.portal.desktop(.*)"] floating enable; border normal; move position cursor
-    [app_id="thunar" title="File Operation Progress" ] floating enable; border normal; resize set 1000 600; move position cursor
 
     [window_role="GtkFileChooserDialog"] floating enable; border normal; move position cursor
     [title="Open Folder(.*)"] floating enable; border normal;
@@ -50,9 +48,6 @@ for_window {
     [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
     [title="^Steam Keyboard$"] floating enable 
 
-    # Fix Audacious
-    [app_id="audacious"] floating enable; border normal;
-
     # Jetbrains fixes
     [class="jetbrains-(.*)" title="Go to Line/Column"] floating enable
     [class="jetbrains-(.*)" title="Rename"] floating enable
@@ -82,6 +77,6 @@ for_window {
     [instance="update_installer"] floating enable
 
     # Tag xwayland windows as such
-    [shell="xwayland"] title_format "[X11] %title"
+    [shell="xwayland"] title_format "[ X11] %title"
 
 }
