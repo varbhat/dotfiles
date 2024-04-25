@@ -9,9 +9,9 @@ selopnreca="Select Output and Record"
 
 mark_file="$XDG_RUNTIME_DIR/screenrecord-file"
 
-wf-recorder_check() {
-	if pgrep -x "wf-recorder" >/dev/null; then
-		pkill -INT -x wf-recorder
+wl_screenrec_check() {
+	if pgrep -x "wl-screenrec" >/dev/null; then
+		pkill -INT -x wl-screenrec
 		wl-copy --type video/mp4 <"$(cat $mark_file)"
 		rm "$mark_file"
 		pkill -SIGRTMIN+4 i3status-rs
@@ -19,7 +19,7 @@ wf-recorder_check() {
 	fi
 }
 
-wf-recorder_check
+wl_screenrec_check
 
 # Function taken directly from grimshot
 # https://github.com/swaywm/sway/blob/master/contrib/grimshot
@@ -53,32 +53,32 @@ if [[ ! -z "$menu_option" ]]; then
 	$reccurop)
 		echo "$target_file" >"$mark_file"
 		pkill -SIGRTMIN+4 i3status-rs
-		wf-recorder -o "$(focussed_output)" -f "$target_file"
+		wl-screenrec -o "$(focussed_output)" -f "$target_file"
 		;;
 	$recsel)
 		echo "$target_file" >"$mark_file"
 		pkill -SIGRTMIN+4 i3status-rs
-		wf-recorder -g "$(slurp)" -f "$target_file" >/dev/null 2>&1
+		wl-screenrec -g "$(slurp)" -f "$target_file" >/dev/null 2>&1
 		;;
 	$selopnrec)
 		echo "$target_file" >"$mark_file"
 		pkill -SIGRTMIN+4 i3status-rs
-		wf-recorder -a -o "$(sel_output)" -f "$target_file" >/dev/null 2>&1
+		wl-screenrec -o "$(sel_output)" -f "$target_file" >/dev/null 2>&1
 		;;
 	$reccuropa)
 		echo "$target_file" >"$mark_file"
 		pkill -SIGRTMIN+4 i3status-rs
-		wf-recorder -a -o "$(focussed_output)" -f "$target_file" >/dev/null 2>&1
+		wl-screenrec --audio -o "$(focussed_output)" -f "$target_file" >/dev/null 2>&1
 		;;
 	$recsela)
 		echo "$target_file" >"$mark_file"
 		pkill -SIGRTMIN+4 i3status-rs
-		wf-recorder -a -g "$(slurp)" -f "$target_file" >/dev/null 2>&1
+		wl-screenrec --audio -g "$(slurp)" -f "$target_file" >/dev/null 2>&1
 		;;
 	$selopnreca)
 		echo "$target_file" >"$mark_file"
 		pkill -SIGRTMIN+4 i3status-rs
-		wf-recorder -a -o "$(sel_output)" -f "$target_file" >/dev/null 2>&1
+		wl-screenrec --audio -o "$(sel_output)" -f "$target_file" >/dev/null 2>&1
 		;;
 	esac
 fi

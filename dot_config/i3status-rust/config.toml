@@ -75,7 +75,7 @@ confirm_msg = "Are you sure you want to reboot?"
 
 [[block]]
 block = "custom"
-command = "cat /run/user/1000/wf-recorder-file >/dev/null && echo 󰄄"
+command = "cat $XDG_RUNTIME_DIR/screenrecord-file >/dev/null && echo 󰄄"
 signal = 4
 hide_when_empty = true
 interval = "once"
