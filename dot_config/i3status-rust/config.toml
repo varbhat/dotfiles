@@ -6,8 +6,8 @@ icons = "material-nf"
 [[block]]
 block = "focused_window"
 [block.format]
-full = " $title.str(max_w:80) |"
-short = " $title.str(max_w:50) |"
+full = " $title.str(max_w:80) $visible_marks |"
+short = " $title.str(max_w:50) $visible_marks |"
 
 [[block]]
 block = "music"
@@ -18,7 +18,7 @@ block = "custom"
 command = "echo "
 interval = "once"
 [[block.click]]
-cmd = "killall wlsunset || wlsunset -T 4001"
+cmd = "pkill wlsunset || wlsunset -T 4001"
 button = "left"
 
 [[block]]
@@ -44,11 +44,9 @@ cmd = "swaymsg mode keyboard"
 button = "right"
 cmd = "swaymsg mode keyboard"
 
-
 #[[block]]
 #block = "battery"
 #format = " $icon $percentage "
-
 
 [[block]]
 block = "time"
