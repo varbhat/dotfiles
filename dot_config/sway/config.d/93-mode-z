@@ -33,6 +33,8 @@ set $zmode "zmode"
 mode "$zmode" {
     bindsym p mode "$powermode"
     bindsym k mode "$kblayoutmode"
+    bindsym e exec fzl-emoji.sh; mode "default"
+    bindsym Shift+e exec fzl-kaomoji.sh; mode "default"
     bindsym r reload; mode "default"
     bindsym l exec $lockcmd; mode "default"
     bindsym z border toggle; mode "default"
