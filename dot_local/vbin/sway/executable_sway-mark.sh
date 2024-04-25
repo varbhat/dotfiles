@@ -2,8 +2,15 @@
 set -x
 
 function clear_marks_current_window() {
-	mark=($(swaymsg -t get_tree | jq -r 'recurse(.nodes[]?) | recurse(.floating_nodes[]?) | select(.focused==true) | {marks} | .marks[0]'))
-	sway "unmark \"$mark\""
+	marks="$(swaymsg -t get_tree | jq -r 'recurse(.nodes[]?) | recurse(.floating_nodes[]?) | select(.focused==true) | {marks} | .[].[]')"
+	# https://stackoverflow.com/a/24628676
+	SAVEIFS=$IFS
+	IFS=$'\n'
+	marks=($marks)
+	IFS=$SAVEIFS
+	for ((i = 0; i < ${#marks[@]}; i++)); do
+		sway "unmark \"${marks[$i]}\""
+	done
 	exit
 }
 
