@@ -1,13 +1,8 @@
 #!/bin/bash
-TERM=foot
-workspace=$(fuzzel -d -p "New workspace")
-[[ -z $workspace ]] && exit
-swaymsg workspace $workspace
-IFS=':' read -ra cdpaths <<<"$CDPATH"
-for path in "${cdpaths[@]}"; do
-	echo "$path/$workspace"
-	if [[ -d "$path/$workspace" ]]; then
-		swaymsg exec "$TERM --detach --working-directory \"$path/$workspace\""
-		exit
-	fi
-done
+workspace=$(fuzzel -d -p "New workspace ")
+[[ -z "$workspace" ]] && exit
+if ! [[ "$workspace" =~ ^[0-9] ]]; then
+	new_wsid="$(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)"
+	workspace="${new_wsid}:${workspace}"
+fi
+swaymsg workspace "$workspace"

@@ -4,7 +4,7 @@ windowpid=$(echo $window | jq -r '.pid')
 
 if [ ! -z "$windowpid" ]; then
 	if [ "$(echo $window | jq -r .visible)" = "true" ]; then
-		swaymsg [ app_id="footdropterm" pid="$windowpid" ] move scratchpad
+		swaymsg [app_id="footdropterm" pid="$windowpid" ] move scratchpad
 	else
 		swaymsg [app_id="footdropterm"] move container to workspace current, move position cursor, focus
 	fi

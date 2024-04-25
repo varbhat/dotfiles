@@ -8,7 +8,7 @@ set {
   $menu fuzzel --list-executables-in-path
   $launcher nwggrid | xargs swaymsg exec --
 
-  $lockcmd swaylock.sh
+  $lockcmd sway-lock.sh
   $webbrowser exec firefox
   $wobsock $XDG_RUNTIME_DIR/wob.sock
   $newworkspace swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)

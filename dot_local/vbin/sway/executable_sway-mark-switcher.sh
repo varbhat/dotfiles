@@ -1,9 +1,5 @@
 #!/bin/bash
-marks=($(swaymsg -t get_marks | jq -r '.[]'))
-str=""
-for mark in "${marks[@]}"; do
-	str="$str$mark\n"
-done
-mark=$(printf $str | fuzzel -d -p "Select a mark")
+set -e
+mark=$(swaymsg -t get_marks | jq -r '.[]' | fuzzel -d -p "Switch to mark ")
 [[ -z $mark ]] && exit
-swaymsg "[con_mark=\b$mark\b]" focus
+swaymsg "[con_mark=\"$mark\"]" focus

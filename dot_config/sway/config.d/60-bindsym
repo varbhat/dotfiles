@@ -4,7 +4,7 @@ bindsym {
     XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ && wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/[^0-9]//g' > $wobsock
     XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/[^0-9]//g' > $wobsock
     XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && (wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo 0 > $wobsock) || wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/[^0-9]//g' > $wobsock
-    $meta+XF86AudioMute exec audiotoggle.sh 
+    $meta+XF86AudioMute exec audiotoggle.sh
     XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && (wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo 0 > $wobsock) || wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | sed 's/[^0-9]//g' > $wobsock
     XF86AudioPlay exec playerctl play-pause
     XF86AudioNext exec playerctl next
@@ -12,7 +12,7 @@ bindsym {
     XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
     XF86MonBrightnessUp exec brightnessctl set +5% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $wobsock
     # Meta+Fn+F2
-    $meta+XF86MonBrightnessUp output * dpms on  
+    $meta+XF86MonBrightnessUp output * dpms on
     # Meta+Fn+F1
     $meta+XF86MonBrightnessDown output * dpms off
 
@@ -23,8 +23,7 @@ bindsym {
 
     # Terminal
     $meta+Return exec $term
-    $meta+$alt+Return exec swayddt
-    $meta+F12 exec swayddt
+    $meta+t exec sway-drop-term.sh
 
     # kill windows
     $meta+BackSpace kill
@@ -102,21 +101,20 @@ bindsym {
     $meta+Ctrl+$down move workspace to output down
 }
 
-
-
-
-
-
 # Mouse Bindings
 bindsym --whole-window {
     $meta+button4 workspace prev_on_output
     $meta+button5 workspace next_on_output
 
-    $alt+button4 exec swaywinmenu
-    $alt+button5 exec swaywinkillmenu
-
     $meta+$alt+button3 kill
     $meta+$alt+button1 exec $newworkspace
+}
+
+# Mouse Bindings on Window Borders
+bindsym --border {
+    button3 kill
+    $alt+button3 sticky toggle
+    Shift+button3 $forcekill
 }
 
 # Touchpad Gestures
@@ -134,9 +132,3 @@ bindgesture {
     swipe:4:left move left
 }
 
-# Mouse Bindings on Window Borders
-bindsym --border {
-    button3 kill
-    $alt+button3 sticky toggle
-    Shift+button3 $forcekill
-}

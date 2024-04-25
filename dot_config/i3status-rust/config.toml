@@ -1,27 +1,21 @@
 [theme]
-theme = "srcery"
+theme = "native"
 [icons]
-icons = "awesome6"
+icons = "material-nf"
 
 [[block]]
 block = "focused_window"
 [block.format]
-full = " $title.str(max_w:25) |"
-short = " $title.str(max_w:20) |"
-[[block.click]]
-button = "right"
-cmd = "swaymsg kill"
-[[block.click]]
-button = "middle"
-cmd = "swaymsg move to scratchpad"
+full = " $title.str(max_w:80) |"
+short = " $title.str(max_w:50) |"
 
 [[block]]
 block = "music"
-format = "{ $prev|} {$combo.str(max_w:25,rot_interval:0.5) { $play|} { $next|} |}"
+format = "{$combo.str(max_w:25,rot_interval:0.5) { $play|}|}"
 
 [[block]]
 block = "custom"
-command = "echo "
+command = "echo "
 interval = "once"
 [[block.click]]
 cmd = "killall wlsunset || wlsunset -T 4001"
@@ -49,11 +43,6 @@ cmd = "swaymsg mode keyboard"
 [[block.click]]
 button = "right"
 cmd = "swaymsg mode keyboard"
-
-[[block]]
-block = "tea_timer"
-format = " $icon {$minutes:$seconds |}"
-done_cmd = "notify-send 'Timer Finished'"
 
 
 #[[block]]

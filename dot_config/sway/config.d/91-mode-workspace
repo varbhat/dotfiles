@@ -17,12 +17,15 @@ mode "$workspacemode" {
 
       # Actions
       asterisk sticky toggle; mode "default"
-      r exec sway-rename.sh; mode "default"
+      r exec sway-workspace-rename.sh; mode "default"
       slash exec sway-workspace-switcher.sh; mode "default"
       s exec sway-tree-switcher.sh; mode "default"
       o exec sway-workspace-move.sh; mode "default"
       g exec sway-window-move.sh; mode "default"
       a exec sway-new-workspace.sh; mode "default"
+
+      # Kill Menu
+      Backspace exec sway-kill-menu.sh; mode "default"
 
       # layout
       h splith; mode "default"

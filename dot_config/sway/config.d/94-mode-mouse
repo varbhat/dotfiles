@@ -52,5 +52,6 @@ mode "$mousemode" {
 
   bindsym Escape mode "default"
   bindsym grave mode "default"
+  bindsym $meta+grave mode "default"
 }
 bindsym $meta+grave mode "$mousemode"

@@ -19,7 +19,6 @@ for_window {
     [title="Open Folder(.*)"] floating enable; border normal;
     [title="Open Files(.*)"] floating enable; border normal;
     [title="(.*)debug-app(.*)"] floating enable; border normal;
-    [app_id="wofi"] floating enable; border normal; move position cursor
     [app_id="foot" title="floatterm(.*)"] floating enable; border normal; move position cursor; resize set 1000 600
     [app_id="footdropterm"] floating enable; sticky toggle; border normal; move position cursor; resize set 1000 600;
     [app_id="org.qbittorrent.qBittorrent"] floating enable; border normal; resize set 1000 600;

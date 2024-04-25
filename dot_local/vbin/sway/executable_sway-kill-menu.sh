@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 # Based on https://gist.github.com/lbonn/89d064cde963cfbacabd77e0d3801398
 set -e
 
-row=$(swaymsg -t get_tree | jq -r '
+while true; do
+	row=$(swaymsg -t get_tree | jq -r '
     ..
     | objects
     | select(.type == "workspace") as $ws
@@ -11,10 +12,11 @@ row=$(swaymsg -t get_tree | jq -r '
     | select(has("app_id"))
     | (if .focused == true then "*" else " " end) as $asterisk
     | "\($asterisk) [\($ws.name)] \(.app_id): \(.name) (\(.id))\u0000icon\u001f\(.app_id)"' |
-	fuzzel -d -p "Window Switcher ")
+		fuzzel -d -p "kill window ")
 
-if [ ! -z "$row" ]; then
-	# shellcheck disable=SC2001
-	winid=$(echo "$row" | sed 's/.*(\([0-9]*\))$/\1/')
-	swaymsg "[con_id=$winid] focus"
-fi
+	if [ ! -z "$row" ]; then
+		# shellcheck disable=SC2001
+		winid=$(echo "$row" | sed 's/.*(\([0-9]*\))$/\1/')
+		swaymsg "[con_id=$winid] kill"
+	fi
+done
