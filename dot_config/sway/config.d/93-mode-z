@@ -38,6 +38,7 @@ mode "$zmode" {
     bindsym r reload; mode "default"
     bindsym l exec $lockcmd; mode "default"
     bindsym z border toggle; mode "default"
+    bindsym Print exec fzl-recorder.sh; mode "default"
     bindsym $meta+z border toggle; mode "default"
     bindsym b bar mode toggle; mode "default"
     bindsym Escape mode "default"

@@ -74,6 +74,13 @@ cmd = "sudo reboot"
 confirm_msg = "Are you sure you want to reboot?"
 
 [[block]]
+block = "custom"
+command = "cat /run/user/1000/wf-recorder-file >/dev/null && echo 󰄄"
+signal = 4
+hide_when_empty = true
+interval = "once"
+
+[[block]]
 block = "privacy"
 [[block.driver]]
 name = "v4l"
