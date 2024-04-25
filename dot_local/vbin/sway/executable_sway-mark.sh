@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -x
 
 function clear_marks_current_window() {

@@ -10,6 +10,7 @@ set {
 
   $lockcmd sway-lock.sh
   $webbrowser exec firefox
+  $spirallayout exec pkill sway-spiral || sway-spiral
   $wobsock $XDG_RUNTIME_DIR/wob.sock
   $newworkspace swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)
   $movetonewworkspace swaymsg move container to workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)

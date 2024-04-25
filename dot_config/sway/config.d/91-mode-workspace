@@ -21,18 +21,29 @@ mode "$workspacemode" {
       slash exec sway-workspace-switcher.sh; mode "default"
       s exec sway-tree-switcher.sh; mode "default"
       o exec sway-workspace-move.sh; mode "default"
+      p exec sway-window-send.sh; mode "default"
       g exec sway-window-move.sh; mode "default"
       a exec sway-new-workspace.sh; mode "default"
+      Shift+r exec sway-win-swap-con.sh; mode "default"
+      c exec sway-mark-swap-con.sh; mode "default"
 
       # Kill Menu
       Backspace exec sway-kill-menu.sh; mode "default"
 
       # layout
       h splith; mode "default"
+      $meta+h splith; mode "default"
       v splitv; mode "default"
+      $meta+v splitv; mode "default"
       minus layout toggle stacking split; mode "default"
+      $meta+minus layout toggle stacking split; mode "default"
       t layout toggle tabbed split; mode "default"
+      $meta+t layout toggle tabbed split; mode "default"
       z layout toggle split; mode "default"
+      $meta+z layout toggle split; mode "default"
+      at $spirallayout; mode "default"
+      $meta+2 $spirallayout; mode "default"
+
       $meta+w layout toggle tabbed split; mode "default"
 
       f fullscreen; mode "default"

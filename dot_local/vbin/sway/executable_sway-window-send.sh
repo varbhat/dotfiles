@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 selection=$(swaymsg -t get_workspaces -r | jq -r -c '.[] | .name' | fuzzel -d -p "Send window to ")
 [[ -z $selection ]] && exit

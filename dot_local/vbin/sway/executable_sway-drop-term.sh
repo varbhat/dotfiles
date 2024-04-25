@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 window=$(swaymsg -t get_tree | jq -r '..|try select(.app_id == "footdropterm")')
 windowpid=$(echo $window | jq -r '.pid')
 

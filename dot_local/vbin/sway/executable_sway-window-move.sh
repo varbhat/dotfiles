@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 workspaces=$(swaymsg -t get_workspaces -r | jq -r -c '.[] | .name')
-selection=$(echo "$workspaces" | fuzzel -d -p "Move and switch window to ")
+selection=$(echo "$workspaces" | fuzzel -d -p "Move and switch window to which workspace ")
 [[ -z $selection ]] && exit
 
 # https://www.baeldung.com/linux/check-variable-exists-in-list

@@ -28,6 +28,7 @@ bindsym {
     # kill windows
     $meta+BackSpace kill
     $meta+Shift+BackSpace $forcekill
+    $meta+alt+Backspace exec sway-kill-menu.sh
 
     # Menus and Launchers
     $meta+d exec $menu

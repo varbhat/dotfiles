@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Based on https://gist.github.com/lbonn/89d064cde963cfbacabd77e0d3801398
 set -e
 
@@ -15,6 +15,6 @@ row=$(swaymsg -t get_tree | jq -r '
 
 if [ ! -z "$row" ]; then
 	# shellcheck disable=SC2001
-	winid=$(echo "$row" | sed 's/.*(\([0-9]*\))$/\1/')
-	swaymsg "[con_id=$winid] focus"
+	conid=$(echo "$row" | sed 's/.*(\([0-9]*\))$/\1/')
+	swaymsg "[con_id=$conid] focus"
 fi

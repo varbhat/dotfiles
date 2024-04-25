@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 workspace=$(fuzzel -d -p "New workspace ")
 [[ -z "$workspace" ]] && exit
 if ! [[ "$workspace" =~ ^[0-9] ]]; then
