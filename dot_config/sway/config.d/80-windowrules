@@ -14,6 +14,7 @@ for_window {
     [app_id="pavucontrol-qt"] floating enable; border normal; move position cursor
     [app_id="blueman-manager"] floating enable; border normal; move position cursor
     [app_id="org.freedesktop.impl.portal.desktop(.*)"] floating enable; border normal; move position cursor
+    [app_id="xdg-desktop-portal-gtk"] floating enable; border normal; move position cursor
 
     [window_role="GtkFileChooserDialog"] floating enable; border normal; move position cursor
     [title="Open Folder(.*)"] floating enable; border normal;
