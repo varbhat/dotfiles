@@ -4,6 +4,8 @@ for_window {
     # App icons in Title for Some apps
     [app_id="(?i)firefox"] title_format " %title"
     [app_id="foot"] title_format " %title"
+    [app_id="foot" title="(.*) - NVIM"] title_format " %title"
+    [app_id="mpv"] title_format " %title"
     [app_id="pavucontrol-qt"] title_format " %title"
     [app_id="org.telegram.desktop"] title_format " %title"
     [app_id="blueman-manager"] title_format "󰂯 %title"
