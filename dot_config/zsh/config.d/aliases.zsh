@@ -19,6 +19,7 @@ fi
 # flatpak aliases
 if command -v eza >/dev/null; then
   alias fin='flatpak install flathub --user'
+  alias flathubrepoadd='flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo'
   alias fun='flatpak uninstall'
   alias fundelete='flatpak uninstall --delete-data'
   alias fclean='flatpak uninstall --unused --delete-data'
