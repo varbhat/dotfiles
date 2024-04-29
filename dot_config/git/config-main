@@ -11,4 +11,7 @@ sshCommand = ssh -i /home/vbt/.ssh/id_ed25519
 format = ssh
 
 [commit]
-gpgsign = true
+gpgSign = true
+
+[tag]
+gpgSign = true
