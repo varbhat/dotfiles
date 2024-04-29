@@ -9,4 +9,3 @@ woefe/git-prompt.zsh
 hlissner/zsh-autopair
 Tarrasch/zsh-bd
 romkatv/zsh-bench kind:path
-olets/zsh-abbr    kind:defer
