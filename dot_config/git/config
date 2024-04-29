@@ -53,6 +53,7 @@ mb = merge-base
 originurl = config --get remote.origin.url
 pu = push
 pushall = !git remote | xargs -L1 git push --all   # Ref: https://stackoverflow.com/a/18674313
+pa = pushall
 pushfwl = push --force-with-lease # Ref: https://stackoverflow.com/a/43726130/265508
 rb = rebase
 re = restore
