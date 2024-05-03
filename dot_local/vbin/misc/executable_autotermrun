@@ -1,0 +1,12 @@
+#!/bin/bash
+# https://stackoverflow.com/a/911267
+
+if [[ -t 1 ]]; then
+	# stdout is a terminal
+	# exec the args
+	"$@"
+else
+	# stdout is not a terminal
+	# So, spawn a terminal and exec the args
+	$TERMINAL -e "$@"
+fi
