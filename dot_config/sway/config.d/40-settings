@@ -7,4 +7,4 @@ smart_borders on
 popup_during_fullscreen leave_fullscreen
 floating_modifier $meta normal # super key
 focus_on_window_activation focus
-font Inter, "Symbols Nerd Font", FontAwesome 10
+font Inter, "Symbols Nerd Font" 10
