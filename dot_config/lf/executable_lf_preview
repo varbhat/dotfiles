@@ -16,6 +16,7 @@ application/x-tar) tar tf "$1" ;;
 application/zip) unzip -l "$1" ;;
 application/x-rar-compressed) unrar l "$1" ;;
 application/x-7z-compressed) 7z l "$1" ;;
+application/gzip) gunzip -l "$1" ;;
 application/pdf)
 	pdftoppm -f 1 -l 1 -scale-to 1024 -png "$1" | chafa -f sixel -s "$2x$3" --animate off --polite on
 	exit 1

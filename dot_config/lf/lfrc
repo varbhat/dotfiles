@@ -7,6 +7,7 @@ set sixel true
 set drawbox true
 map . :set hidden!
 set shell bash
+set icons true
 
 cmd rand_jump ${{
     res="$(find . -maxdepth 1 | shuf -n 1 | sed 's/\\/\\\\/g;s/"/\\"/g')"
