@@ -25,7 +25,7 @@ application/json)
 	cat "$1" | jq '.' -C
 	exit 1
 	;;
-font/*)
+font/* | application/vnd.ms-opentype)
 	fontPreview.sh "$1" | chafa -f sixel -s "$2x$3" --animate off --polite on
 	exit 1
 	;;
