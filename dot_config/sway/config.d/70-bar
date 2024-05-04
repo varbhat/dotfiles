@@ -1,6 +1,6 @@
 # vim: set ft=swayconfig:
 bar {
-    font pango:Inter, "Symbols Nerd Font" 9.5
+    font pango:"Noto Sans", "Symbols Nerd Font" 9
     position bottom
     status_command i3status-rs
     #strip_workspace_numbers yes
