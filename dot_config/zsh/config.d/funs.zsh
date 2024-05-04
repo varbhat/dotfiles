@@ -25,3 +25,7 @@ n() {
         fi
     fi
 }
+
+getMime() {
+  file -b --mime-type "$@"
+}

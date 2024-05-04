@@ -10,6 +10,8 @@ alias g='git'
 alias lg='lazygit'
 alias chx='chmod +x'
 
+alias aget='aria2c'
+
 if command -v eza >/dev/null; then
   alias ls='eza --icons=auto --hyperlink'
 else

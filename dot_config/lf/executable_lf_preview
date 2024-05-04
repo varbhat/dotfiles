@@ -8,7 +8,28 @@ video/*)
 	vidthumb.sh "$1" | chafa -f sixel -s "$2x$3" --animate off --polite on
 	exit 1
 	;;
+audio/*)
+	ffmpeg -i "$1" -loglevel panic -filter:v scale=-2:1000 -an -f image2pipe -vcodec png - | chafa -f sixel -s "$2x$3" --animate off --polite on
+	exit 1
+	;;
+application/x-tar) tar tf "$1" ;;
+application/zip) unzip -l "$1" ;;
+application/x-rar-compressed) unrar l "$1" ;;
+application/x-7z-compressed) 7z l "$1" ;;
+application/pdf)
+	pdftoppm -f 1 -l 1 -scale-to 1024 -png "$1" | chafa -f sixel -s "$2x$3" --animate off --polite on
+	exit 1
+	;;
+application/json)
+	cat "$1" | jq '.' -C
+	exit 1
+	;;
+font/*)
+	fontPreview.sh "$1" | chafa -f sixel -s "$2x$3" --animate off --polite on
+	exit 1
+	;;
 *)
-	cat "$1"
+	bat --color=always --style=plain "$1"
+	exit 1
 	;;
 esac
