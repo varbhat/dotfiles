@@ -18,6 +18,10 @@ else
   alias ls='ls --color=auto'
 fi
 
+alias lsa='ls -a'
+# See funs.zsh for lst fn
+alias lsta='lst -a'
+
 # flatpak aliases
 if command -v eza >/dev/null; then
   alias fin='flatpak install flathub --user'
