@@ -33,8 +33,10 @@ getMime() {
 
 # Lists the FS as Tree and pages it with bat
 # It also emits OSC 8 (Hyperlink) to the Terminal
+# If you don't want icons pass, --icons=never as arg,
+# like this: lst --icons=never
 lst() {
-  eza -T --color="always" "$@" | bat --color="always" --style=plain
+  eza -T --icons=always --hyperlink --color=always "$@" | bat --color=always --style=plain
 }
 
 # Change Directory using zoxide
