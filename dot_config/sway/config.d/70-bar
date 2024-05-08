@@ -3,14 +3,14 @@ bar {
     font pango:"Noto Sans", "Symbols Nerd Font" 9
     position bottom
     status_command i3status-rs
-    #strip_workspace_numbers yes
     colors {
-        separator #dddddd
         background #000000
         statusline #ffffff
-        focused_workspace #0088CC #0088CC #ffffff
-        active_workspace #333333 #333333 #ffffff
-        inactive_workspace #333333 #333333 #888888
-        urgent_workspace #2f343a #900000 #ffffff
+        separator #ccd0da
+        focused_workspace #494d64 #494d64 #ffffff
+        active_workspace #1e1e2e #1e1e2e #ffffff
+        inactive_workspace #1e1e2e #1e1e2e #9ca0b0
+        urgent_workspace #900000 #900000 #ffffff
+        binding_mode #900000 #900000 #ffffff
     }
 }
