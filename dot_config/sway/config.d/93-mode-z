@@ -28,6 +28,21 @@ mode "$powermode" {
     bindsym Escape mode "default"
 }
 
+# present mode (See wl-mirror and wl-present)
+set $presentmode "presentmode"
+mode "$presentmode" {
+  bindsym m exec wl-present mirror; mode "default"
+  bindsym p exec wl-present toggle-freeze; mode "default"
+  bindsym o exec wl-present set-output; mode "default"
+  bindsym r exec wl-present set-region; mode "default"
+  bindsym s exec wl-present set-scaling; mode "default"
+  bindsym f exec wl-present fullscreen; mode "default"
+  bindsym Shift+f exec wl-present no-fullscreen; mode "default"
+  bindsym g exec wl-present fullscreen-output; mode "default"
+  bindsym c exec wl-present custom; mode "default"
+  bindsym Escape mode "default"
+}
+
 # z mode
 set $zmode "zmode" 
 mode "$zmode" {
@@ -35,6 +50,7 @@ mode "$zmode" {
     bindsym k mode "$kblayoutmode"
     bindsym e exec fzl-emoji.sh; mode "default"
     bindsym Shift+e exec fzl-kaomoji.sh; mode "default"
+    bindsym m mode "$presentmode"
     bindsym r reload; mode "default"
     bindsym l exec $lockcmd; mode "default"
     bindsym z border toggle; mode "default"

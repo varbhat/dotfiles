@@ -18,6 +18,7 @@ for_window {
     [app_id="blueman-manager"] floating enable; border normal; move position cursor
     [app_id="org.freedesktop.impl.portal.desktop(.*)"] floating enable; border normal; move position cursor
     [app_id="xdg-desktop-portal-gtk"] floating enable; border normal; move position cursor
+    [app_id="at.yrlf.wl_mirror"] floating enable; border normal; resize set 1000 600;
 
     [window_role="GtkFileChooserDialog"] floating enable; border normal; move position cursor
     [title="Open Folder(.*)"] floating enable; border normal;
