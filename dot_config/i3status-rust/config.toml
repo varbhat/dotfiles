@@ -42,7 +42,7 @@ button = "left"
 cmd = "swaymsg mode keyboard"
 [[block.click]]
 button = "right"
-cmd = "swaymsg mode keyboard"
+cmd = "pkill wvkbd-mobintl || wvkbd-mobintl -fn monospace -L 300"
 
 #[[block]]
 #block = "battery"

@@ -8,6 +8,7 @@ window="Select a window"
 
 copy="Copy to clipboard"
 save="Save file"
+dragon="Dragon"
 
 tmp_filename="/tmp/screenshot_$(date +%d)-$(date +%m)-$(date +%y)_$(date +%T).png"
 
@@ -37,7 +38,7 @@ mode_cmd() {
 
 # Ask to select mode
 select_mode() {
-	echo -e "$copy\n$save" | mode_cmd
+	echo -e "$copy\n$save\n$dragon" | mode_cmd
 }
 
 menu_option="$(run_fuzzel)"
@@ -67,6 +68,9 @@ if [[ ! -z "$menu_option" ]]; then
 			;;
 		$save)
 			cp $tmp_filename $(target_directory)
+			;;
+		$dragon)
+			dragon-drop $tmp_filename
 			;;
 		esac
 	fi
