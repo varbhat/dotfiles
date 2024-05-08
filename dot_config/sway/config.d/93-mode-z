@@ -55,7 +55,7 @@ mode "$zmode" {
     bindsym r reload; mode "default"
     bindsym l exec $lockcmd; mode "default"
     bindsym z border toggle; mode "default"
-    bindsym Space exec pkill wvkbd-mobintl || wvkbd-mobintl -fn monospace -L 300; mode "default"
+    bindsym Space exec pkill -SIGRTMIN wvkbd-mobintl || wvkbd-mobintl -fn monospace -L 300; mode "default"
     bindsym Print exec fzl-recorder.sh; mode "default"
     bindsym $meta+z border toggle; mode "default"
     bindsym b bar mode toggle; mode "default"
