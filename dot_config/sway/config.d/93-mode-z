@@ -6,7 +6,7 @@ mode "$kblayoutmode" {
     set {
         $setkbdvorak exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "us" && swaymsg input type:keyboard xkb_variant 'dvorak';
         $setkbqwerty exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "us" && swaymsg input type:keyboard xkb_variant 'qwerty';
-        $setkbkankagapa exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "in" && swaymsg input type:keyboard xkb_variant 'kan-kagapa';
+        $setkbkankagapa exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "in" && swaymsg input type:keyboard xkb_variant 'kan-kagapa-dvorak';
         $setkbsankagapa exec swaymsg input type:keyboard xkb_variant '""' && swaymsg input type:keyboard xkb_layout '""' && swaymsg input type:keyboard xkb_layout "in" && swaymsg input type:keyboard xkb_variant 'san-kagapa';
     }
     # 43 -> dvorak d
