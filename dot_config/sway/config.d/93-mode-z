@@ -19,6 +19,8 @@ mode "$kblayoutmode" {
     bindcode 47 $setkbsankagapa; mode "default"
     bindsym Escape mode "default"
 }
+# Fn keys are same on all above mentioned layouts
+bindsym $meta+F2 mode "$kblayoutmode"
 
 # powermode
 set $powermode "powermode"
