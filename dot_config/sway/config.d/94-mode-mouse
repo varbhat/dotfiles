@@ -1,8 +1,8 @@
 # vim: set ft=swayconfig:
-# Mouse Mode
+# Cursor Mode
 # Move cursor with keyboard
-set $mousemode "mousemode"
-mode "$mousemode" {
+set $cursormode "cursormode"
+mode "$cursormode" {
   # Move cursor
 	bindsym $left seat - cursor move -10 0
 	bindsym $down seat - cursor move 0 10
@@ -54,4 +54,4 @@ mode "$mousemode" {
   bindsym grave mode "default"
   bindsym $meta+grave mode "default"
 }
-bindsym $meta+grave mode "$mousemode"
+bindsym $meta+grave mode "$cursormode"
