@@ -14,6 +14,7 @@ set {
   $wobsock $XDG_RUNTIME_DIR/wob.sock
   $newworkspace swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)
   $movetonewworkspace swaymsg move container to workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)
+  $focusrandomworkspace swaymsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | flatten[]' | shuf -n 1)
 
   $left  h
   $down  j
