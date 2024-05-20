@@ -63,6 +63,25 @@ cmd = "pavucontrol-qt"
 
 [[block]]
 block = "menu"
+text = "󱇙"
+[[block.items]]
+display = " -&gt; Apps &lt;-"
+cmd = "nwggrid"
+[[block.items]]
+display = " -&gt; ckill &lt;-"
+cmd = "sway-ckill.sh"
+[[block.items]]
+display = " -&gt; Firefox &lt;-"
+cmd = "firefox"
+[[block.items]]
+display = " -&gt; Foot &lt;-"
+cmd = "foot"
+[[block.items]]
+display = " -&gt; Caja &lt;-"
+cmd = "caja"
+
+[[block]]
+block = "menu"
 text = "\uf011"
 [[block.items]]
 display = " -&gt; Power Off &lt;-"
