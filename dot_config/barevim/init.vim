@@ -1,13 +1,13 @@
 syntax enable
 filetype indent on
-colorscheme industry
+colorscheme retrobox
 set autoindent
 set expandtab
 set number
 set hlsearch
 set incsearch
 set nobackup
-set cursorline
+"set cursorline
 set clipboard=unnamedplus
 set tabstop=4
 set backspace=indent,eol,start
