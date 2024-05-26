@@ -59,6 +59,7 @@ mode "$zmode" {
     bindsym z border toggle; mode "default"
     bindsym c exec grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -n 1 | cut -d ' ' -f 4 | wl-copy; mode "default"
     bindsym Space exec pkill -SIGRTMIN wvkbd-mobintl || wvkbd-mobintl -fn monospace -L 300; mode "default"
+    bindsym s exec pkill wshowkeys || wshowkeys -a bottom -a right; mode "default"
     bindsym Print exec fzl-recorder.sh; mode "default"
     bindsym $meta+z border toggle; mode "default"
     bindsym b bar mode toggle; mode "default"
