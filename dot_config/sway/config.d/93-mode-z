@@ -23,7 +23,16 @@ set $powermode "powermode"
 mode "$powermode" {
     bindsym o exec sudo poweroff; mode "default"
     bindsym r exec sudo reboot; mode "default"
-    bindsym Escape mode "de
+    bindsym Escape mode "default"
+}
+
+# present mode (See wl-mirror and wl-present)
+set $presentmode "presentmode"
+mode "$presentmode" {
+  bindsym m exec wl-present mirror; mode "default"
+  bindsym p exec wl-present toggle-freeze; mode "default"
+  bindsym Space exec wl-present toggle-freeze; mode "default"
+  bindsym o exec wl-present set-output; mode "default"
   bindsym r exec wl-present set-region; mode "default"
   bindsym s exec wl-present set-scaling; mode "default"
   bindsym f exec wl-present fullscreen; mode "default"
