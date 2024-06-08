@@ -3,17 +3,12 @@
 set $workspacemode workspace
 mode "$workspacemode" {
    bindsym {
-      # Workspace Nav
-      Prior workspace prev_on_output
-      Next workspace next_on_output
-      1 workspace prev_on_output
-      2 workspace next_on_output
-      less exec swaymsg workspace prev_on_output
-      greater exec swaymsg workspace next_on_output
+      comma workspace prev_on_output
+      period workspace next_on_output
       0 exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | min')"
       dollar exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | max')"
-      Home exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | min')"
-      End exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | max')"
+      b exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | min')"
+      e exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | max')"
       semicolon exec $focusrandomworkspace
 
       # Actions
@@ -36,8 +31,8 @@ mode "$workspacemode" {
       $meta+h splith; mode "default"
       v splitv; mode "default"
       $meta+v splitv; mode "default"
-      minus layout toggle stacking split; mode "default"
-      $meta+minus layout toggle stacking split; mode "default"
+      k layout toggle stacking split; mode "default"
+      $meta+k layout toggle stacking split; mode "default"
       t layout toggle tabbed split; mode "default"
       $meta+t layout toggle tabbed split; mode "default"
       z layout toggle split; mode "default"
@@ -48,7 +43,6 @@ mode "$workspacemode" {
       $meta+w layout toggle tabbed split; mode "default"
 
       f fullscreen; mode "default"
-      comma floating toggle
     }
     bindsym Escape mode "default"
 }
