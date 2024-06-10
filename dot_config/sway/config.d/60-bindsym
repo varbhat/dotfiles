@@ -70,15 +70,12 @@ bindsym {
     $meta+Shift+$up move up
     $meta+Shift+$right move right
 
-    $meta+space floating toggle
-    $meta+Shift+space focus mode_toggle
-    #prior->pgup next->pgdown
-    $meta+Prior floating disable
-    $meta+Next floating enable
+    $meta+tab floating toggle
+    $meta+space focus mode_toggle
 
     # Scratchpad
-    $meta+backslash scratchpad show
-    $meta+Shift+backslash move scratchpad
+    $meta+x scratchpad show
+    $meta+Shift+x move scratchpad
 
     # Mark Windows and switch
     $meta+g exec sway-mark-switcher.sh
