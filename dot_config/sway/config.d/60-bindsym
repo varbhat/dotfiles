@@ -33,6 +33,9 @@ bindsym {
     # Menus and Launchers
     $meta+d exec $menu
     $meta+alt+d exec $launcher
+    $meta+Find exec $launcher
+
+    # Browser
     $meta+b exec $webbrowser
 
     # reload sway
