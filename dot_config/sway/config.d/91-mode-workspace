@@ -9,7 +9,7 @@ mode "$workspacemode" {
       dollar exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | max')"
       b exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | min')"
       e exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | max')"
-      semicolon exec $focusrandomworkspace
+      u exec $focusrandomworkspace
 
       # Actions
       asterisk sticky toggle; mode "default"

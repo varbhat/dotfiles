@@ -74,8 +74,8 @@ bindsym {
     $meta+space focus mode_toggle
 
     # Scratchpad
-    $meta+x scratchpad show
-    $meta+Shift+x move scratchpad
+    $meta+e scratchpad show
+    $meta+Shift+e move scratchpad
 
     # Mark Windows and switch
     $meta+g exec sway-mark-switcher.sh
@@ -85,6 +85,10 @@ bindsym {
     $meta+comma workspace prev_on_output
     $meta+period workspace next_on_output
 
+    # Cut,Copy,Paste
+    #$meta+x exec wtype -P XF86Cut
+    #$meta+c exec wtype -P XF86Copy
+    #$meta+v exec wtype -P XF86Paste
 
     # Move Workspaces to output in Direction
     $meta+Ctrl+Right move workspace to output right
