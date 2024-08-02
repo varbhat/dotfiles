@@ -76,11 +76,11 @@ return {
     end,
     keys = {
       {
-        '<leader>tf',
+        '<leader>te',
         function()
           require('dapui').float_element()
         end,
-        desc = 'DAP Float',
+        desc = 'DAP Float [e]lement',
       },
       {
         '<leader>ta',
@@ -88,14 +88,14 @@ return {
           local widgets = require 'dap.ui.widgets'
           widgets.centered_float(widgets.scopes)
         end,
-        desc = 'DAP Widget',
+        desc = 'D[a]P Widget',
       },
       {
         '<leader>tz',
         function()
           require('dapui').toggle()
         end,
-        desc = 'DAP UI Toggle',
+        desc = '[z]DAP UI Toggle',
       },
     },
   },

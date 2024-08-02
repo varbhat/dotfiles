@@ -79,4 +79,21 @@ vim.filetype.add {
   },
 }
 
+-- FormatToggle Command
+vim.api.nvim_create_user_command('FormatGlobalToggle', function()
+  vim.g.disable_autoformat = not vim.g.disable_autoformat
+end, {
+  desc = 'Toggle Global autoformat-on-save',
+})
+
+vim.keymap.set('n', '<leader>tF', '<cmd>FormatGlobalToggle<cr>', { desc = 'Toggle Global autoformat-on-save' })
+
+vim.api.nvim_create_user_command('FormatBufferToggle', function()
+  vim.b.disable_autoformat = not vim.b.disable_autoformat
+end, {
+  desc = 'Toggle Buffer autoformat-on-save',
+})
+
+vim.keymap.set('n', '<leader>tf', '<cmd>FormatBufferToggle<cr>', { desc = 'Toggle Buffer autoformat-on-save' })
+
 -- vim: ts=2 sts=2 sw=2 et
