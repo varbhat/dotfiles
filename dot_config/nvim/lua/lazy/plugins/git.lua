@@ -5,10 +5,13 @@ return {
       'nvim-lua/plenary.nvim', -- required
       'sindrets/diffview.nvim', -- optional - Diff integration
 
-      -- Only one of these is needed, not both.
       'nvim-telescope/telescope.nvim', -- optional
       'ibhagwan/fzf-lua', -- optional
     },
+    keys = {
+      { '<leader>eg', '<cmd>Neogit<cr>', desc = 'Neo[g]it' },
+    },
     config = true,
   },
+  { 'akinsho/git-conflict.nvim', version = '*', config = true },
 }
