@@ -1,6 +1,5 @@
 set previewer ~/.config/lf/lf_preview
 
-
 set ratios 1:2
 set mouse true
 set sixel true
@@ -38,7 +37,6 @@ cmd fzf_jump ${{
 map / :fzf_jump
 
 map <c-f> :search
-
 map <c-w> :filter
 
 cmd on-quit ${{
@@ -51,7 +49,6 @@ cmd zi ${{
 	result="$(zoxide query -i)"
 	lf -remote "send $id cd \"$result\""
 }}
-
 map z :zi
 
 cmd on-cd &{{
