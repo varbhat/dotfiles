@@ -73,5 +73,28 @@ return {
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
   },
+  {
+    'nvim-treesitter/nvim-treesitter-refactor',
+    opts = {},
+    dependencies = {
+      { 'nvim-treesitter/nvim-treesitter' },
+    },
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        refactor = {
+          highlight_definitions = {
+            enable = true,
+            clear_on_cursor_move = true,
+          },
+        },
+      }
+    end,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    opts = {},
+    dependencies = {
+      { 'nvim-treesitter/nvim-treesitter' },
+    },
+  },
 }
--- vim: t
