@@ -41,7 +41,7 @@ return {
           surface0 = '#282727',
 
           base = '#0d0c0c',
-          mantle = '#181825',
+          mantle = '#1D1C19',
           crust = '#1F1F28',
         },
       },
