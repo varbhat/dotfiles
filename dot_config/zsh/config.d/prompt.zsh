@@ -21,8 +21,8 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}🮱"
 
 # colors here: https://unix.stackexchange.com/a/124409
 
-PROMPT=$'%(?..%F{214}%K{%(?.000.052)} err %? %k%f )%F{245}%~%f %F{078}%n%f%F{245}@%f%F{132}%m%f$(gitprompt)\n%F{%(#.red.105)%}%#%f '
-RPROMPT='%F{245}%D{%L:%M:%S}%f'
+PROMPT=$'%F{%(#.red.105)%}%#%f %(?..%F{214}%K{%(?.000.052)} err %? %k%f )%F{245}%~%f %F{078}%n%f%F{245}@%f%F{132}%m%f$(gitprompt) %F{245}%D{%L:%M:%S}%f\n '
+RPROMPT=''
 
 setopt promptsubst
 PS1=$'%F{%(?.236.red)}${(r:$COLUMNS::\u2500:)}%f'$PS1

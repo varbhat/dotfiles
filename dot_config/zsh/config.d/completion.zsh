@@ -18,7 +18,10 @@ zstyle ':autocomplete:*' default-context history-incremental-search-backward
 zstyle ':completion:*:git-checkout:*' sort false                       # disable sort when completing `git checkout`
 zstyle ':completion:*:descriptions' format '[%d]'                      # set descriptions format to enable group support
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}                  # set list-colors to enable filename colorizing
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color=auto $realpath' # preview directory's content with exa when completing cd
+
+
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-y:accept'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'                                # switch group using `,` and `.`
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
 	fzf-preview 'echo ${(P)word}'
