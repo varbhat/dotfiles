@@ -38,6 +38,7 @@ return {
         ensure_installed = {
           'delve',
           'jq',
+          'codelldb',
         },
       }
 
@@ -209,6 +210,14 @@ return {
           require 'neotest-golang',
           require('dap-python').setup 'python',
         },
+      }
+    end,
+  },
+  {
+    'Weissle/persistent-breakpoints.nvim',
+    config = function()
+      require('persistent-breakpoints').setup {
+        load_breakpoints_event = { 'BufReadPost' },
       }
     end,
   },
