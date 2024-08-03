@@ -37,8 +37,8 @@ if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && [[ -f /usr
 	# enable file portal for gtk apps
 	export GTK_USE_PORTAL=1
 
-  # Make wl-present use Fuzzel
-  export WL_PRESENT_DMENU="fuzzel --dmenu"
+        # Make wl-present use Fuzzel
+        export WL_PRESENT_DMENU="fuzzel --dmenu"
 
 	# use qt6ct to theme QT
 	export QT_QPA_PLATFORMTHEME=qt6ct
