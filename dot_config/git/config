@@ -29,6 +29,9 @@ conflictstyle = diff3
 [diff]
 colorMoved = default
 
+[push]
+autoSetupRemote = true
+
 [alias]
 br = branch
 ci = commit
