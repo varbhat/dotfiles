@@ -5,11 +5,6 @@ exec {
     # https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
     dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
-    # Pipewire and Wireplumber: the audio stack
-    /usr/bin/pipewire &
-    /usr/bin/pipewire-pulse &
-    /usr/bin/wireplumber &
-
     # themes
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 

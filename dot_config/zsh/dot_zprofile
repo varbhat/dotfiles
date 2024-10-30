@@ -12,14 +12,14 @@ path+=($HOME/.local/bin)
 path+=($HOME/.local/vbin{,/**/*(N/)})
 
 if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && [[ -f /usr/bin/sway ]]; then
-	# XDG_RUNTIME_DIR
-	if test -z "${XDG_RUNTIME_DIR}"; then
-		export XDG_RUNTIME_DIR=/tmp/xdgruntimedir/"$(id -u)"
-		if ! test -d "${XDG_RUNTIME_DIR}"; then
-			mkdir -p "${XDG_RUNTIME_DIR}"
-			chmod 0700 "${XDG_RUNTIME_DIR}"
-		fi
-	fi
+	## XDG_RUNTIME_DIR
+	#if test -z "${XDG_RUNTIME_DIR}"; then
+		#export XDG_RUNTIME_DIR=/tmp/xdgruntimedir/"$(id -u)"
+		#if ! test -d "${XDG_RUNTIME_DIR}"; then
+			#mkdir -p "${XDG_RUNTIME_DIR}"
+			#chmod 0700 "${XDG_RUNTIME_DIR}"
+		#fi
+	#fi
 
 	# export XDG_CURRENT_DESKTOP
 	export XDG_CURRENT_DESKTOP=sway
@@ -37,8 +37,8 @@ if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && [[ -f /usr
 	# enable file portal for gtk apps
 	export GTK_USE_PORTAL=1
 
-        # Make wl-present use Fuzzel
-        export WL_PRESENT_DMENU="fuzzel --dmenu"
+	# Make wl-present use Fuzzel
+	export WL_PRESENT_DMENU="fuzzel --dmenu"
 
 	# use qt6ct to theme QT
 	export QT_QPA_PLATFORMTHEME=qt6ct
