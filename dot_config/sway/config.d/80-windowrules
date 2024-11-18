@@ -18,7 +18,7 @@ for_window {
     # Auto float some apps
     [app_id="org.twosheds.iwgtk"] floating enable; border normal; move position cursor
     [app_id="pavucontrol-qt"] floating enable; border normal; move position cursor
-    [app_id="org.pulseaudio.pavucontrol"] floating enable; border normal; move position cursor;
+    [app_id="org.pulseaudio.pavucontrol"] floating enable; border normal; move position cursor; resize set 1000 600;
     [app_id="imv"] floating enable; border normal; move position cursor
     [app_id="blueman-manager"] floating enable; border normal; move position cursor
     [app_id="org.freedesktop.impl.portal.desktop(.*)"] floating enable; border normal; move position cursor
