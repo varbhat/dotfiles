@@ -59,7 +59,7 @@ driver = "pulseaudio"
 format = " $icon{ $volume|} "
 [[block.click]]
 button = "left"
-cmd = "pavucontrol-qt"
+cmd = "pavucontrol"
 
 [[block]]
 block = "custom"

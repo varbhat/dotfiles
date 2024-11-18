@@ -6,7 +6,8 @@ for_window {
     [app_id="foot"] title_format " %title"
     #[app_id="foot" title="(.*) - NVIM"] title_format " %title"
     [app_id="mpv"] title_format " %title"
-    [app_id="pavucontrol-qt"] title_format " %title"
+    [app_id="pavucontrol"] title_format " %title"
+    [app_id="org.pulseaudio.pavucontrol"] title_format " %title"
     [app_id="org.telegram.desktop"] title_format " %title"
     [app_id="blueman-manager"] title_format "󰂯 %title"
     [app_id="org.twosheds.iwgtk"] title_format " %title"
@@ -17,6 +18,7 @@ for_window {
     # Auto float some apps
     [app_id="org.twosheds.iwgtk"] floating enable; border normal; move position cursor
     [app_id="pavucontrol-qt"] floating enable; border normal; move position cursor
+    [app_id="org.pulseaudio.pavucontrol"] floating enable; border normal; move position cursor;
     [app_id="imv"] floating enable; border normal; move position cursor
     [app_id="blueman-manager"] floating enable; border normal; move position cursor
     [app_id="org.freedesktop.impl.portal.desktop(.*)"] floating enable; border normal; move position cursor
