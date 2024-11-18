@@ -62,6 +62,17 @@ button = "left"
 cmd = "pavucontrol-qt"
 
 [[block]]
+block = "custom"
+command = "echo 󰅜"
+interval = "once"
+[[block.click]]
+cmd = "swaymsg kill"
+button = "left"
+[[block.click]]
+cmd = "sway-ckill.sh"
+button = "right"
+
+[[block]]
 block = "menu"
 text = "󱇙"
 [[block.items]]
@@ -79,6 +90,11 @@ cmd = "foot"
 [[block.items]]
 display = " -&gt; Caja &lt;-"
 cmd = "caja"
+
+[[block]]
+block = "battery"
+format = "$icon $percentage"
+missing_format = ""
 
 [[block]]
 block = "menu"

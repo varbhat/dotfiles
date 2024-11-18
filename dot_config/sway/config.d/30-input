@@ -6,7 +6,7 @@ input "type:touchpad" {
        natural_scroll enabled
 }
 
-input "13364:640:Keychron_Keychron_K8_Pro" {
+input "1:1:AT_Translated_Set_2_keyboard" {
         xkb_layout us
         xkb_variant dvorak
         xkb_options caps:swapescape
