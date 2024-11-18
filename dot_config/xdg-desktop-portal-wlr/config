@@ -1,0 +1,4 @@
+# 2021-05-24: See https://github.com/emersion/xdg-desktop-portal-wlr/issues/124
+[screencast]
+chooser_cmd = fuzzel --dmenu --prompt='Select the output to share:'
+chooser_type = dmenu
