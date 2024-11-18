@@ -1,0 +1,11 @@
+# https://unix.stackexchange.com/a/47715
+[Unit]
+Description=Turn off Thinkpad Power Button LED
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "echo 0 > /sys/class/leds/tpacpi::power/brightness"
+
+[Install]
+WantedBy=multi-user.target
+
