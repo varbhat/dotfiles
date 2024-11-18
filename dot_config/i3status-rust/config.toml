@@ -73,23 +73,14 @@ cmd = "sway-ckill.sh"
 button = "right"
 
 [[block]]
-block = "menu"
-text = "󱇙"
-[[block.items]]
-display = " -&gt; Apps &lt;-"
+block = "custom"
+command = "echo 󱇙"
+[[block.click]]
 cmd = "nwggrid"
-[[block.items]]
-display = " -&gt; ckill &lt;-"
-cmd = "sway-ckill.sh"
-[[block.items]]
-display = " -&gt; Firefox &lt;-"
-cmd = "firefox"
-[[block.items]]
-display = " -&gt; Foot &lt;-"
+button = "left"
+[[block.click]]
 cmd = "foot"
-[[block.items]]
-display = " -&gt; Caja &lt;-"
-cmd = "caja"
+button = "right"
 
 [[block]]
 block = "battery"
