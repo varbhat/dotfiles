@@ -21,6 +21,7 @@ bindsym $meta+F2 mode "$kblayoutmode"
 # powermode
 set $powermode "powermode"
 mode "$powermode" {
+    bindsym e exit
     bindsym o exec sudo poweroff; mode "default"
     bindsym r exec sudo reboot; mode "default"
     bindsym Escape mode "default"

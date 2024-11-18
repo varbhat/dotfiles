@@ -7,6 +7,7 @@ mkdir -p ~/.cache \
          ~/.xdgpath/pictures/wallpapers \
          ~/space \
          ~/space/downloads \
+         ~/.local/sockets \
          ~/.xdgpath/desktop \
          ~/.xdgpath/documents \
          ~/.xdgpath/music \
