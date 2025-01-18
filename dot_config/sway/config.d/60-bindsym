@@ -85,8 +85,8 @@ bindsym {
     $meta+m exec sway-mark.sh
 
     # workspace
-    $meta+comma workspace prev_on_output
-    $meta+period workspace next_on_output
+    $meta+1 workspace prev_on_output
+    $meta+2 workspace next_on_output
 
     # Cut,Copy,Paste
     #$meta+x exec wtype -P XF86Cut

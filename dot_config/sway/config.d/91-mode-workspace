@@ -3,8 +3,8 @@
 set $workspacemode workspace
 mode "$workspacemode" {
    bindsym {
-      comma workspace prev_on_output
-      period workspace next_on_output
+      1 workspace prev_on_output
+      2 workspace next_on_output
       0 exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | min')"
       dollar exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | max')"
       b exec swaymsg workspace number "$(swaymsg -t get_workspaces -r | jq '[.[].num] | min')"
