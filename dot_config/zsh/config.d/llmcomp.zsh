@@ -1,4 +1,4 @@
-# llm -s "Return 4 executable command line suggestions or answers, no formatting. Output must be fzf compatible results seperated by new line." --save cli_help
+# llm -s "Return 4 executable command line suggestions or answers, no formatting. Output must be fzf compatible results separated by new line." --save cli_help
 llm_cli_help() {
   local selected
   selected=$(llm -t cli_help $BUFFER | fzf --layout=reverse --height=40%)
