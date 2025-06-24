@@ -11,6 +11,11 @@ path+=($HOME/.local/bin)
 # https://unix.stackexchange.com/a/480799
 path+=($HOME/.local/vbin{,/**/*(N/)})
 
+
+if [[ -f /opt/homebrew/bin/brew ]]; then
+ eval $(/opt/homebrew/bin/brew shellenv)
+fi
+
 if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && [[ -f /usr/bin/startplasma-wayland ]]; then
 	# wayland
 	export QT_QPA_PLATFORM=wayland
