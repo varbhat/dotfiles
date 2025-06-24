@@ -1,0 +1,57 @@
+set previewer ~/.config/lf/previewer
+set cleaner ~/.config/lf/cleaner
+
+set ratios 1:2
+set mouse true
+set sixel true
+set drawbox true
+map . :set hidden!
+set shell bash
+set icons true
+
+cmd rand_jump ${{
+    res="$(find . -maxdepth 1 | shuf -n 1 | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    if [ -d "$res" ] ; then
+        cmd="select"
+    elif [ -f "$res" ] ; then
+        cmd="select"
+    else
+        exit 0
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+map ; :rand_jump
+
+map x :delete
+
+cmd fzf_jump ${{
+    res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    if [ -d "$res" ] ; then
+        cmd="cd"
+    elif [ -f "$res" ] ; then
+        cmd="select"
+    else
+        exit 0
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+map / :fzf_jump
+
+map <c-f> :search
+map <c-w> :filter
+
+cmd on-quit ${{
+    tput init
+}}
+
+map <enter> :open
+
+cmd zi ${{
+	result="$(zoxide query -i)"
+	lf -remote "send $id cd \"$result\""
+}}
+map z :zi
+
+cmd on-cd &{{
+        zoxide add "$PWD"
+}}

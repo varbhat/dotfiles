@@ -1,0 +1,17 @@
+# vim: set ft=gitconfig :
+[user]
+email = mailvarbhat@gmail.com
+name = Var Bhat
+signingkey = /home/vbt/.ssh/id_ed25519.pub
+
+[core]
+sshCommand = ssh -i /home/vbt/.ssh/id_ed25519
+
+[gpg]
+format = ssh
+
+[commit]
+gpgSign = true
+
+[tag]
+gpgSign = true

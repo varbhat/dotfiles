@@ -1,0 +1,24 @@
+export EDITOR="nvim"
+export TERMINAL="kitty"
+export GOPATH=~/.local/share/gopath
+export VOLTA_HOME=~/.local/share/volta
+
+path+=($GOPATH/bin)
+path+=($HOME/.cargo/bin)
+path+=($HOME/.local/share/nvim/mason/bin)
+path+=($VOLTA_HOME/bin)
+path+=($HOME/.local/bin)
+# https://unix.stackexchange.com/a/480799
+path+=($HOME/.local/vbin{,/**/*(N/)})
+
+if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && [[ -f /usr/bin/startplasma-wayland ]]; then
+	# wayland
+	export QT_QPA_PLATFORM=wayland
+	export _JAVA_AWT_WM_NONREPARENTING=1
+	export MOZ_ENABLE_WAYLAND=1
+	
+	# enable file portal for gtk apps
+	export GTK_USE_PORTAL=1
+
+	exec /usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland
+fi

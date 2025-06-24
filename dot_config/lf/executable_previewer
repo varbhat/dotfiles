@@ -1,0 +1,47 @@
+#!/bin/sh
+
+draw() {
+  kitten icat --stdin no --transfer-mode memory --place "${w}x${h}@${x}x${y}" "$1" </dev/null >/dev/tty
+  exit 1
+}
+
+file="$1"
+w="$2"
+h="$3"
+x="$4"
+y="$5"
+
+case "$(file -Lb --mime-type -- "$file")" in
+image/*)
+   draw "$file"
+   exit 1
+    ;;
+video/*)
+    draw "$(vidthumb.sh "$file")"
+    ;;
+audio/*)
+	ffmpeg -i "$1" -loglevel panic -filter:v scale=-2:1000 -an -f image2pipe -vcodec png - | kitten icat --stdin no --transfer-mode memory --place "${w}x${h}@${x}x${y}" >/dev/tty
+	exit 1
+	;;
+application/x-tar) tar tf "$1" ;;
+application/zip) unzip -l "$1" ;;
+application/x-rar-compressed) unrar l "$1" ;;
+application/x-7z-compressed) 7z l "$1" ;;
+application/gzip) gunzip -l "$1" ;;
+application/pdf)
+	pdftoppm -f 1 -l 1 -scale-to 1024 -png "$1" | kitten icat --transfer-mode memory --place "${w}x${h}@${x}x${y}" >/dev/tty
+	exit 1
+	;;
+application/json)
+	cat "$1" | jq '.' -C
+	exit 1
+	;;
+font/* | application/vnd.ms-opentype)
+	fontPreview.sh "$1" | kitten icat --transfer-mode memory --place "${w}x${h}@${x}x${y}" >/dev/tty
+	exit 1
+	;;
+*)
+	bat --color=always --style=plain "$1"
+	exit 1
+	;;
+esac
