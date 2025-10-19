@@ -1,47 +1,102 @@
 #!/bin/sh
+# preview.sh — universal file preview script for Kitty
 
-draw() {
-  kitten icat --stdin no --transfer-mode memory --place "${w}x${h}@${x}x${y}" "$1" </dev/null >/dev/tty
-  exit 1
-}
+set -eu
 
 file="$1"
-w="$2"
-h="$3"
-x="$4"
-y="$5"
+w="${2:-800}"
+h="${3:-600}"
+x="${4:-0}"
+y="${5:-0}"
 
-case "$(file -Lb --mime-type -- "$file")" in
+# --- Simple MIME type checker based on file extension ---
+get_mime_by_ext() {
+    case "${1##*.}" in
+        jpg|jpeg|png|gif|bmp|webp|tiff) echo "image/*" ;;
+        mp4|mkv|avi|mov|webm) echo "video/*" ;;
+        mp3|flac|wav|ogg|m4a) echo "audio/*" ;;
+        tar) echo "application/x-tar" ;;
+        zip) echo "application/zip" ;;
+        rar) echo "application/x-rar-compressed" ;;
+        7z) echo "application/x-7z-compressed" ;;
+        gz) echo "application/gzip" ;;
+        pdf) echo "application/pdf" ;;
+        json) echo "application/json" ;;
+        otf|ttf|woff|woff2) echo "font/*" ;;
+        *) echo "text/plain" ;;
+    esac
+}
+
+# Try 'file' first, fallback to extension-based MIME if it fails
+get_mime() {
+    mime="$(file -Lb --mime-type -- "$1" 2>/dev/null || true)"
+    if [ -z "$mime" ] || [ "$mime" = "application/octet-stream" ]; then
+        get_mime_by_ext "$1"
+    else
+        echo "$mime"
+    fi
+}
+
+draw_image() {
+    kitten icat --stdin yes --transfer-mode memory \
+        --place "${w}x${h}@${x}x${y}" </dev/stdin >/dev/tty
+    exit 0
+}
+
+draw_file() {
+    kitten icat --stdin no --transfer-mode memory \
+        --place "${w}x${h}@${x}x${y}" "$1" </dev/null >/dev/tty
+    exit 0
+}
+
+mime_type="$(get_mime "$file")"
+
+case "$mime_type" in
 image/*)
-   draw "$file"
-   exit 1
+    draw_file "$file"
     ;;
+
 video/*)
-    draw "$(vidthumb.sh "$file")"
+   ffmpegthumbnailer -i "$file" -o /dev/stdout -t $(shuf -i 5-90 -n 1) -s 0 | draw_image
     ;;
+
 audio/*)
-	ffmpeg -i "$1" -loglevel panic -filter:v scale=-2:1000 -an -f image2pipe -vcodec png - | kitten icat --stdin no --transfer-mode memory --place "${w}x${h}@${x}x${y}" >/dev/tty
-	exit 1
-	;;
-application/x-tar) tar tf "$1" ;;
-application/zip) unzip -l "$1" ;;
-application/x-rar-compressed) unrar l "$1" ;;
-application/x-7z-compressed) 7z l "$1" ;;
-application/gzip) gunzip -l "$1" ;;
+    ffmpeg -i "$file" -loglevel panic -filter:v scale=-2:1000 -an -f image2pipe -vcodec png - | draw_image
+    ;;
+
+application/x-tar)
+    tar tf "$file"
+    ;;
+
+application/zip)
+    unzip -l "$file"
+    ;;
+
+application/x-rar-compressed)
+    unrar l "$file"
+    ;;
+
+application/x-7z-compressed)
+    7z l "$file"
+    ;;
+
+application/gzip)
+    gunzip -l "$file"
+    ;;
+
 application/pdf)
-	pdftoppm -f 1 -l 1 -scale-to 1024 -png "$1" | kitten icat --transfer-mode memory --place "${w}x${h}@${x}x${y}" >/dev/tty
-	exit 1
-	;;
+    pdftoppm -f 1 -l 1 -scale-to 1024 -png "$file" | draw_image
+    ;;
+
 application/json)
-	cat "$1" | jq '.' -C
-	exit 1
-	;;
-font/* | application/vnd.ms-opentype)
-	fontPreview.sh "$1" | kitten icat --transfer-mode memory --place "${w}x${h}@${x}x${y}" >/dev/tty
-	exit 1
-	;;
+    jq '.' -C < "$file"
+    ;;
+
+font/*|application/vnd.ms-opentype)
+    fontPreview.sh "$file" | draw_image
+    ;;
+
 *)
-	bat --color=always --style=plain "$1"
-	exit 1
-	;;
+    bat --color=always --style=plain "$file" || cat "$file"
+    ;;
 esac
