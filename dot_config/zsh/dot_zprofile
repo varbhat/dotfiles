@@ -16,7 +16,7 @@ if [[ -f /opt/homebrew/bin/brew ]]; then
  eval $(/opt/homebrew/bin/brew shellenv)
 fi
 
-if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && [[ -f /usr/bin/startplasma-wayland ]]; then
+if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && [[ -f /usr/bin/niri-session ]]; then
 	# wayland
 	export QT_QPA_PLATFORM=wayland
 	export _JAVA_AWT_WM_NONREPARENTING=1
@@ -25,5 +25,5 @@ if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && [[ -f /usr
 	# enable file portal for gtk apps
 	export GTK_USE_PORTAL=1
 
-	exec /usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland
+	systemctl start --user niri
 fi
