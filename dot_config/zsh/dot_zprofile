@@ -16,14 +16,38 @@ if [[ -f /opt/homebrew/bin/brew ]]; then
  eval $(/opt/homebrew/bin/brew shellenv)
 fi
 
-if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && [[ -f /usr/bin/niri-session ]]; then
+if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && [[ -f /usr/bin/scroll ]]; then
+	## XDG_RUNTIME_DIR
+	#if test -z "${XDG_RUNTIME_DIR}"; then
+		#export XDG_RUNTIME_DIR=/tmp/xdgruntimedir/"$(id -u)"
+		#if ! test -d "${XDG_RUNTIME_DIR}"; then
+			#mkdir -p "${XDG_RUNTIME_DIR}"
+			#chmod 0700 "${XDG_RUNTIME_DIR}"
+		#fi
+	#fi
+
+	# export XDG_CURRENT_DESKTOP
+	export XDG_CURRENT_DESKTOP=sway
+
 	# wayland
 	export QT_QPA_PLATFORM=wayland
 	export _JAVA_AWT_WM_NONREPARENTING=1
 	export MOZ_ENABLE_WAYLAND=1
-	
+	export XCURSOR_THEME=Adwaita
+
+	#export SDL_DYNAMIC_API=/usr/lib/libSDL2-2.0.so.0
+	#export SDL_AUDIODRIVER=pipewire
+	#export SDL_VIDEODRIVER=wayland
+
 	# enable file portal for gtk apps
 	export GTK_USE_PORTAL=1
 
-	systemctl start --user niri
+	# Make wl-present use Fuzzel
+	export WL_PRESENT_DMENU="fuzzel --dmenu"
+
+	# use qt6ct to theme QT
+	export QT_QPA_PLATFORMTHEME=qt6ct
+
+	# start sway
+	dbus-run-session scroll 2>&1 &
 fi
