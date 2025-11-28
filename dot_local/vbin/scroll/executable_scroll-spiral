@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+# https://github.com/alexherbo2/sway-tools/blob/master/bin/sway-spiral
+# exec pkill sway-spiral || sway-spiral
+
+scrollmsg --type subscribe --monitor '["window"]' |
+	jq --unbuffered 'select(.change == "focus") | .container.rect | if .width > .height then "horizontal" else "vertical" end' |
+	while read orientation; do
+		scrollmsg split $orientation
+	done

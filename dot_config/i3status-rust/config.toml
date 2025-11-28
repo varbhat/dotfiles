@@ -1,0 +1,80 @@
+[theme]
+theme = "native"
+[icons]
+icons = "material-nf"
+
+[[block]]
+block = "focused_window"
+[block.format]
+full = " $title.str(max_w:80) $visible_marks |"
+short = " $title.str(max_w:50) $visible_marks |"
+
+[[block]]
+block = "music"
+format = "{$combo.str(max_w:25,rot_interval:0.5) { $play|}|}"
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+cmd = "pkill wlsunset || wlsunset -T 4001"
+button = "left"
+
+[[block]]
+block = "net"
+format = " $icon{$signal_strength $ssid $frequency|} $device"
+[[block.click]]
+button = "left"
+cmd = "iwgtk"
+[[block.click]]
+button = "right"
+cmd = "blueberry"
+
+[[block]]
+block = "time"
+interval = 60
+format = "$timestamp.datetime(f:'%I:%M %p %a %d-%m-%Y')"
+
+[[block]]
+block = "sound"
+driver = "pulseaudio"
+format = " $icon{ $volume|} "
+[[block.click]]
+button = "left"
+cmd = "com.saivert.pwvucontrol"
+
+[[block]]
+block = "custom"
+command = "echo 󰅜"
+interval = "once"
+[[block.click]]
+cmd = "scrollmsg kill"
+button = "left"
+[[block.click]]
+cmd = "scroll-ckill.sh"
+button = "right"
+
+[[block]]
+block = "battery"
+format = "$icon $percentage"
+missing_format = ""
+
+[[block]]
+block = "menu"
+text = "\uf011"
+[[block.items]]
+display = " -&gt; Power Off &lt;-"
+cmd = "poweroff"
+confirm_msg = "Are you sure you want to power off?"
+[[block.items]]
+display = " -&gt;  Reboot   &lt;-"
+cmd = "reboot"
+confirm_msg = "Are you sure you want to reboot?"
+
+[[block]]
+block = "privacy"
+[[block.driver]]
+name = "v4l"
+[[block.driver]]
+name = "pipewire"
