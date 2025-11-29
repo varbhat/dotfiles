@@ -83,6 +83,7 @@ set {
   $menu fuzzel --list-executables-in-path
   $newworkspace scrollmsg workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)
   $movetonewworkspace scrollmsg move container to workspace number $(swaymsg -t get_workspaces -r | jq '[.[].num] | max' | sed 's/$/+1/' | bc)
+  $randomwin scrollmsg "[con_id=$(scrollmsg -t get_tree | jq -r '.. | objects | select(.type? == "con" and .id?) | .id' | shuf -n 1)] focus"
 }
 
 # vim: set ft=swayconfig:
@@ -144,6 +145,9 @@ exec {
     # Layout mode
     bindsym $mod+bracketleft set_mode h
     bindsym $mod+bracketright set_mode v
+
+
+    bindsym $mod+apostrophe exec $randomwin
 #
 # Moving around:
 #
