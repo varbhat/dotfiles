@@ -229,9 +229,9 @@
   };
 
   home.file.".zshenv".text = ''
-ZDOTDIR=$HOME/.config/zsh
-'';
-	
+    ZDOTDIR=$HOME/.config/zsh
+  '';
+
 
   xdg.configFile."zsh" = {
     source = ../assets/zsh;
