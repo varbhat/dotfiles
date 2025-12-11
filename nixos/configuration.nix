@@ -323,7 +323,9 @@
   services.openssh.enable = true;
   services.fprintd.enable = true;
 
-  services.tlp.enable = true;
+  #services.tlp.enable = true;
+
+  services.power-profiles-daemon.enable = true;
 
   services.upower.enable = true;
 
