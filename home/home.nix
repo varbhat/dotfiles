@@ -1,11 +1,10 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
+{ inputs
+, lib
+, config
+, pkgs
+, ...
 }:
 {
   # You can import other home-manager modules here
@@ -39,7 +38,6 @@
     };
   };
 
-  # TODO: Set your username
   home = {
     username = "vbt";
     homeDirectory = "/home/vbt";
@@ -170,45 +168,40 @@
     };
   };
 
-  programs.mpv.enable = true;
-
-  xdg.configFile."mpv/mpv.conf".text = ''
-    hwdec=vaapi
-    gpu-context=wayland
-    keep-open=yes
-    force-window=immediate
-    ao=pipewire
-    alang=eng
-    slang=eng
-    sub-auto=fuzzy
-    screenshot-template="%F - [%P]v%#01n"
-    screenshot-format=png
-    ytdl-raw-options=sub-lang=en,write-auto-sub=
-    ytdl-format=bestvideo[height<=720]+bestaudio
-    cache=yes
-    demuxer-max-bytes=1GiB
-    		'';
-
-  xdg.configFile."mpv/input.conf".text = ''
-    ctrl+r cycle_values video-rotate "90" "180" "270" "0"
-    k playlist-next
-    shift+k playlist-prev
-    		'';
-
-  xdg.configFile."mpv/scripts/playlist-shuffle.lua".text = ''
-    --[[
-        shuffles the playlist and moves the currently playing file to the start of the playlist
-        available at: https://github.com/CogentRedTester/mpv-scripts
-    ]]
-    --
-
-    mp.add_key_binding(";", "playlist-shuffle", function()
-    	mp.command("playlist-shuffle")
-    	local pos = mp.get_property_number("playlist-pos")
-    	mp.commandv("playlist-move", pos, 0)
-    	mp.osd_message("playlist shuffled")
-    end)
-  '';
+  programs.mpv = {
+    enable = true;
+    scripts = with pkgs; [
+      mpvScripts.mpris
+      mpvScripts.thumbfast
+      mpvScripts.mpv-playlistmanager
+      # mpvScripts.simple-mpv-ui
+      mpvScripts.uosc
+    ];
+    config = {
+      osc = "no"; # uosc
+      hwdec = "vaapi";
+      gpu-context = "wayland";
+      keep-open = "yes";
+      force-window = "immediate";
+      ao = "pipewire";
+      alang = "eng";
+      slang = "eng";
+      sub-auto = "fuzzy";
+      save-position-on-quit = "yes";
+      screenshot-template = "%F - [%P]v%#01n";
+      screenshot-format = "png";
+      ytdl-raw-options = "sub-lang=en,write-auto-sub=";
+      ytdl-format = "bestvideo[height<=720]+bestaudio";
+      cache = "yes";
+      demuxer-max-bytes = "1GiB";
+    };
+    bindings = {
+      "ctrl+r" = ''cycle_values video-rotate "90" "180" "270" "0"'';
+      "k" = ''script-message playlistmanager playlist-next'';
+      "shift+k" = ''script-message playlistmanager playlist-prev'';
+      ";" = ''script-message playlistmanager shuffle'';
+    };
+  };
 
   xdg.configFile."kitty/kitty.conf".text = ''
     # vim:fileencoding=utf-8:foldmethod=marker
