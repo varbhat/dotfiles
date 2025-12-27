@@ -255,7 +255,6 @@
     wtype
     obs-studio
     zed-editor
-    google-chrome
     telegram-desktop
     bitwarden-desktop
     bitwarden-cli
