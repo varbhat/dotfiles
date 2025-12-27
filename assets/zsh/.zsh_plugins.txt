@@ -1,0 +1,10 @@
+jeffreytse/zsh-vi-mode
+Aloxaf/fzf-tab
+zsh-users/zsh-autosuggestions kind:defer
+zsh-users/zsh-history-substring-search kind:defer
+zsh-users/zsh-completions kind:defer
+zdharma-continuum/fast-syntax-highlighting kind:defer
+zdharma-continuum/history-search-multi-word
+hlissner/zsh-autopair
+Tarrasch/zsh-bd
+romkatv/zsh-bench kind:path
