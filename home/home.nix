@@ -103,15 +103,16 @@
     set shiftwidth=4
     		'';
 
-  xdg.configFile."gtk-3.0/settings.ini".text = ''
-    [Settings]
-    gtk-application-prefer-dark-theme=1
-    		'';
+  gtk = {
+    enable = true;
+    colorScheme = "dark";
+    gtk2.enable = false;
+  };
 
-  xdg.configFile."gtk-4.0/settings.ini".text = ''
-    [Settings]
-    gtk-application-prefer-dark-theme=1
-    		'';
+  # qt = {
+  #   enable = false;
+  #   style = "breeze";
+  # };
 
   xdg.configFile."MangoHud/MangoHud.conf".text = ''
     toggle_fps_limit=F1
