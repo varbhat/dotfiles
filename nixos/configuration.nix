@@ -209,7 +209,6 @@
     kitty
     foot
     firefox
-    firefoxpwa
     open-in-mpv
     fastfetch
     comma
