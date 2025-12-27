@@ -11,3 +11,8 @@ ratio = [0, 2, 6]
 image_delay = 0
 max_width  = 10000
 max_height = 10000
+
+[opener]
+play = [
+	{ run = 'umpv "$@"', orphan = true, for = "unix" }
+]
