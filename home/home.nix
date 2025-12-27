@@ -316,8 +316,6 @@
     };
   };
 
-  programs.kitty = { };
-
   # Helix Text editor
   programs.helix = {
     enable = true;
