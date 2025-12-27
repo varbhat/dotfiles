@@ -203,17 +203,13 @@
     };
   };
 
-  xdg.configFile."kitty/kitty.conf".text = ''
-    # vim:fileencoding=utf-8:foldmethod=marker
-
-    # BEGIN_KITTY_FONTS
-    font_family      family=Hack postscript_name=Hack-Regular
-    font_size 13
-    bold_font        auto
-    italic_font      auto
-    bold_italic_font auto
-    # END_KITTY_FONTS
-    		'';
+  programs.kitty = {
+    #enable = true;
+    font = {
+      name = "Hack";
+      size = 13;
+    };
+  };
 
   xdg.configFile."scroll/config" = {
     source = ../assets/scroll/config;
@@ -314,13 +310,7 @@
     };
   };
 
-  programs.kitty = {
-    enable = true;
-    font = {
-      name = "Hack";
-      size = 13;
-    };
-  };
+  programs.kitty = { };
 
   # Helix Text editor
   programs.helix = {
