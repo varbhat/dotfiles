@@ -811,6 +811,16 @@
     ];
   };
 
+  programs.atuin = {
+    enable = true;
+    settings = {
+      enter_accept = "false";
+      style = "compact";
+      auto_sync = "false";
+      update_check = "false";
+    };
+  };
+
   # Several Scripts here
   home.file.".local/vbin" = {
     source = ../assets/vbin;
