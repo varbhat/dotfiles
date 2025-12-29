@@ -900,7 +900,7 @@
     environment = [
       "XDG_CURRENT_DESKTOP=labwc:wlroots"
       "XKB_DEFAULT_LAYOUT=us"
-      "XKB_VARIANT=dvorak"
+      "XKB_DEFAULT_VARIANT=dvorak"
     ];
     autostart = [
       "dms run"
