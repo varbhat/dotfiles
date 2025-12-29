@@ -11,6 +11,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # nixos-hardware
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     # scroll
     scroll-flake = {
       url = "github:AsahiRocks/scroll-flake";
@@ -19,10 +22,11 @@
   };
 
   outputs =
-    inputs@{ self
-    , nixpkgs
-    , home-manager
-    , ...
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      ...
     }:
     {
       nixosConfigurations = {
