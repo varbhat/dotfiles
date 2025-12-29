@@ -300,7 +300,7 @@
     package = inputs.scroll-flake.packages.${pkgs.stdenv.hostPlatform.system}.scroll-git;
   };
 
-  programs.flatpak.enable = true;
+  services.flatpak.enable = true;
 
   programs.dms-shell = {
     enable = true;
