@@ -695,13 +695,13 @@
       export PATH="$PATH:$HOME/.local/bin"
       for d in "$HOME/.local/vbin"/*/; do PATH="$d:$PATH"; done; PATH="$HOME/.local/vbin:$PATH"
 
-      if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && command -v scroll >/dev/null; then
-        	export XDG_CURRENT_DESKTOP=scroll
+      if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && command -v labwc >/dev/null; then
+        	export XDG_CURRENT_DESKTOP=labwc
         	export QT_QPA_PLATFORM=wayland
         	export _JAVA_AWT_WM_NONREPARENTING=1
         	export MOZ_ENABLE_WAYLAND=1
         	export GTK_USE_PORTAL=1
-        	dbus-run-session scroll 2>&1 && exit
+        	dbus-run-session labwc 2>&1 && exit
       fi
     '';
   };
@@ -901,6 +901,7 @@
       "XDG_CURRENT_DESKTOP=labwc:wlroots"
       "XKB_DEFAULT_LAYOUT=us"
       "XKB_DEFAULT_VARIANT=dvorak"
+      "XKB_DEFAULT_OPTIONS=caps:swapescape"
     ];
     autostart = [
       "dms run"
