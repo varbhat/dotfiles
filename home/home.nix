@@ -733,10 +733,10 @@
         abbr --add fupdate 'flatpak update'
       end
 
-      # fish_add_path $HOME/.local/vbin/**/
-      # fish_add_path $GOPATH/bin
-      # fish_add_path $HOME/.cargo/bin
-      # fish_add_path $HOME/.local/bin
+      fish_add_path $HOME/.local/vbin/**/
+      fish_add_path $GOPATH/bin
+      fish_add_path $HOME/.cargo/bin
+      fish_add_path $HOME/.local/bin
 
       if test -f /opt/homebrew/bin/brew
           /opt/homebrew/bin/brew shellenv | source
