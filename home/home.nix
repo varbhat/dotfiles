@@ -110,6 +110,11 @@
     gtk2.enable = false;
   };
 
+  dconf = {
+    enable = true;
+    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  };
+
   # qt = {
   #   enable = false;
   #   style = "breeze";
