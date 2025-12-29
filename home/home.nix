@@ -944,6 +944,22 @@
     };
   };
 
+  # home.packages = with pkgs; [
+  #   claude-code
+  #   claude-code-router
+  # ];
+  #
+  # https://github.com/zed-industries/zed/discussions/39290
+  # programs.claude-code = {
+  #   # enable = true;
+  #   settings = {
+  #     "env" = {
+  #       "ANTHROPIC_BASE_URL" = "http://localhost:3456";
+  #       "ANTHROPIC_AUTH_TOKEN" = "dummy-key-for-router";
+  #     };
+  #   };
+  # };
+
   programs.distrobox = {
     enable = true;
     settings = {
@@ -952,11 +968,6 @@
       container_image_default = "ghcr.io/ublue-os/arch-toolbox";
     };
   };
-
-  # home.packages = with pkgs; [
-  #   claude-code
-  #   claude-code-router
-  # ];
 
   programs.neovim = {
     enable = true;
