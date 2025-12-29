@@ -100,7 +100,6 @@ exec {
 
     wl-paste --watch cliphist store
     dms run
-    mpris-proxy
 }
 
 
