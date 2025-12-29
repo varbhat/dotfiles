@@ -953,8 +953,10 @@
     };
   };
 
-  # Add stuff for your user as you see fit:
-  # home.packages = with pkgs; [ steam ];
+  # home.packages = with pkgs; [
+  #   claude-code
+  #   claude-code-router
+  # ];
 
   programs.neovim = {
     enable = true;
