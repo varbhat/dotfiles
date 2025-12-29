@@ -6,7 +6,7 @@ return {
     },
     lazy = false,
     -- Optional dependencies
-    -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+    -- dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
 
     dependencies = {
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
