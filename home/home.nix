@@ -909,6 +909,31 @@
       "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
       "wl-paste --watch cliphist store"
     ];
+    rc = {
+      theme = {
+        name = "nord";
+        cornerRadius = 0;
+      };
+      keyboard = {
+        default = true;
+        keybind = [
+          {
+            "@key" = "W-Return";
+            action = {
+              "@name" = "Execute";
+              "@command" = "foot";
+            };
+          }
+          {
+            "@key" = "W-d";
+            action = {
+              "@name" = "Execute";
+              "@command" = "fuzzel";
+            };
+          }
+        ];
+      };
+    };
     menu = [
       {
         menuId = "client-menu";
