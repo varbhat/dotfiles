@@ -206,6 +206,15 @@
     };
   };
 
+  programs.yt-dlp = {
+    enable = true;
+    settings = {
+      embed-thumbnail = true;
+      embed-subs = true;
+      downloader = "aria2c";
+    };
+  };
+
   programs.kitty = {
     #enable = true;
     enableGitIntegration = true;
