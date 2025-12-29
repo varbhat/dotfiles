@@ -907,6 +907,62 @@
       "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
       "wl-paste --watch cliphist store"
     ];
+    menu = [
+      {
+        menuId = "client-menu";
+        label = "Client Menu";
+        icon = "";
+        items = [
+          {
+            label = "Maximize";
+            icon = "";
+            action = {
+              name = "ToggleMaximize";
+            };
+          }
+          {
+            label = "Fullscreen";
+            action = {
+              name = "ToggleFullscreen";
+            };
+          }
+          {
+            label = "Foot";
+            action = {
+              name = "Execute";
+              command = "foot";
+            };
+          }
+          {
+            label = "Move Left";
+            action = {
+              name = "SendToDesktop";
+              to = "left";
+            };
+          }
+          {
+            separator = { };
+          }
+          {
+            label = "Workspace";
+            menuId = "workspace";
+            icon = "";
+            items = [
+              {
+                label = "Move Left";
+                action = {
+                  name = "SendToDesktop";
+                  to = "left";
+                };
+              }
+            ];
+          }
+          {
+            separator = true;
+          }
+        ];
+      }
+    ];
   };
 
   # Helix Text editor
