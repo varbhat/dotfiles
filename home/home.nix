@@ -695,13 +695,13 @@
       export PATH="$PATH:$HOME/.local/bin"
       for d in "$HOME/.local/vbin"/*/; do PATH="$d:$PATH"; done; PATH="$HOME/.local/vbin:$PATH"
 
-      if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && command -v labwc >/dev/null; then
-        	export XDG_CURRENT_DESKTOP=labwc
+      if [[ -z $DISPLAY ]] && (($EUID != 0)) && [[ $(tty) = /dev/tty1 ]] && command -v scroll >/dev/null; then
+        	export XDG_CURRENT_DESKTOP=scroll
         	export QT_QPA_PLATFORM=wayland
         	export _JAVA_AWT_WM_NONREPARENTING=1
         	export MOZ_ENABLE_WAYLAND=1
         	export GTK_USE_PORTAL=1
-        	dbus-run-session labwc 2>&1 && exit
+        	dbus-run-session scroll 2>&1 && exit
       fi
     '';
   };
@@ -893,103 +893,6 @@
         bright7 = "ffffff"; # bright white
       };
     };
-  };
-
-  wayland.windowManager.labwc = {
-    enable = true;
-    environment = [
-      "XDG_CURRENT_DESKTOP=labwc:wlroots"
-      "XKB_DEFAULT_LAYOUT=us"
-      "XKB_DEFAULT_VARIANT=dvorak"
-      "XKB_DEFAULT_OPTIONS=caps:swapescape"
-      "XCURSOR_THEME=Adwaita"
-    ];
-    autostart = [
-      "dms run"
-      "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
-      "wl-paste --watch cliphist store"
-    ];
-    rc = {
-      theme = {
-        name = "nord";
-        cornerRadius = 0;
-      };
-      keyboard = {
-        default = true;
-        keybind = [
-          {
-            "@key" = "W-Return";
-            action = {
-              "@name" = "Execute";
-              "@command" = "foot";
-            };
-          }
-          {
-            "@key" = "W-d";
-            action = {
-              "@name" = "Execute";
-              "@command" = "fuzzel";
-            };
-          }
-        ];
-      };
-    };
-    menu = [
-      {
-        menuId = "client-menu";
-        label = "Client Menu";
-        icon = "";
-        items = [
-          {
-            label = "Maximize";
-            icon = "";
-            action = {
-              name = "ToggleMaximize";
-            };
-          }
-          {
-            label = "Fullscreen";
-            action = {
-              name = "ToggleFullscreen";
-            };
-          }
-          {
-            label = "Foot";
-            action = {
-              name = "Execute";
-              command = "foot";
-            };
-          }
-          {
-            label = "Move Left";
-            action = {
-              name = "SendToDesktop";
-              to = "left";
-            };
-          }
-          {
-            separator = { };
-          }
-          {
-            label = "Workspace";
-            menuId = "workspace";
-            icon = "";
-            items = [
-              {
-                label = "Move Left";
-                action = {
-                  name = "SendToDesktop";
-                  to = "left";
-                };
-              }
-            ];
-          }
-          {
-            separator = true;
-          }
-        ];
-      }
-    ];
   };
 
   # Helix Text editor
