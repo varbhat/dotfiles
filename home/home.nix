@@ -684,6 +684,11 @@
       atuin init fish | source
       zoxide init fish | source
 
+      fish_add_path $HOME/.local/vbin/**/
+      fish_add_path $GOPATH/bin
+      fish_add_path $HOME/.cargo/bin
+      fish_add_path $HOME/.local/bin
+
       if type -q eza
         alias ls='eza --icons=auto --hyperlink'
       end
@@ -695,17 +700,12 @@
       if type -q flatpak
         abbr --add fin 'flatpak install flathub --user'
         abbr --add flathub 'flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo'
-        abbr --add fun 'flatpak uninstall'
+        abbr --add fun 'flatpak uninstall --user'
         abbr --add frun 'flatpak run --user'
-        abbr --add fundelete 'flatpak uninstall --delete-data'
-        abbr --add fclean 'flatpak uninstall --unused --delete-data'
-        abbr --add fupdate 'flatpak update'
+        abbr --add fundelete 'flatpak uninstall --user --delete-data'
+        abbr --add fclean 'flatpak uninstall --user --unused --delete-data'
+        abbr --add fupdate 'flatpak update --user'
       end
-
-      fish_add_path $HOME/.local/vbin/**/
-      fish_add_path $GOPATH/bin
-      fish_add_path $HOME/.cargo/bin
-      fish_add_path $HOME/.local/bin
 
       if test -f /opt/homebrew/bin/brew
           /opt/homebrew/bin/brew shellenv | source
