@@ -301,6 +301,7 @@
   };
 
   services.flatpak.enable = true;
+  xdg.portal.enable = true;
 
   programs.dms-shell = {
     enable = true;
