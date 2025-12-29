@@ -902,6 +902,7 @@
       "XKB_DEFAULT_LAYOUT=us"
       "XKB_DEFAULT_VARIANT=dvorak"
       "XKB_DEFAULT_OPTIONS=caps:swapescape"
+      "XCURSOR_THEME=Adwaita"
     ];
     autostart = [
       "dms run"
