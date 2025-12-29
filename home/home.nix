@@ -897,6 +897,11 @@
 
   wayland.windowManager.labwc = {
     enable = true;
+    environment = [
+      "XDG_CURRENT_DESKTOP=labwc:wlroots"
+      "XKB_DEFAULT_LAYOUT=us"
+      "XKB_VARIANT=dvorak"
+    ];
     autostart = [
       "dms run"
       "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
