@@ -101,6 +101,7 @@
   users.users.vbt = {
     isNormalUser = true;
     description = "vbt";
+    initialPassword = "password"; # Change it after creation
     shell = pkgs.bash;
     extraGroups = [
       "networkmanager"
