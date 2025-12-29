@@ -833,7 +833,7 @@
     settings = {
       main = {
         font = "Hack:size=13";
-        "show-actions" = true;
+        show-actions = true;
         width = 100;
       };
 
@@ -849,8 +849,8 @@
         input = "cdd6f4ff";
         match = "f38ba8ff";
         selection = "585b70ff";
-        "selection-match" = "f38ba8ff";
-        "selection-text" = "cdd6f4ff";
+        selection-match = "f38ba8ff";
+        selection-text = "cdd6f4ff";
         counter = "7f849cff";
         border = "b4befeff";
       };
