@@ -48,6 +48,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hardware/framework13.nix
+            inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
             ./host/framework13.nix
             ./nixos/configuration.nix
             inputs.scroll-flake.nixosModules.default
