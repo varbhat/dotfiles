@@ -895,6 +895,15 @@
     };
   };
 
+  wayland.windowManager.labwc = {
+    enable = true;
+    autostart = [
+      "dms run"
+      "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
+      "wl-paste --watch cliphist store"
+    ];
+  };
+
   # Helix Text editor
   programs.helix = {
     enable = true;

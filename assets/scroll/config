@@ -98,14 +98,7 @@ exec {
     # themes
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
-    # polkit: auth agent
-    #/usr/lib/mate-polkit/polkit-mate-authentication-agent-1
-
-    # make bluetooth media controls work
-    mpris-proxy
-
     wl-paste --watch cliphist store
-
     dms run
 }
 
