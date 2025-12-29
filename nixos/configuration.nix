@@ -258,7 +258,6 @@
     blueman
     slurp
     flatpak
-    mangohud
     stylua
     boxbuddy
     ueberzugpp
