@@ -121,7 +121,6 @@
   qt = {
     enable = true;
     style = "breeze";
-    platformTheme.name = "kde";
   };
 
   home.packages = with pkgs; [
