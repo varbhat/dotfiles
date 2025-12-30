@@ -118,28 +118,16 @@
     };
   };
 
-  qt = {
-    enable = true;
-    style = {
-      name = "breeze";
-    };
-    kde = {
-      settings = {
-        kdeglobals = {
-          General = {
-            ColorScheme = "BreezeDark";
-          };
-        };
-        plasmarc = {
-          Theme = "breeze-dark";
-        };
-      };
-    };
-  };
+  # qt = {
+  #   enable = true;
+  #   style = {
+  #     name = "breeze";
+  #   };
+  # };
 
-  home.packages = with pkgs; [
-    pcmanfm-qt
-  ];
+  # home.packages = with pkgs; [
+  #   pcmanfm-qt
+  # ];
 
   programs.zathura = {
     enable = true;
