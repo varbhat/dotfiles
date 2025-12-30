@@ -125,8 +125,13 @@
     };
     kde = {
       settings = {
-        General = {
-          ColorScheme = "BreezeDark";
+        kdeglobals = {
+          General = {
+            ColorScheme = "BreezeDark";
+          };
+        };
+        plasmarc = {
+          Theme = "breeze-dark";
         };
       };
     };
