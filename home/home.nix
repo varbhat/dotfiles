@@ -121,7 +121,7 @@
   qt = {
     enable = true;
     style = {
-      #name = "breeze";
+      name = "breeze";
     };
     kde = {
       settings = {
