@@ -118,10 +118,15 @@
     };
   };
 
-  # qt = {
-  #   enable = false;
-  #   style = "breeze";
-  # };
+  qt = {
+    enable = true;
+    style = "breeze";
+    platformTheme = "kde";
+  };
+
+  home.packages = with pkgs; [
+    pcmanfm-qt
+  ];
 
   programs.zathura = {
     enable = true;
