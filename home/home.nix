@@ -120,7 +120,16 @@
 
   qt = {
     enable = true;
-    style = "breeze";
+    style = {
+      #name = "breeze";
+    };
+    kde = {
+      settings = {
+        General = {
+          ColorScheme = "BreezeDark";
+        };
+      };
+    };
   };
 
   home.packages = with pkgs; [
