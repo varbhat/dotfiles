@@ -123,6 +123,9 @@
   #   style = {
   #     name = "breeze";
   #   };
+  #   platformTheme = {
+  #     name = "qtct";
+  #   };
   # };
 
   # home.packages = with pkgs; [
@@ -630,6 +633,14 @@
           }
         ];
       };
+
+      # tasks = {
+      #   # Increase bound limits for Image Preview
+      #   image_bound = [
+      #     50000
+      #     50000
+      #   ];
+      # };
     };
     plugins = {
       full-border = pkgs.yaziPlugins.full-border;
