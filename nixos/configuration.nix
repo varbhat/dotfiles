@@ -264,6 +264,7 @@
     ueberzugpp
     libnotify
     dragon-drop
+    poppler
   ];
 
   fonts = {
