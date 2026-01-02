@@ -76,6 +76,8 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
+  documentation.enable = false;
+
   console.keyMap = "dvorak";
 
   # Enable fwupd for firmware updates
@@ -85,7 +87,7 @@
   services.fstrim.enable = true;
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  #services.printing.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
