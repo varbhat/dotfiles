@@ -1,5 +1,6 @@
 {
   config,
+  ...
 }:
 
 {
@@ -17,6 +18,9 @@
       };
     };
   };
+
+  # Use latest Linux kernel.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Silent Boot and Plymouth
   boot = {
