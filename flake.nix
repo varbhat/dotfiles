@@ -35,8 +35,7 @@
         ryze = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            ./hardware/ryze.nix
-            ./host/ryze.nix
+            ./host/ryze/default.nix
             ./nixos/configuration.nix
             inputs.scroll-flake.nixosModules.default
           ];
@@ -47,9 +46,8 @@
         frame = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            ./hardware/framework13.nix
+            ./host/framework13/default.nix
             inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
-            ./host/framework13.nix
             ./nixos/configuration.nix
             inputs.scroll-flake.nixosModules.default
           ];
