@@ -1,0 +1,122 @@
+{
+  "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767525999,
+        "narHash": "sha256-1E9xlYlyl3EnUrwxoaJMTK7dFrC2llL/TJ+T4xIcXDY=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "7d5927b63cea63deb655b3e8421ae17ebb9feac2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1767185284,
+        "narHash": "sha256-ljDBUDpD1Cg5n3mJI81Hz5qeZAwCGxon4kQW3Ho3+6Q=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "40b1a28dce561bea34858287fbb23052c3ee63fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1767379071,
+        "narHash": "sha256-EgE0pxsrW9jp9YFMkHL9JMXxcqi/OoumPJYwf+Okucw=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "fb7944c166a3b630f177938e478f0378e64ce108",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixos-hardware": "nixos-hardware",
+        "nixpkgs": "nixpkgs",
+        "scroll-flake": "scroll-flake"
+      }
+    },
+    "scroll-flake": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "scroll-git": "scroll-git",
+        "scroll-stable": "scroll-stable"
+      },
+      "locked": {
+        "lastModified": 1767203507,
+        "narHash": "sha256-jnMsYUXKRJ4pvNQyvhSmPej8y20XnsmV+00Pehn+P+k=",
+        "owner": "AsahiRocks",
+        "repo": "scroll-flake",
+        "rev": "982ba81b9e0f532f5b1ab91f4a6d28772f88697f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AsahiRocks",
+        "repo": "scroll-flake",
+        "type": "github"
+      }
+    },
+    "scroll-git": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767090907,
+        "narHash": "sha256-cIvq1nsKZk6jQzbpC2EDmj34TXW3+ZkxhfBQKcotg8w=",
+        "ref": "master",
+        "rev": "19f526f0d9b32ecba19af20eb799317d0fdaa807",
+        "revCount": 8061,
+        "type": "git",
+        "url": "https://github.com/dawsers/scroll"
+      },
+      "original": {
+        "ref": "master",
+        "type": "git",
+        "url": "https://github.com/dawsers/scroll"
+      }
+    },
+    "scroll-stable": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767091886,
+        "narHash": "sha256-1P+BHUzFMDN42dx9QCKW2fkkXggFZtmko/sQHeCx9IM=",
+        "ref": "refs/tags/1.12.4",
+        "rev": "7501869147e3066819e33152f3259370453c853f",
+        "revCount": 8062,
+        "type": "git",
+        "url": "https://github.com/dawsers/scroll"
+      },
+      "original": {
+        "ref": "refs/tags/1.12.4",
+        "type": "git",
+        "url": "https://github.com/dawsers/scroll"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
