@@ -11,6 +11,7 @@
   xdg = {
     portal = {
       enable = true;
+      xdgOpenUsePortal = true;
       config = {
         scroll = {
           default = [ "gtk" ];

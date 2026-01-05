@@ -7,6 +7,7 @@
 {
   imports = [
     ../../modules/home/base.nix
+    ../../modules/home/codium.nix
     ../../modules/home/distrobox.nix
     ../../modules/home/firefox.nix
     ../../modules/home/fuzzel.nix
