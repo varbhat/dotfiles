@@ -22,6 +22,7 @@
     ../../modules/nixos/rust.nix
     ../../modules/nixos/shell.nix
     ../../modules/nixos/ssh.nix
+    ../../modules/nixos/tailscale.nix
     ../../modules/nixos/time.nix
     ../../modules/nixos/user.nix
     ../../modules/nixos/wifi.nix
