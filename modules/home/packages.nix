@@ -1,6 +1,7 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }:
 
 {
@@ -38,8 +39,8 @@
     xz
     bzip2
 
-    sqlitebrowser
-    dbeaver-bin
+    #sqlitebrowser
+    #dbeaver-bin
 
     chafa
 
