@@ -175,13 +175,27 @@
     settings.updates.auto_update = true;
   };
 
-  home.packages = with pkgs; [
-    bat
-    bat-extras.batman
-    bat-extras.prettybat
-    eza
-    fd
-    ripgrep
-    chafa
-  ];
+  programs.zoxide = {
+    enable = true;
+  };
+
+  programs.ripgrep = {
+    enable = true;
+  };
+
+  programs.bat = {
+    enable = true;
+    extraPackages = with pkgs.bat-extras; [
+      batman
+      prettybat
+    ];
+  };
+
+  programs.eza = {
+    enable = true;
+  };
+
+  programs.fd = {
+    enable = true;
+  };
 }

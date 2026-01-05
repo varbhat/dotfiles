@@ -21,16 +21,17 @@
     go
     gcc
     gdb
-    clang
+    #clang
     #openjdk
     cargo
-    rustc
     python3
     nodejs
     uv
 
     comma
     nix-index
+
+    chafa
 
     telegram-desktop
   ];
