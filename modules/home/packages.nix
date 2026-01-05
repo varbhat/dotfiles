@@ -1,6 +1,7 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }:
 
 {
@@ -40,6 +41,7 @@
 
     #sqlitebrowser
     #dbeaver-bin
+    #pgadmin4-desktopmode
 
     chafa
 
