@@ -21,7 +21,7 @@
     jq
     fzf
     acpi
-    lm-sensors
+    lm_sensors
     nh
   ];
 }
