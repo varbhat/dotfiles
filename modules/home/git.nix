@@ -122,5 +122,6 @@
 
   home.packages = with pkgs; [
     delta
+    gh
   ];
 }

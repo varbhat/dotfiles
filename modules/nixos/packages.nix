@@ -23,5 +23,6 @@
     acpi
     lm_sensors
     nh
+    systemctl-tui
   ];
 }
