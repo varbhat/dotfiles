@@ -1,6 +1,7 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }:
 
 {
@@ -30,6 +31,13 @@
 
     comma
     nix-index
+
+    unzip
+    p7zip
+    unrar-free
+    zstd
+    xz
+    bzip2
 
     chafa
 
