@@ -39,6 +39,9 @@
     xz
     bzip2
 
+    sqlitebrowser
+    dbeaver-bin
+
     chafa
 
     telegram-desktop
