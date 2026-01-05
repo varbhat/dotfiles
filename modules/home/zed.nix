@@ -17,6 +17,8 @@
     ];
     extraPackages = with pkgs; [
       nixd
+      nil
+      nixpkgs-fmt
     ];
     userSettings = {
       vim_mode = true;

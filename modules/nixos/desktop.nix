@@ -34,6 +34,10 @@
     TTYVTDisallocate = true;
   };
 
+  hardware.graphics = {
+    enable = true;
+  };
+
   programs.scroll = {
     enable = true;
     package = inputs.scroll-flake.packages.${pkgs.stdenv.hostPlatform.system}.scroll-git;
@@ -47,6 +51,8 @@
       hack-font
       nerd-fonts.symbols-only
       nerd-fonts.hack
+      font-awesome_6
+      inter
     ];
     fontconfig.defaultFonts = {
       serif = [ "Noto Serif" ];

@@ -14,6 +14,7 @@
     ../../modules/home/helix.nix
     ../../modules/home/mpv.nix
     ../../modules/home/neovim.nix
+    ../../modules/home/packages.nix
     ../../modules/home/scroll.nix
     ../../modules/home/shell.nix
     ../../modules/home/terminal.nix

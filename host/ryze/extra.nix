@@ -5,5 +5,5 @@
   imports = [
   ];
   networking.hostName = "ryze"; # hostname of ryze
-  boot.initrd.availableKernelModules = [ "amdgpu" ];
+  hardware.amdgpu.initrd.enable = true;
 }

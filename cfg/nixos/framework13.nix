@@ -13,6 +13,7 @@
     ../../modules/nixos/docker.nix
     ../../modules/nixos/dvorak.nix
     ../../modules/nixos/editor.nix
+    ../../modules/nixos/flatpak.nix
     ../../modules/nixos/i2c.nix
     ../../modules/nixos/kernel.nix
     ../../modules/nixos/network.nix

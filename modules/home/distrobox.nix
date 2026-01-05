@@ -15,4 +15,8 @@
       container_image_default = "ghcr.io/ublue-os/arch-toolbox";
     };
   };
+
+  home.packages = with pkgs; [
+    boxbuddy
+  ];
 }

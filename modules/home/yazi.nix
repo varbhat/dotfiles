@@ -64,4 +64,10 @@
       starship = pkgs.yaziPlugins.starship;
     };
   };
+
+  home.packages = with pkgs; [
+    poppler # PDF preview
+    ueberzugpp # Image preview on terminals that don't support image previews
+    dragon-drop # Drag and Drop Files
+  ];
 }

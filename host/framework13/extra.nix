@@ -5,5 +5,5 @@
   imports = [
   ];
   networking.hostName = "frame"; # hostname of framework13
-  boot.initrd.availableKernelModules = [ "amdgpu" ];
+  hardware.amdgpu.initrd.enable = true;
 }

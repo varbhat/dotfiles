@@ -41,4 +41,12 @@
       ";" = ''script-message playlistmanager shuffle'';
     };
   };
+
+  home.packages = with pkgs; [
+    open-in-mpv
+  ];
+
+  xdg.mimeApps.defaultApplications = {
+    "x-scheme-handler/mpv" = [ "open-in-mpv.desktop" ];
+  };
 }

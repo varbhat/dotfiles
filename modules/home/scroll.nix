@@ -405,4 +405,20 @@
   };
 
   services.mpris-proxy.enable = true;
+
+  home.packages = with pkgs; [
+    waypipe
+    wl-mirror
+    wayvnc
+    wvkbd
+    wtype
+    fuzzel
+    # iwgtk
+    wl-clipboard
+    grim
+    slurp
+    pwvucontrol
+    wdisplays
+    blueman
+  ];
 }

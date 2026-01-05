@@ -150,6 +150,10 @@
     ];
   };
 
+  programs.starship = {
+    enable = true;
+  };
+
   programs.atuin = {
     enable = true;
     settings = {
@@ -170,4 +174,14 @@
     enable = true;
     settings.updates.auto_update = true;
   };
+
+  home.packages = with pkgs; [
+    bat
+    bat-extras.batman
+    bat-extras.prettybat
+    eza
+    fd
+    ripgrep
+    chafa
+  ];
 }

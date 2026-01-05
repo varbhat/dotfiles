@@ -7,17 +7,6 @@
   imports = [
   ];
 
-  xdg.mimeApps.defaultApplications = {
-    "x-scheme-handler/http" = [ "firefox.desktop" ];
-    "x-scheme-handler/https" = [ "firefox.desktop" ];
-    "x-scheme-handler/mpv" = [ "open-in-mpv.desktop" ];
-    "text/html" = [ "firefox.desktop" ];
-    "application/pdf" = [
-      "zathura.desktop"
-      "firefox.desktop"
-    ];
-  };
-
   xdg = {
     # Override the default XDG directories
     userDirs = {

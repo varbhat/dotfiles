@@ -39,6 +39,7 @@
       stylua
       nixd
       nixfmt-rfc-style
+      nixpkgs-fmt
       vscode-langservers-extracted
       gdb
       gopls
