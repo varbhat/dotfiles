@@ -1,6 +1,7 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }:
 
 {
@@ -22,6 +23,7 @@
       "systemd-journal"
       "network"
       "i2c"
+      "libvirtd"
     ];
     packages = with pkgs; [
     ];

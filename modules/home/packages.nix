@@ -1,6 +1,7 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }:
 
 {
@@ -41,6 +42,9 @@
     #sqlitebrowser
     #dbeaver-bin
     #pgadmin4-desktopmode
+
+    parabolic # yt-dlp gui
+    #ani-cli
 
     chafa
 
