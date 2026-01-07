@@ -1,6 +1,7 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }:
 
 {
@@ -9,7 +10,6 @@
 
   home.packages = with pkgs; [
     syncthing
-    logseq
     spoofdpi
     obs-studio
     libnotify # notify-send
