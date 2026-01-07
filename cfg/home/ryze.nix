@@ -13,6 +13,7 @@
     ../../modules/home/fuzzel.nix
     ../../modules/home/git.nix
     ../../modules/home/helix.nix
+    ../../modules/home/keyring.nix
     ../../modules/home/mpv.nix
     ../../modules/home/neovim.nix
     ../../modules/home/packages.nix
