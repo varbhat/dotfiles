@@ -25,6 +25,7 @@
     ../../modules/nixos/tailscale.nix
     ../../modules/nixos/time.nix
     ../../modules/nixos/user.nix
+    #../../modules/nixos/virtmanager.nix
     ../../modules/nixos/wifi.nix
   ];
 
